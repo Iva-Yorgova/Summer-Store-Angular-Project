@@ -1,3 +1,22 @@
 .spacer {
     flex: 1 1 auto;
-  }
+}
+
+.home-btn:hover {
+    color: rgb(250, 173, 209);
+}
+
+.snipcart-checkout:hover {
+    color: rgb(250, 173, 209);
+}
+
+.about-us {
+    text-decoration: none;
+    color: white;
+    margin: 7px 30px 0px 30px;
+    font-size: 18px;
+}
+
+.about-us:hover {
+    color: rgb(250, 173, 209);
+}

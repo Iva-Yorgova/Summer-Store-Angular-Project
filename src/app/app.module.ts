@@ -17,6 +17,7 @@ import { ProductPageComponent } from './product-page/product-page.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { FooterComponent } from './footer/footer.component';
     ProductPageComponent,
     NavbarComponent,
     FooterComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

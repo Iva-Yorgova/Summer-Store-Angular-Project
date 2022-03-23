@@ -2,11 +2,16 @@ h2 {
     padding: 0.5em 0;
     font-size: 26px;
     color: white;
+    text-align: center;
+    max-width: 90vw;
 }
 
 .jumbo {
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
+    font-family: "Quicksand", sans-serif;
+    text-align: center;
+    line-height: 44px;
 }
 
 .header {
@@ -15,4 +20,10 @@ h2 {
 
 .jumbo {
     font-size: 48px;
+}
+
+.products-wrapper {
+    background: url('/assets/summer.jpg'), ;
+    background-size: cover;
+    background-repeat: no-repeat;
 }

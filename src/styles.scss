@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/theming';
+$custom-typography: mat-typography-config($font-family: '"Raleway", sans-serif;');
+@include mat-core($custom-typography);
+html,
+body {
+    height: 100%;
+    background-color: #f7d3fa;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.snipcart-item-line--cart-edit .snipcart-item-line__image {
+    max-width: 40px;
+    width: 120px;
+}
+
+.snipcart-item-line__media--small {
+    height: auto;
+}
+
+.snipcart-item-line__image {
+    width: 50px;
+}

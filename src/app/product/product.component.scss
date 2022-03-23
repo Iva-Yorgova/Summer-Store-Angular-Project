@@ -1,0 +1,29 @@
+.product-card {
+    background-color: #FAECD7;
+    color: black;
+    font-family: "Quicksand", sans-serif;
+    width: 200px;
+    margin-top: 30px;
+    padding-top: 30px;
+    border: 10px solid white;
+}
+
+.product-card:hover {
+    cursor: pointer;
+}
+
+.mat-card-image {
+    object-fit: contain;
+    max-height: 290px;
+}
+
+.mat-card-title {
+    display: block;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.snipcart-item-line__image {
+    width: 50px;
+}

@@ -1,0 +1,44 @@
+.product-page-card-title {
+    display: flex;
+    justify-content: center;
+    font-family: "Quicksand", sans-serif;
+    padding: 1em 0;
+}
+
+.product-page-card {
+    margin-top: 6em;
+    width: 50vw;
+    padding: 30px;
+    margin-bottom: 6em;
+    max-width: 500px;
+    border: 10px solid white;
+}
+
+.product-page-card img {
+    object-fit: contain;
+    max-height: 260px;
+}
+
+.chip-list-box {
+    display: flex;
+    justify-content: center;
+}
+
+.chip {
+    font-size: 16px;
+    color: #FDF6EB;
+    padding: 18px;
+}
+
+.snipcart-item-line__image {
+    width: 50px;
+}
+
+@media (min-width: 900px) {
+    .product-page-card img {
+        object-fit: contain;
+    }
+    .chip:hover {
+        cursor: pointer;
+    }
+}

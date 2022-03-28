@@ -12,3 +12,68 @@
 .wrapper {
     margin: 50px;
 }
+
+.courses-btn {
+    text-align: left;
+}
+
+.about-ul {
+    margin-top: 50px;
+    padding-left: 0;
+}
+
+.my-btn {
+    margin-right: 30px;
+    background-color: gray;
+    padding: 10px 20px;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    border: 3px solid white;
+}
+
+.my-btn:hover {
+    background-color: black;
+}
+
+li {
+    list-style: none;
+}
+
+li.active {
+    background-color: black;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.view-content {
+    margin-bottom: 40px;
+}
+
+.course-title {
+    font-weight: bold;
+}
+
+.courses-tbl {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: black;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(240, 96, 144, 0.3);
+}

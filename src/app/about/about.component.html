@@ -1,6 +1,57 @@
 <div class="about-wrapper">
+
     <div class="header" fxLayout="column" fxLayoutAlign="center center">
         <div class="wrapper">
+
+            <button (click)="onAdd()" class="btn btn-secondary mb-3">Add Course</button>
+
+            <div class="courses-btn mb-4" *ngIf="courses.length > 0">
+                <h1>List of courses:</h1>
+
+                <ul class="about-ul mb-4 d-flex">
+                    <li class="my-btn" [class.active]="viewMode == 'table'">
+                        <a (click)="viewMode = 'table'">Table View</a>
+                    </li>
+                    <li class="my-btn" [class.active]="viewMode == 'list'">
+                        <a (click)="viewMode = 'list'">List View</a>
+                    </li>
+                </ul>
+                <div class="view-content" [ngSwitch]="viewMode">
+                    <div *ngSwitchCase="'table'">
+                        <table class="courses-tbl">
+                            <tr>
+                                <th>N:</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                            <tr *ngFor="let course of courses; index as i; even as isEven">
+                                <td>{{i + 1}}</td>
+                                <td>{{ course.name}}</td>
+                                <td>{{ course.description}}</td>
+                                <td><button (click)="onDelete(course)" class="btn btn-danger">Delete</button></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div *ngSwitchCase="'list'">
+                        <ul>
+                            <li *ngFor="let course of courses; index as i; even as isEven">
+                                {{i + 1}}.
+                                <span class="course-title">{{ course.name}}: </span> {{ course.description}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <hr>
+
+            </div>
+            <div *ngIf="courses.length == 0">
+                No courses
+            </div>
+
+
+
+
             <h1>Ice Cream Story</h1>
             <p>Ice cream is a sweetened frozen food typically eaten as a snack or dessert. It may be made from milk or cream and is flavoured with a sweetener, either sugar or an alternative, and a spice, such as cocoa or vanilla, or with fruit such as strawberries
                 or peaches. It can also be made by whisking a flavored cream base and liquid nitrogen together. Food coloring is sometimes added, in addition to stabilizers. The mixture is cooled below the freezing point of water and stirred to incorporate

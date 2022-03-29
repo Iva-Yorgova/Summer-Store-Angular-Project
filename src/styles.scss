@@ -20,6 +20,10 @@ body {
     background-repeat: no-repeat;
 }
 
+.form-control.ng-touched.ng-invalid {
+    border: 2px solid red;
+}
+
 .snipcart-item-line--cart-edit .snipcart-item-line__image {
     max-width: 40px;
     width: 120px;
@@ -32,5 +36,8 @@ body {
 .snipcart-item-line__image {
     width: 50px;
 }
+
+
 /* Importing Bootstrap SCSS file. */
+
 @import '~bootstrap/scss/bootstrap';

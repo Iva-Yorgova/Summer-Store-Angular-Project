@@ -17,6 +17,30 @@
     font-size: 18px;
 }
 
-.about-us:hover {
+.about-us:hover,
+.contact:hover,
+.login:hover,
+.database:hover {
     color: rgb(250, 173, 209);
+}
+
+.contact {
+    text-decoration: none;
+    color: white;
+    margin: 7px 0px 0px 0px;
+    font-size: 18px;
+}
+
+.login {
+    text-decoration: none;
+    color: white;
+    margin: 7px 20px 0px 0px;
+    font-size: 18px;
+}
+
+.database {
+    text-decoration: none;
+    color: white;
+    margin: 7px 20px 0px 0px;
+    font-size: 18px;
 }

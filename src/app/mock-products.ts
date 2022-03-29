@@ -37,5 +37,6 @@ export const PRODUCTS: Product[] = [
       { name: 'candy', color: '#00C6C3' },
     ],
     sizes: [Size.SMALL, Size.MEDIUM, Size.LARGE],
-  }
+  },
+  
 ];

@@ -1,3 +1,10 @@
+.wrapper {
+    background: url('/assets/summer.jpg'), ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+}
+
 .product-page-card-title {
     display: flex;
     justify-content: center;

@@ -1,0 +1,30 @@
+.contact-bg {
+    background-color: rgb(253, 208, 148);
+    display: flex;
+    min-height: 84vh;
+}
+
+.contact-bg p {
+    margin: 0;
+}
+
+.contact-form {
+    width: 70vw;
+    margin: 40px auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.contact-btn {
+    background-color: rgb(213, 74, 248);
+    border: none;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 5px;
+}
+
+.contact-btn:hover {
+    background-color: rgb(201, 17, 247);
+}

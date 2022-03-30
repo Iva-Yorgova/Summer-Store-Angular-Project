@@ -1,0 +1,38 @@
+<div class="contact-bg">
+
+    <form class="contact-form">
+        <h1>Contact Us</h1>
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input 
+            required 
+            minlength="3" 
+            maxlength="10" 
+            ngModel 
+            name="fullName" 
+            id="fullName" 
+            type="text" 
+            #fullName="ngModel" 
+            class="form-control">
+            <div class="alert alert-danger" 
+            *ngIf="fullName.touched && !fullName.valid">
+                <div *ngIf="fullName.errors?.required">
+                    Full Name is required.
+                </div>
+                <div *ngIf="fullName.errors?.minlength">
+                    Full Name should be at least {{fullName.errors?.minlength.requiredLength}} symbols.
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input ngModel name="Email" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="Message">Message</label>
+            <textarea name="Message" id="" cols="30" rows="10" class="form-control"></textarea>
+        </div>
+        <button class="contact-btn">Send</button>
+    </form>
+
+</div>

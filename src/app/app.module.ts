@@ -22,6 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContactComponent } from './contact/contact.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { PhotosComponent } from './photos/photos.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { LoginComponent } from './login/login.component';
     FooterComponent,
     AboutComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    PhotosComponent
   ],
   imports: [
     BrowserModule,
@@ -48,9 +51,16 @@ import { LoginComponent } from './login/login.component';
     MatSelectModule,
     MatToolbarModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+  //   {
+  //   provide: HTTP_INTERCEPTORS,
+  //   useClass: HttpHeadersInterceptor,
+  //   multi: true,
+  // }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

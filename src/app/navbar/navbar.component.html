@@ -5,8 +5,12 @@
     <a class="about-us" routerLink="about">About</a>
     <a class="contact" routerLink="contact">Contact</a>
     <a class="photos" routerLink="photos">Photos</a>
+
     <span class="spacer"></span>
-    <a class="login" routerLink="login">Log In</a>
+    <app-login-button *ngIf="(auth.isAuthenticated$ | async) === false"> 
+    </app-login-button>
+    <app-logout-button *ngIf="auth.isAuthenticated$ | async">   
+    </app-logout-button>
     <button mat-icon-button aria-label="Checkout button" class="snipcart-checkout">
     <mat-icon>shopping_cart</mat-icon>
   </button>

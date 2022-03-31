@@ -3,7 +3,7 @@
     <div class="photos">
         <h1>Search for your favourite photos:</h1>
         <input class="p-2" type="text" [(ngModel)]="search" placeholder="keyword...">
-        <input class="m-3 p-2" type="number" [(ngModel)]="perPage" placeholder="photos per page...">
+        <input class="m-3 p-2" type="number" [(ngModel)]="perPage" placeholder="number of photos...">
         <button class="btn btn-secondary" (click)="searchPhotos()">Search</button> 
     </div>
 
@@ -17,7 +17,7 @@
                         <h5 class="photographer-name">{{photo.photographer}}</h5>
                     </div>
                     <div class="photo-div">
-                        <img class="photothumb" src="{{photo.src.large}}">
+                        <img class="photothumb" src="{{photo.src.landscape}}">
                     </div>
                     <div class="desc">
                         <p>{{photo.alt}}</p>
@@ -34,3 +34,4 @@
     </div>
 
 </div>
+

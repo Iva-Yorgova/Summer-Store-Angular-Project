@@ -21,9 +21,13 @@ import { AboutComponent } from './about/about.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContactComponent } from './contact/contact.component';
 import { FormsModule } from '@angular/forms';
-import { LoginComponent } from './login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PhotosComponent } from './photos/photos.component';
+import { AuthModule } from '@auth0/auth0-angular';
+import { environment as env } from 'src/environments/environment';
+import { LoginButtonComponent } from './navbar/login-button/login-button.component';
+import { LogoutButtonComponent } from './navbar/logout-button/logout-button.component';
+import { LoadingComponent } from './navbar/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -36,8 +40,10 @@ import { PhotosComponent } from './photos/photos.component';
     FooterComponent,
     AboutComponent,
     ContactComponent,
-    LoginComponent,
-    PhotosComponent
+    PhotosComponent,
+    LoginButtonComponent,
+    LogoutButtonComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +58,10 @@ import { PhotosComponent } from './photos/photos.component';
     MatToolbarModule,
     NgbModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AuthModule.forRoot({
+      ...env.auth,
+    })
   ],
   providers: [
   //   {

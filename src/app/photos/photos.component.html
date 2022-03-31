@@ -1,3 +1,4 @@
+
 <div class="photos-wrapper">
 
     <div class="photos">
@@ -7,30 +8,52 @@
         <button class="btn btn-secondary" (click)="searchPhotos()">Search</button> 
     </div>
 
-    <div class="grid">
-        
-        <div class="item photo" *ngFor="let photo of data">
-            <a href="{{photo.url}}" target="blank">
-                <div class="content">
-        
-                    <div class="title">
-                        <h5 class="photographer-name">{{photo.photographer}}</h5>
+        <div class="grid">
+            <div class="item photo" *ngFor="let photo of data">
+                <a href="{{photo.url}}" target="blank">
+                    <div class="content">
+            
+                        <div class="title">
+                            <h5 class="photographer-name">{{photo.photographer}}</h5>
+                        </div>
+                        <div class="photo-div">
+                            <img class="photothumb" src="{{photo.src.landscape}}">
+                        </div>
+                        <div class="desc">
+                            <p>{{photo.alt}}</p>
+                        </div>
                     </div>
-                    <div class="photo-div">
-                        <img class="photothumb" src="{{photo.src.landscape}}">
+                    <div class="icon-home" >
+                        <img src="assets/home-location.svg">
+                        <p>Go to photo's page</p>
                     </div>
-                    <div class="desc">
-                        <p>{{photo.alt}}</p>
-                    </div>
-                </div>
-                <div class="icon-home" >
-                    <img src="assets/home-location.svg">
-                    <p>Go to photo's page</p>
-                </div>
-            </a>
-        
+                </a>          
+            </div>          
         </div>
-       
+
+        <div class="wrapper">
+        <h1 class="gallery-title">Ice Cream Gallery</h1>  
+        <div class="grid">                     
+            <div class="item photo" *ngFor="let photo of gallery">
+                <a href="{{photo.url}}" target="blank">
+                    <div class="content">        
+                        <div class="title">
+                            <h5 class="photographer-name">{{photo.photographer}}</h5>
+                        </div>
+                        <div class="photo-div">
+                            <img class="photothumb" src="{{photo.src.landscape}}">
+                        </div>
+                        <div class="desc">
+                            <p>{{photo.alt}}</p>
+                        </div>
+                    </div>
+                    <div class="icon-home" >
+                        <img src="assets/home-location.svg">
+                        <p>Go to photo's page</p>
+                    </div>
+                </a>          
+            </div>          
+        </div>
     </div>
 
 </div>

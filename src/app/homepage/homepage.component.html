@@ -1,7 +1,14 @@
 <div class="products-wrapper">
     <div class="header" fxLayout="column" fxLayoutAlign="center center">
+        <img class="logo-img" src="../../assets/home-delivery.png" alt="">
         <h1 class="jumbo">{{ title }}</h1>
         <h2>{{ subtitle }}</h2>
     </div>
-    <app-products></app-products>
+    <app-products *ngIf="auth.isAuthenticated$ | async"></app-products>
+    <div class="please-msg" *ngIf="(auth.isAuthenticated$ | async) === false">
+        <h4 >
+            Please, login first to continue to our store!
+        </h4>
+    </div>
+    
 </div>

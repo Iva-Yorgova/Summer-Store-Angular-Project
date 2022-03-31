@@ -24,6 +24,12 @@ export class PhotosService {
     .pipe(catchError(this.handleError));
   }
 
+  getGalleryData(): Observable<any> {
+    const url = "https://api.pexels.com/v1/search?query=IceCream&per_page=12";
+    return this.http.get<any>(url, httpOptions)
+    .pipe(catchError(this.handleError));
+  }
+
 
   handleError(error: any) {
     return throwError(error.message || 'Server error');

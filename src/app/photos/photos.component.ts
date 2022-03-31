@@ -37,12 +37,15 @@ export class PhotosComponent implements OnInit {
   search!: string;
   perPage!: number;
   data!: Photo[];
+  gallery!: Photo[];
 
-  constructor(private httpClient: HttpClient, private photoService: PhotosService) {
+  constructor(private httpClient: HttpClient, private photoService: PhotosService) 
+  {
     this.photoService.getData(this.search, this.perPage)
-   }
+  }
 
   ngOnInit(): void {
+    this.getGallery();
   }
 
   searchPhotos() {
@@ -50,8 +53,13 @@ export class PhotosComponent implements OnInit {
       console.log(data);
       this.data = data.photos;
   }, (error) => console.log(error));
-
   }
 
+  getGallery() {
+    this.photoService.getGalleryData().subscribe((gallery) => {
+      this.gallery = gallery.photos;
+  }, (error) => console.log(error));
+  }
+ 
 
 }

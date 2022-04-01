@@ -8,7 +8,7 @@ import { Product } from '../core/product';
 })
 export class ProductComponent implements OnInit {
   @Input() product: Product | undefined;
-  imageUrl :string = "";
+  imageUrl: string = "";
   
   ngOnInit() {
    this.imageUrl = this.product?.imageUrls[0] ?? '';

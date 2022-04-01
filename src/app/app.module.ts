@@ -28,6 +28,7 @@ import { environment as env } from 'src/environments/environment';
 import { LoginButtonComponent } from './navbar/login-button/login-button.component';
 import { LogoutButtonComponent } from './navbar/logout-button/logout-button.component';
 import { LoadingComponent } from './navbar/loading/loading.component';
+import { StoreComponent } from './store/store.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { LoadingComponent } from './navbar/loading/loading.component';
     PhotosComponent,
     LoginButtonComponent,
     LogoutButtonComponent,
-    LoadingComponent
+    LoadingComponent,
+    StoreComponent
   ],
   imports: [
     BrowserModule,

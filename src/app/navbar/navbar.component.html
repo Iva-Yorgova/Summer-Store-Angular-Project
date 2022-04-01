@@ -3,8 +3,9 @@
     <mat-icon>home</mat-icon>
   </button>
     <a class="about-us" routerLink="about">About</a>
-    <a class="contact" routerLink="contact">Contact</a>
+    <a class="store" routerLink="store">Store</a>
     <a class="photos" routerLink="photos">Photos</a>
+    <a class="contact" routerLink="contact">Contact</a>
 
     <span class="spacer"></span>
     <app-login-button *ngIf="(auth.isAuthenticated$ | async) === false"> 

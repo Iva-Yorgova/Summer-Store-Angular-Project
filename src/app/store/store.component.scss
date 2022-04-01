@@ -1,0 +1,29 @@
+.store-wrapper {
+    background-color: rgb(236, 213, 213);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    min-height: 90vh;
+    text-align: center;
+    align-items: center;
+}
+
+.please-msg {
+    margin-top: 50px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: 2px solid brown;
+    color:brown;
+    width: max-content;
+    text-align: center;
+}
+
+.jumbo {
+    font-size: 30px;
+    margin-top: 40px;
+}
+
+h4 {
+    margin:0;
+}

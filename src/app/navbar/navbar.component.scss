@@ -13,22 +13,14 @@
 .about-us {
     text-decoration: none;
     color: white;
-    margin: 7px 30px 0px 30px;
+    margin: 7px 0px 0px 20px;
     font-size: 18px;
-}
-
-.about-us:hover,
-.contact:hover,
-.login:hover,
-.database:hover,
-.photos:hover {
-    color: rgb(250, 173, 209);
 }
 
 .contact {
     text-decoration: none;
     color: white;
-    margin: 7px 0px 0px 0px;
+    margin: 7px 0px 0px 20px;
     font-size: 18px;
 }
 
@@ -45,4 +37,22 @@
     margin: 7px 0px 0px 20px;
     font-size: 18px;
 }
+
+.store {
+    text-decoration: none;
+    color: white;
+    margin: 7px 0px 0px 20px;
+    font-size: 18px;
+}
+
+.about-us:hover,
+.contact:hover,
+.login:hover,
+.database:hover,
+.photos:hover,
+.store:hover {
+    color: rgb(250, 173, 209);
+}
+
+
 

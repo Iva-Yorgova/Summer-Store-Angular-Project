@@ -5,12 +5,14 @@ import { ContactComponent } from './contact/contact.component';
 import { PhotosComponent } from './photos/photos.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProductPageComponent } from './product-page/product-page.component';
+import { StoreComponent } from './store/store.component';
 
 const routes: Routes = [
   {path: "about", component: AboutComponent},
+  {path: "store", component: StoreComponent},
   {path: "contact", component: ContactComponent},
   {path: "photos", component: PhotosComponent},
-  {path: "product/:id", component: ProductPageComponent},
+  {path: "store/product/:id", component: ProductPageComponent},
   {path: "**", component: HomepageComponent},
 ];
 

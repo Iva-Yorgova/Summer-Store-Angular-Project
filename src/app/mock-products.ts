@@ -5,7 +5,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 1,
     name: 'Ice Cream',
-    imageUrls: ['../assets/ice-cream-prune.svg', '../assets/ice-cream-cherry.svg', '../assets/ice-cream-squash.svg'],
+    imageUrls: ['../assets/ice-cream-prune.jpg', '../assets/ice-cream-cherry.jpg', '../assets/ice-cream-squash.jpg'],
     price: 10,
     flavors: [
       { name: 'prune', color: '#5A188E' },
@@ -17,7 +17,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 2,
     name: 'Popsicle',
-    imageUrls: ['../assets/popsicle-lime.svg', '../assets/popsicle-lettuce.svg', '../assets/popsicle-cherry.svg'],
+    imageUrls: ['../assets/popsicle-lime.jpg', '../assets/popsicle-lettuce.jpg', '../assets/popsicle-cherry.jpg'],
     price: 8,
     flavors: [
       { name: 'lime', color: '#D1E811' },
@@ -29,7 +29,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 3,
     name: 'Cake',
-    imageUrls: ['../assets/cake-choco.svg', '../assets/cake-vanila.svg', '../assets/cake-candy.svg'],
+    imageUrls: ['../assets/cake-choco.jpg', '../assets/cake-vanila.jpg', '../assets/cake-candy.jpg'],
     price: 10,
     flavors: [
       { name: 'choco', color: '#640420' },

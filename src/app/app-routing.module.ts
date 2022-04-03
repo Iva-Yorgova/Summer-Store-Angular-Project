@@ -6,6 +6,7 @@ import { PhotosComponent } from './photos/photos.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { StoreComponent } from './store/store.component';
+import { PostsModule } from './posts/posts.module';
 
 const routes: Routes = [
   {path: "about", component: AboutComponent},
@@ -14,10 +15,12 @@ const routes: Routes = [
   {path: "photos", component: PhotosComponent},
   {path: "store/product/:id", component: ProductPageComponent},
   {path: "**", component: HomepageComponent},
+  //{path: "", loadChildren: "./posts/post.module#PostsModule"}
+  
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), PostsModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

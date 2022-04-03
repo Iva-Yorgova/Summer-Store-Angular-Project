@@ -38,5 +38,29 @@ export const PRODUCTS: Product[] = [
     ],
     sizes: [Size.SMALL, Size.MEDIUM, Size.LARGE],
   },
+  {
+    id: 4,
+    name: 'Cookie',
+    imageUrls: ['../assets/cookie-choco.jpg', '../assets/cookie-red.jpg', '../assets/cookie-vanila.jpg'],
+    price: 4,
+    flavors: [
+      { name: 'choco', color: '#82301f' },
+      { name: 'red', color: '#640420' },
+      { name: 'vanila', color: '#fec28c' },
+    ],
+    sizes: [Size.SMALL, Size.MEDIUM, Size.LARGE],
+  },
+  {
+    id: 5,
+    name: 'Frozen Yogurt',
+    imageUrls: ['../assets/yogurt-raspberry.jpg', '../assets/yogurt-blueberry.jpg', '../assets/yogurt-choco.jpg'],
+    price: 16,
+    flavors: [
+      { name: 'raspberry', color: '#82301f' },
+      { name: 'blueberry', color: '#640420' },
+      { name: 'choco', color: '#fec28c' },
+    ],
+    sizes: [Size.SMALL, Size.MEDIUM, Size.LARGE],
+  }
   
 ];

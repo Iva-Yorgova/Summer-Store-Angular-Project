@@ -3,14 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { HomepageComponent } from './homepage/homepage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatCardModule} from '@angular/material/card';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatIconModule} from '@angular/material/icon';
-import {MatSelectModule} from '@angular/material/select';
-import {MatButtonModule} from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input'; 
+import { MatExpansionModule } from '@angular/material/expansion'; 
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 import { ProductPageComponent } from './product-page/product-page.component';
@@ -29,6 +31,14 @@ import { LoginButtonComponent } from './navbar/login-button/login-button.compone
 import { LogoutButtonComponent } from './navbar/logout-button/logout-button.component';
 import { LoadingComponent } from './navbar/loading/loading.component';
 import { StoreComponent } from './store/store.component';
+import { BlogModule } from './blog/blog.module';
+import { SharedModule } from './shared/shared.module';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
+import { PostsModule } from './posts/posts.module';
 
 @NgModule({
   declarations: [
@@ -58,12 +68,22 @@ import { StoreComponent } from './store/store.component';
     MatIconModule,
     MatSelectModule,
     MatToolbarModule,
+    MatInputModule,
+    MatExpansionModule,
     NgbModule,
     FormsModule,
     HttpClientModule,
     AuthModule.forRoot({
-      ...env.auth,
-    })
+       ...env.auth,
+    }),
+    BlogModule,
+    SharedModule,
+    PostsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule
+
   ],
   providers: [
   //   {

@@ -6,12 +6,24 @@
     <a class="store" routerLink="store">Store</a>
     <a class="photos" routerLink="photos">Photos</a>
     <a class="contact" routerLink="contact">Contact</a>
+    <a class="contact" routerLink="blog">Blog</a>
 
     <span class="spacer"></span>
-    <app-login-button *ngIf="(auth.isAuthenticated$ | async) === false"> 
+
+    <div *ngIf="auth.afAuth.authState | async as user; else showLogin">
+      <!-- <span>Hello {{user.displayName}}</span> -->
+      <button mat-raised-button color="accent" routerLink="/dashboard">Write a Post</button>
+      <button mat-button (click)="auth.logout()">Logout</button>
+    </div>
+    <ng-template #showLogin>
+      <button mat-button (click)="auth.login()">Login with Google</button>
+    </ng-template>
+
+    <!-- <app-login-button *ngIf="(auth.isAuthenticated$ | async) === false"> 
     </app-login-button>
     <app-logout-button *ngIf="auth.isAuthenticated$ | async">   
-    </app-logout-button>
+    </app-logout-button> -->
+
     <button mat-icon-button aria-label="Checkout button" class="snipcart-checkout shopping-cart-btn">
     <mat-icon>shopping_cart</mat-icon>
   </button>

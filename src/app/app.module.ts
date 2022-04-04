@@ -13,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input'; 
 import { MatExpansionModule } from '@angular/material/expansion'; 
+import { MatProgressBarModule } from '@angular/material/progress-bar'; 
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 import { ProductPageComponent } from './product-page/product-page.component';
@@ -70,6 +71,7 @@ import { PostsModule } from './posts/posts.module';
     MatToolbarModule,
     MatInputModule,
     MatExpansionModule,
+    MatProgressBarModule,
     NgbModule,
     FormsModule,
     HttpClientModule,

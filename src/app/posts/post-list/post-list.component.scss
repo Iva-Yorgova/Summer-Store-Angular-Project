@@ -1,0 +1,62 @@
+.post-list-wrapper {
+    padding: 30px;
+    margin: 0px auto;
+    background: rgb(247, 211, 250);
+    min-height: 90vh;
+}
+
+.post-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-auto-rows: auto;
+    grid-gap: 20px;
+    margin: 30px auto;
+    max-width: 95%;
+}
+
+.post-box:hover {
+    cursor: pointer;
+}
+
+mat-card {
+    max-width: 700px;
+    background-color:azure;
+    color: darkslategray;
+}
+
+mat-icon {
+    top: 2px;
+    position: relative;
+    font-size: 20px;
+}
+
+.mat-icon-button {
+    padding: 0;
+    min-width: 0;
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    line-height: 0px;
+    border-radius: 50%;
+}
+
+.image-box {
+    height: 200px;
+    overflow: hidden;
+}
+
+img {
+    width: 100%;
+}
+
+hr {
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    margin-top: 20px;
+}

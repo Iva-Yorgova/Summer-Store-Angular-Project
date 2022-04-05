@@ -1,0 +1,25 @@
+<div class="wrapper">
+
+    <div class="dashboard-wrapper">
+        <div>
+            <input type="file" name="file" id="file" (change)="uploadImage($event)">
+            <div [hidden]="!uploadPercent" class="mb-3 mt-3">
+                <mat-progress-bar color="accent" mode="determinate" value="{{uploadPercent | async}}"></mat-progress-bar>
+            </div>
+        </div>
+        <div [hidden]="!image" class="mb-3">
+            <img [src]="image || '//:0'">
+        </div>
+        <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input matInput placeholder="Post Title" [(ngModel)]="title">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Content</mat-label>
+            <textarea matInput placeholder="Content" [(ngModel)]="content" rows="10"></textarea>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button (click)="createPost()" [disabled]="!title || !content || !image">{{buttonText}}</button>
+    </div>
+
+</div>

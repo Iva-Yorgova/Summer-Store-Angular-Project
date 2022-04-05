@@ -1,4 +1,11 @@
 <mat-card class="product-card" [routerLink]="'product/' + product?.id">
+  <div class="icons">
+    <img *ngIf="product?.name === 'Frozen Yogurt' " src="../../assets/frozen-yogurt.png" >
+    <img *ngIf="product?.name === 'Ice Cream' " src="../../assets/ice-cream.png" >
+    <img *ngIf="product?.name === 'Popsicle' " src="../../assets/popsicle.png" >
+    <img *ngIf="product?.name === 'Cake' " src="../../assets/cake.png" >
+    <img *ngIf="product?.name === 'Cookie' " src="../../assets/cookie.png" >
+  </div>
   <mat-card-title>{{ product?.name }}</mat-card-title>
   <img mat-card-image [src]="imageUrl" />
 </mat-card>

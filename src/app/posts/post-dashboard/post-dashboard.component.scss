@@ -1,0 +1,28 @@
+.wrapper {
+    min-height: 90vh;
+    background: rgb(247, 211, 250);
+    padding:70px;
+}
+
+.dashboard-wrapper {
+    margin: 0px auto;
+    border: 2px solid gray;
+    width: 60vw;
+    padding: 10px;
+}
+
+mat-form-field {
+    padding: 10px;
+    width: 100%;
+    color: gray;
+    margin-bottom: 10px;
+    background-color:rgb(240, 237, 237);
+}
+
+mat-label {
+    color:darkslategrey;
+}
+
+img {
+    width: 100%;
+}

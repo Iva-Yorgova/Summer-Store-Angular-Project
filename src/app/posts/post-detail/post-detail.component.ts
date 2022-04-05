@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/blog/auth.service';
+import { DialogService } from 'src/app/shared/dialog.service';
 import { Post } from '../post';
 import { PostService } from '../post.service';
 
@@ -18,7 +19,8 @@ export class PostDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private postService: PostService,
-    public auth: AuthService) { }
+    public auth: AuthService,
+    private dialogService: DialogService) { }
 
   ngOnInit(): void {
     this.getPost();
@@ -42,19 +44,13 @@ export class PostDetailComponent implements OnInit {
 
   delete() {
     const id = this.route.snapshot.paramMap.get("id");
-    this.postService.delete(id);
-    this.router.navigate(["/blog"]);
-  }
-
-  // delete() {
-  //   const id = this.route.snapshot.paramMap.get("id");
-  //   this.dialogService.openConfirmDialog('Are you sure you want to delete this post?')
-  //   .afterClosed().subscribe(res => {
-  //     if(res) {
-  //       this.postService.delete(id);
-  //       this.router.navigate(["/blog"]);
-  //     }
-  //   });
+    this.dialogService.openConfirmDialog('Are you sure you want to delete this post?')
+    .afterClosed().subscribe(res => {
+      if(res) {
+        this.postService.delete(id);
+        this.router.navigate(["/blog"]);
+      }
+    });
     
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/blog/auth.service';
+import { DialogService } from 'src/app/shared/dialog.service';
 import { Post } from '../post';
 import { PostService } from '../post.service';
 
@@ -13,7 +14,10 @@ export class PostListComponent implements OnInit {
 
   posts: Observable<Post[]> | any;
 
-  constructor(private postService: PostService, public auth: AuthService) {
+  constructor(
+    private postService: PostService, 
+    public auth: AuthService,
+    private dialogService: DialogService) {
 
    }
 
@@ -22,7 +26,14 @@ export class PostListComponent implements OnInit {
   }
 
   delete(id: string) {
-    this.postService.delete(id);
+    this.dialogService.openConfirmDialog('Are you sure you want to delete this post?')
+    .afterClosed().subscribe(res => {
+      if(res) {
+        this.postService.delete(id);
+      }
+    });
   }
+
+  
 
 }

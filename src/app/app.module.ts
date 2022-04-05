@@ -40,6 +40,8 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { PostsModule } from './posts/posts.module';
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatConfirmDialogComponent } from './posts/mat-confirm-dialog/mat-confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,7 @@ import { PostsModule } from './posts/posts.module';
     MatInputModule,
     MatExpansionModule,
     MatProgressBarModule,
+    MatDialogModule,
     NgbModule,
     FormsModule,
     HttpClientModule,
@@ -94,6 +97,7 @@ import { PostsModule } from './posts/posts.module';
   //   multi: true,
   // }
 ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [MatConfirmDialogComponent]
 })
 export class AppModule { }

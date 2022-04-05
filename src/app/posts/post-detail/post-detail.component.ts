@@ -46,4 +46,16 @@ export class PostDetailComponent implements OnInit {
     this.router.navigate(["/blog"]);
   }
 
+  // delete() {
+  //   const id = this.route.snapshot.paramMap.get("id");
+  //   this.dialogService.openConfirmDialog('Are you sure you want to delete this post?')
+  //   .afterClosed().subscribe(res => {
+  //     if(res) {
+  //       this.postService.delete(id);
+  //       this.router.navigate(["/blog"]);
+  //     }
+  //   });
+    
+  }
+
 }

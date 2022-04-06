@@ -2,47 +2,34 @@
     flex: 1 1 auto;
 }
 
+.home-btn {
+    color: rgb(255, 255, 255);
+}
+
 .home-btn:hover {
     color: rgb(250, 173, 209);
+}
+
+.snipcart-checkout {
+    color: rgb(255, 255, 255);
 }
 
 .snipcart-checkout:hover {
     color: rgb(250, 173, 209);
 }
 
-.about-us {
+.about-us,
+.login,
+.about-us,
+.contact,
+.photos,
+.store,
+.blog {
     text-decoration: none;
     color: white;
-    margin: 7px 0px 0px 20px;
-    font-size: 18px;
-}
-
-.contact {
-    text-decoration: none;
-    color: white;
-    margin: 7px 0px 0px 20px;
-    font-size: 18px;
-}
-
-.login {
-    text-decoration: none;
-    color: white;
-    margin: 7px 20px 0px 0px;
-    font-size: 18px;
-}
-
-.photos {
-    text-decoration: none;
-    color: white;
-    margin: 7px 0px 0px 20px;
-    font-size: 18px;
-}
-
-.store {
-    text-decoration: none;
-    color: white;
-    margin: 7px 0px 0px 20px;
-    font-size: 18px;
+    font-size: 16px;
+    padding-top: 5px;
+    margin-right: 10px;
 }
 
 .about-us:hover,
@@ -50,15 +37,73 @@
 .login:hover,
 .database:hover,
 .photos:hover,
-.store:hover {
+.store:hover,
+.blog:hover,
+.hamburger-menu:hover {
     color: rgb(250, 173, 209);
 }
 
-.login-btn {
-    margin-right: 10px;
+.logout-btn {
+    color: white;
+    background-color: rgba(119, 67, 147, 0.5);
+    margin-left: 20px;
 }
 
-.login-btn:hover {
-    background-color:rgba(96, 157, 159, 0.5);
+.logout-btn:hover {
+    background-color: rgb(119, 67, 147);
 }
 
+.post-btn {
+    background-color: rgb(24, 96, 129);
+    color: white;
+}
+
+.post-btn:hover {
+    background-color: rgb(2, 94, 164);
+}
+
+.nav-box {
+    display: flex;
+    flex-direction: row;
+    background-color: #1e1d1d;
+    height: 70px;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.hamburger-menu {
+    color:white;
+    cursor: pointer;
+    display:none;
+}
+
+//Responsive
+@media only screen and (max-width: 780px) {
+    // .nav-box {
+    //     flex-direction: column;
+    //     justify-content: left;
+    //     align-items: start;
+    //     height: auto;
+    //     padding-bottom: 10px;
+    //     padding-top: 10px;
+    //     gap: 7px;
+    // }
+
+    .about-us,
+    .contact,
+    .login,
+    .database,
+    .photos,
+    .store,
+    .blog {
+        display: none;
+    }
+
+    .hamburger-menu {
+        display: block;
+    }
+
+}

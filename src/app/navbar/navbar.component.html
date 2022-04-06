@@ -1,30 +1,36 @@
-<mat-toolbar>
+<div class="nav-box">
+
     <button class="home-btn" mat-icon-button aria-label="Home button" routerLink="/">
-    <mat-icon>home</mat-icon>
-  </button>
+    <mat-icon>home</mat-icon></button>
+
     <a class="about-us" routerLink="about">About</a>
     <a class="store" routerLink="store">Store</a>
     <a class="photos" routerLink="photos">Photos</a>
     <a class="contact" routerLink="contact">Contact</a>
-    <a class="contact" routerLink="blog">Blog</a>
+    <a class="blog" routerLink="blog">Blog</a>
 
     <span class="spacer"></span>
 
     <div *ngIf="auth.afAuth.authState | async as user; else showLogin">
       <!-- <span>Hello {{user.displayName}}</span> -->
-      <button mat-raised-button color="accent" routerLink="/dashboard">Write a Post</button>
-      <button mat-button (click)="auth.logout()">Logout</button>
+      <button mat-raised-button  class="post-btn" color="accent" routerLink="/dashboard">Write a Post</button>
+      <button mat-button class="logout-btn" (click)="auth.logout()">Logout</button>
     </div>
+
     <ng-template #showLogin>
       <button mat-button (click)="auth.login()" class="login-btn">Login with Google</button>
     </ng-template>
 
     <!-- <app-login-button *ngIf="(auth.isAuthenticated$ | async) === false"> 
-    </app-login-button>
+    </app-login-button> 
     <app-logout-button *ngIf="auth.isAuthenticated$ | async">   
     </app-logout-button> -->
 
     <button mat-icon-button aria-label="Checkout button" class="snipcart-checkout shopping-cart-btn">
-    <mat-icon>shopping_cart</mat-icon>
-  </button>
-</mat-toolbar>
+    <mat-icon>shopping_cart</mat-icon></button>
+
+    <mat-icon class="hamburger-menu">dehaze</mat-icon>
+
+    
+
+</div>

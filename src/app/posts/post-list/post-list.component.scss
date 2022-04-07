@@ -30,9 +30,15 @@ mat-icon {
     font-size: 20px;
 }
 
+mat-icon.heart-icon {
+    font-size: 16px;
+    color:rgb(243, 133, 168)
+}
+
 .icons-wrapper {
     display: flex;
     justify-content: space-between;
+    margin-left: 8px;
 }
 
 .mat-icon-button {

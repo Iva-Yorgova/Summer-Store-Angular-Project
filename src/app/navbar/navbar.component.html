@@ -26,8 +26,10 @@
     <app-logout-button *ngIf="auth.isAuthenticated$ | async">   
     </app-logout-button> -->
 
-    <button mat-icon-button aria-label="Checkout button" class="snipcart-checkout shopping-cart-btn">
-    <mat-icon>shopping_cart</mat-icon></button>
+    <button mat-icon-button aria-label="Checkout button" class="snipcart-checkout  shopping-cart-btn">
+      <mat-icon>shopping_cart</mat-icon>
+      <span class="snipcart-items-count">0</span>
+    </button>
 
     <mat-icon class="hamburger-menu">dehaze</mat-icon>
 

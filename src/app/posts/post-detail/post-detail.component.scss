@@ -7,6 +7,11 @@
     min-height: 90vh;
 } 
 
+.icons-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
 .post-detail-box {
     border: 1px solid gray;
     border-radius: 3px;
@@ -23,11 +28,10 @@ h1 {
 }
 
 mat-card-actions {
-    display: flex;
-    justify-content: end;
     margin: 0;
     padding: 0;
 }
+
 
 mat-form-field {
     padding: 10px;

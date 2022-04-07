@@ -42,6 +42,7 @@ import { environment } from '../environments/environment';
 import { PostsModule } from './posts/posts.module';
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatConfirmDialogComponent } from './posts/mat-confirm-dialog/mat-confirm-dialog.component';
+import { AsidePostsComponent } from './posts/aside-posts/aside-posts.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,7 @@ import { MatConfirmDialogComponent } from './posts/mat-confirm-dialog/mat-confir
     LogoutButtonComponent,
     LoadingComponent,
     StoreComponent
-  ],
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,7 +1,9 @@
-<div class="post-list-wrapper">
+<div class="posts-wrapper">
 
     <h1>Latest Posts</h1>
     <hr>
+
+    <div class="post-list-wrapper">
 
     <section class="post-box">
         <mat-card *ngFor="let post of posts | async">
@@ -36,6 +38,10 @@
 
         </mat-card>
     </section>
+
+    <app-aside-posts></app-aside-posts>
+
+</div>
 
 </div>
 

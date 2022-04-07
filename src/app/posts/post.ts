@@ -1,4 +1,3 @@
-import { Timestamp } from "rxjs/internal/operators/timestamp";
 
 export class Post {
     id?: string;
@@ -8,6 +7,5 @@ export class Post {
     content!: string;
     likes!: number;
     category!: string;
-    //published!: Timestamp<any>;
     published!: Date;
 }

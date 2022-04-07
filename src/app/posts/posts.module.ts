@@ -16,10 +16,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';  
 import { MatDialogModule } from '@angular/material/dialog'
 
-
-
 import { RouterModule, Routes } from '@angular/router';
 import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
+import { AsidePostsComponent } from './aside-posts/aside-posts.component';
 
 const routes: Routes = [
   {path: 'blog', component: PostListComponent},
@@ -32,7 +31,8 @@ const routes: Routes = [
     PostDashboardComponent,
     PostDetailComponent,
     PostListComponent,
-    MatConfirmDialogComponent
+    MatConfirmDialogComponent,
+    AsidePostsComponent
   ],
   imports: [
     FormsModule,

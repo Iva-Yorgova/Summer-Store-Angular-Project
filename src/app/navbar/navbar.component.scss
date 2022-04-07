@@ -53,6 +53,16 @@
     background-color: rgb(119, 67, 147);
 }
 
+.login-btn {
+    color: white;
+    background-color: rgba(119, 67, 147, 0.5);
+    margin-left: 20px;
+}
+
+.login-btn:hover {
+    background-color: rgb(119, 67, 147);
+}
+
 .post-btn {
     background-color: rgb(24, 96, 129);
     color: white;
@@ -82,16 +92,6 @@
 
 //Responsive
 @media only screen and (max-width: 780px) {
-    // .nav-box {
-    //     flex-direction: column;
-    //     justify-content: left;
-    //     align-items: start;
-    //     height: auto;
-    //     padding-bottom: 10px;
-    //     padding-top: 10px;
-    //     gap: 7px;
-    // }
-
     .about-us,
     .contact,
     .login,

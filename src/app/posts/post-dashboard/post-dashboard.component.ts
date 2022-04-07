@@ -5,6 +5,9 @@ import { PostService } from '../post.service';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { finalize, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Post } from '../post';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { Category } from '../category';
 
 
 @Component({
@@ -14,12 +17,19 @@ import { Router } from '@angular/router';
 })
 export class PostDashboardComponent implements OnInit {
 
+  posts: Observable<Post[]> | any;
+  itemDoc!: AngularFirestoreDocument<Category>;
+  categories: Observable<Category[]> | any;
+
   constructor(
     private auth: AuthService, 
     private postService: PostService,
     private storage: AngularFireStorage,
-    private router: Router) 
-    { }
+    private router: Router,
+    private afs: AngularFirestore) 
+    { 
+      this.categories = this.afs.collection('categories').snapshotChanges();
+  }
 
   title: string | any;
   image: string | any;
@@ -46,7 +56,19 @@ export class PostDashboardComponent implements OnInit {
       likes: this.likes,
       category: this.category
     }
+    const categoryData = {
+      name: this.category,
+      posts: 1
+    }
     this.postService.create(data);
+    if(this.postService.getCategoryData(this.category) !== null) {
+      console.log('found match');
+      console.log(); 
+      this.categories.where()
+    }
+    else {
+      this.postService.createCategory(categoryData);
+    }
     this.title = '';
     this.content = '';
     this.image = '';

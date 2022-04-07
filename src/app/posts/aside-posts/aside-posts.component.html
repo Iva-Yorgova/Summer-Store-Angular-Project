@@ -1,0 +1,13 @@
+<div class="post-list-wrapper">
+
+    <h1>Categories</h1>
+    <hr>
+
+    <section class="post-box">
+        <div class="category" *ngFor="let category of categories | async">
+          <h3 class="category-name" >{{category.name}}</h3>
+          <span>{{category.posts}}</span>
+        </div>
+    </section>
+
+</div>

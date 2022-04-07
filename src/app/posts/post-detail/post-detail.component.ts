@@ -32,8 +32,6 @@ export class PostDetailComponent implements OnInit {
     return this.postService.getPostData(id).subscribe(data => this.post = data);
   }
 
-  
-
   updatePost() {
     const formData = {
       title: this.post.title,

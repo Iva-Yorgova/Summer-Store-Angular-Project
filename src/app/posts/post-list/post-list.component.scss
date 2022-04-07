@@ -54,10 +54,20 @@ mat-icon.heart-icon {
 .image-box {
     height: 200px;
     overflow: hidden;
+    background-color: blueviolet;
+   
 }
 
 img {
     width: 100%;
+    height: 100%;
+    transition: all .5s ease-in-out;
+    object-fit: cover;
+}
+
+img:hover {
+    transform: scale(1.5);
+    opacity:0.7;
 }
 
 hr {
@@ -68,8 +78,23 @@ h1 {
     text-align: center;
 }
 
-h2 {
-    margin-top: 20px;
+h5 {
+    text-align: right;
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+
+.category-box{
+    display: flex;
+    justify-content: end;
+}
+
+.category-bar{
+    padding: 1px 5px;
+    background-color: rgb(234, 233, 233);
+    border-radius: 2px;
+    width: max-content;
+    text-align: right;
 }
 
 .likes {

@@ -70,3 +70,29 @@ mat-icon {
     top: 3px;
     position: relative;
 }
+
+.category-box{
+    display: flex;
+    justify-content: end;
+    margin-top: 10px;
+}
+
+.category-bar{
+    padding: 1px 5px;
+    background-color: rgb(234, 233, 233);
+    border-radius: 2px;
+    width: max-content;
+    text-align: right;
+}
+
+.info-box {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+
+}
+
+.author-info {
+    margin-right: 10px;
+}

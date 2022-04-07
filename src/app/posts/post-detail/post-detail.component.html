@@ -20,6 +20,9 @@
         <div [hidden]="editing">
             <div class="post-detail-box">
                 <img src="{{post.image}}" alt="{{post.title}}">
+                <div class="category-box">
+                    <h5 class="category-bar">{{post.category}}</h5> 
+                </div> 
                 <h1>{{post.title}}</h1>
 
                 <!-- <editor apiKey="vi87d1gjroxj4d14mmefijxmo23v54ck3cuaxhqic1vgowx3" [init]="{
@@ -32,8 +35,16 @@
 
                 <p>{{post.content}}</p>
                 <hr>
-                <mat-icon> person_pin</mat-icon>posted by <strong>{{post.author}}</strong> <br>
-                <mat-icon>date_range</mat-icon>{{post.published.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}               
+                <div class="info-box">
+                    <div class="author-info">
+                        <mat-icon> person_pin</mat-icon>posted by <strong>{{post.author}}</strong>
+                    </div>
+                     <div>
+                        <mat-icon>date_range</mat-icon>{{post.published.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}
+                     </div>
+                     
+                </div>
+                              
                 <hr>
 
                 <mat-card-actions>

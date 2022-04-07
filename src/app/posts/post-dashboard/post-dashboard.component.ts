@@ -25,6 +25,7 @@ export class PostDashboardComponent implements OnInit {
   image: string | any;
   content: string | any;
   likes: number = 0;
+  category: string | any;
 
   buttonText: string = 'Create Post';
 
@@ -42,12 +43,14 @@ export class PostDashboardComponent implements OnInit {
       image: this.image,
       published: new Date(),
       title: this.title,
-      likes: this.likes
+      likes: this.likes,
+      category: this.category
     }
     this.postService.create(data);
     this.title = '';
     this.content = '';
     this.image = '';
+    this.category = '';
     this.buttonText = 'Post Created'
     setTimeout(() => this.buttonText = 'Create Post', 3000);
     this.router.navigate(["/blog"]);

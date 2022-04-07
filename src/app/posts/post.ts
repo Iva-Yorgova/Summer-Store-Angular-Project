@@ -6,6 +6,7 @@ export class Post {
     author!: string;
     authorId!: string;
     content!: string;
+    likes!: number;
     //image!: string;
     //published!: Timestamp<any>;
     published!: Date;

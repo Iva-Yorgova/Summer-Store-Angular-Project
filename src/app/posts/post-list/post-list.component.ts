@@ -17,9 +17,7 @@ export class PostListComponent implements OnInit {
   constructor(
     private postService: PostService, 
     public auth: AuthService,
-    private dialogService: DialogService) {
-
-   }
+    private dialogService: DialogService) { }
 
   ngOnInit(): void {
     this.posts = this.postService.getPosts();
@@ -34,6 +32,5 @@ export class PostListComponent implements OnInit {
     });
   }
 
-  
 
 }

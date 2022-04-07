@@ -30,6 +30,11 @@ mat-icon {
     font-size: 20px;
 }
 
+.icons-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
 .mat-icon-button {
     padding: 0;
     min-width: 0;
@@ -59,4 +64,9 @@ h1 {
 
 h2 {
     margin-top: 20px;
+}
+
+.likes {
+    top: 3px;
+    position: relative;
 }

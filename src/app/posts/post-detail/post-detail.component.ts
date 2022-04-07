@@ -32,10 +32,21 @@ export class PostDetailComponent implements OnInit {
     return this.postService.getPostData(id).subscribe(data => this.post = data);
   }
 
+  
+
   updatePost() {
     const formData = {
       title: this.post.title,
       content: this.post.content
+    }
+    const id = this.route.snapshot.paramMap.get('id');
+    this.postService.update(id!, formData);
+    this.editing = false;
+  }
+
+  likePost() {
+    const formData = {
+      likes: this.post.likes + 1
     }
     const id = this.route.snapshot.paramMap.get('id');
     this.postService.update(id!, formData);

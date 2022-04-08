@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/blog/auth.service';
 import { Category } from '../category';
@@ -14,13 +15,25 @@ export class AsidePostsComponent implements OnInit {
 
   posts: Observable<Post[]> | any;
   categories: Observable<Category[]> | any;
+  postsByCategory: Observable<Post[]> | any;
+  category!: string | any;
 
   constructor(
     private postService: PostService, 
-    public auth: AuthService) { }
+    public auth: AuthService,
+    private router: ActivatedRoute,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.categories = this.postService.getCategories();
-  }
+    this.posts = this.postService.getPosts();
 
+     this.router.queryParamMap.subscribe(queryParams => {
+      this.category = queryParams.get("category");
+      console.log(this.category);
+      this.postsByCategory = this.postService.getPostsByCategory(this.category);
+      console.log(this.postsByCategory);
+      console.log('here');
+   });
+  }
 }

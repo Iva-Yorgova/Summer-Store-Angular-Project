@@ -10,6 +10,10 @@
     color: rgb(250, 173, 209);
 }
 
+.dropdown-menu {
+    display: block;
+}
+
 .snipcart-checkout {
     color: rgb(255, 255, 255);
 }
@@ -92,15 +96,25 @@
 
 //Responsive
 @media only screen and (max-width: 780px) {
-    .about-us,
-    .contact,
-    .login,
-    .database,
-    .photos,
-    .store,
-    .blog {
-        display: none;
+    .nav-box {
+        flex-direction: column;
+        justify-content: left;
+        align-items: start;
+        height: auto;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        gap: 7px;
     }
+
+    // .about-us,
+    // .contact,
+    // .login,
+    // .database,
+    // .photos,
+    // .store,
+    // .blog {
+    //     display: none;
+    // }
 
     .hamburger-menu {
         display: block;

@@ -63,8 +63,6 @@ export class PostDashboardComponent implements OnInit {
     this.postService.create(data);
     if(this.postService.getCategoryData(this.category) !== null) {
       console.log('found match');
-      console.log(); 
-      this.categories.where()
     }
     else {
       this.postService.createCategory(categoryData);

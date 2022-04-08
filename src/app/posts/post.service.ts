@@ -53,9 +53,9 @@ export class PostService {
     return category;
   }
 
-  getPostsByCategory(name: string) {
+  getPostsByCategory(name: string): Observable<any> {
     const posts = this.afs.collection<Post>('posts', 
-    ref => ref.where('category', '==', name));
+    ref => ref.where('category', '==', name)).valueChanges();
     return posts;
   }
 

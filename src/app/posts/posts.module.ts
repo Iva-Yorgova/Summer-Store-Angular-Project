@@ -19,10 +19,13 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { RouterModule, Routes } from '@angular/router';
 import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
 import { AsidePostsComponent } from './aside-posts/aside-posts.component';
+import { LatestPostsComponent } from './latest-posts/latest-posts.component';
+import { CategoryPostsComponent } from './category-posts/category-posts.component';
 
 const routes: Routes = [
   {path: 'blog', component: PostListComponent},
   {path: 'blog/:id', component: PostDetailComponent},
+  {path: 'category', component: CategoryPostsComponent},
   {path: 'dashboard', component: PostDashboardComponent}
 ]
 
@@ -32,7 +35,9 @@ const routes: Routes = [
     PostDetailComponent,
     PostListComponent,
     MatConfirmDialogComponent,
-    AsidePostsComponent
+    AsidePostsComponent,
+    LatestPostsComponent,
+    CategoryPostsComponent
   ],
   imports: [
     FormsModule,

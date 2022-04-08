@@ -13,6 +13,7 @@ import { PostService } from '../post.service';
 export class PostListComponent implements OnInit {
 
   posts: Observable<Post[]> | any;
+  postsByCategory: Observable<Post[]> | any;
 
   constructor(
     private postService: PostService, 
@@ -30,6 +31,10 @@ export class PostListComponent implements OnInit {
         this.postService.delete(id);
       }
     });
+  }
+
+  categoryPosts(name: string) {
+    this.postsByCategory = this.postService.getPostsByCategory(name);
   }
 
 

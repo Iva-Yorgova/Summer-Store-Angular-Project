@@ -27,12 +27,12 @@ mat-card {
     background-color:azure;
     color: darkslategray;
 }
-
-app-aside-posts {
+.aside {
     margin: 30px auto;
-    
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
-
 mat-icon {
     top: 2px;
     position: relative;
@@ -85,6 +85,8 @@ hr {
 
 h1 {
     text-align: center;
+    font-size: 30px;
+    margin-top: 40px;
 }
 
 h5 {
@@ -119,4 +121,8 @@ h2 {
     .post-list-wrapper {
         display:block;
     }
+
+    .post-box {
+        width: 100%;
+      }
 }

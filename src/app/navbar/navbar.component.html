@@ -1,14 +1,16 @@
 <div class="nav-box">
 
     <button class="home-btn" mat-icon-button aria-label="Home button" routerLink="/">
-    <mat-icon>home</mat-icon></button>
+      <mat-icon>home</mat-icon>
+    </button>
 
-    <a class="about-us" routerLink="about">About</a>
-    <a class="store" routerLink="store">Store</a>
-    <a class="photos" routerLink="photos">Photos</a>
-    <a class="contact" routerLink="contact">Contact</a>
-    <a class="blog" routerLink="blog">Blog</a>
-
+    <div id="myNav">
+      <a class="about-us" routerLink="about">About</a>
+      <a class="store" routerLink="store">Store</a>
+      <a class="photos" routerLink="photos">Photos</a>
+      <a class="contact" routerLink="contact">Contact</a>
+      <a class="blog" routerLink="blog">Blog</a>
+    </div>
     <span class="spacer"></span>
 
     <div *ngIf="auth.afAuth.authState | async as user; else showLogin">
@@ -31,8 +33,8 @@
       <span class="snipcart-items-count">0</span>
     </button>
 
-    <mat-icon class="hamburger-menu">dehaze</mat-icon>
+    <!-- <mat-icon class="hamburger-menu">dehaze</mat-icon> -->
 
-    
 
 </div>
+

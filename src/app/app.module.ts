@@ -43,6 +43,7 @@ import { PostsModule } from './posts/posts.module';
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatConfirmDialogComponent } from './posts/mat-confirm-dialog/mat-confirm-dialog.component';
 import { AsidePostsComponent } from './posts/aside-posts/aside-posts.component';
+import { CategoryPostsComponent } from './posts/category-posts/category-posts.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,7 @@ import { AsidePostsComponent } from './posts/aside-posts/aside-posts.component';
     LoginButtonComponent,
     LogoutButtonComponent,
     LoadingComponent,
-    StoreComponent
+    StoreComponent,
     ],
   imports: [
     BrowserModule,
@@ -89,7 +90,7 @@ import { AsidePostsComponent } from './posts/aside-posts/aside-posts.component';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule
-
+    
   ],
   providers: [
   //   {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { AuthService } from 'src/app/blog/auth.service';
 import { PostService } from '../post.service';
 import { AngularFireStorage } from 'angularfire2/storage';
@@ -61,11 +61,13 @@ export class PostDashboardComponent implements OnInit {
       posts: 1
     }
     this.postService.create(data);
-    if(this.postService.getCategoryData(this.category) !== null) {
+    if(this.postService.getCategories())
+     {
       console.log('found match');
     }
     else {
       this.postService.createCategory(categoryData);
+      console.log('created');
     }
     this.title = '';
     this.content = '';

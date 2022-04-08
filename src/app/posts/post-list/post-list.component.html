@@ -2,11 +2,12 @@
 
     <h1>Posts</h1>
     <hr>
-
-    <form id="filter">
-        <label>Filter posts by category:</label>
-        <input type="text" [ngModelOptions]="{standalone:true}" [(ngModel)]="term" />
-    </form>
+    <div class="filter-posts">
+        <form class="filter-box" id="filter">
+            <label>Filter posts by category:</label>
+            <input type="text" [ngModelOptions]="{standalone:true}" [(ngModel)]="term" />
+        </form>
+    </div>
     
     <div class="post-list-wrapper">
 

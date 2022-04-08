@@ -11,5 +11,6 @@ export class HomepageComponent {
   subtitle = 'Summer is here! Order your favorite delicacies!';
 
   constructor(public auth: AuthService) {}
+
   
   }

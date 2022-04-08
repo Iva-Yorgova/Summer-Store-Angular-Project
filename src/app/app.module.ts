@@ -62,7 +62,7 @@ import { FilterPipe } from './filter.pipe';
     LogoutButtonComponent,
     LoadingComponent,
     StoreComponent,
-    FilterPipe,
+    FilterPipe
     ],
   imports: [
     BrowserModule,

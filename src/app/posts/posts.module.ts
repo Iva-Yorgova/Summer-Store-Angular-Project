@@ -56,7 +56,9 @@ const routes: Routes = [
     MatButtonModule,
     MatProgressBarModule,
     MatDialogModule
+   
   ],
   providers: [ PostService ]
 })
+
 export class PostsModule { }

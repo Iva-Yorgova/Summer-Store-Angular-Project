@@ -21,6 +21,8 @@ import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dial
 import { AsidePostsComponent } from './aside-posts/aside-posts.component';
 import { LatestPostsComponent } from './latest-posts/latest-posts.component';
 import { CategoryPostsComponent } from './category-posts/category-posts.component';
+import { FilterPipe } from './filter.pipe';
+
 
 const routes: Routes = [
   {path: 'blog', component: PostListComponent},
@@ -37,7 +39,8 @@ const routes: Routes = [
     MatConfirmDialogComponent,
     AsidePostsComponent,
     LatestPostsComponent,
-    CategoryPostsComponent
+    CategoryPostsComponent,
+    FilterPipe
   ],
   imports: [
     FormsModule,

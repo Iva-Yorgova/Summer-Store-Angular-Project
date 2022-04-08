@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/blog/auth.service';
 import { DialogService } from 'src/app/shared/dialog.service';
 import { Post } from '../post';
 import { PostService } from '../post.service';
+import { FilterPipe } from '../filter.pipe';
 
 @Component({
   selector: 'app-post-list',
@@ -14,6 +15,7 @@ export class PostListComponent implements OnInit {
 
   posts: Observable<Post[]> | any;
   postsByCategory: Observable<Post[]> | any;
+  term: any;
 
   constructor(
     private postService: PostService, 

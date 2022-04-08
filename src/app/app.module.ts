@@ -44,6 +44,7 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { MatConfirmDialogComponent } from './posts/mat-confirm-dialog/mat-confirm-dialog.component';
 import { AsidePostsComponent } from './posts/aside-posts/aside-posts.component';
 import { CategoryPostsComponent } from './posts/category-posts/category-posts.component';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { CategoryPostsComponent } from './posts/category-posts/category-posts.co
     LogoutButtonComponent,
     LoadingComponent,
     StoreComponent,
+    FilterPipe,
     ],
   imports: [
     BrowserModule,

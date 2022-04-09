@@ -4,6 +4,7 @@
 
 .myNav {
     display: flex;
+    gap: 10px;
 }
 
 .home-btn {
@@ -110,15 +111,10 @@
         gap: 7px;
     }
 
-    // .about-us,
-    // .contact,
-    // .login,
-    // .database,
-    // .photos,
-    // .store,
-    // .blog {
-    //     display: none;
-    // }
+    .myNav {
+        gap: 0px;
+    }
+    
 
     .hamburger-menu {
         display: block;

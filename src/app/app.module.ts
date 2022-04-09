@@ -45,6 +45,8 @@ import { MatConfirmDialogComponent } from './posts/mat-confirm-dialog/mat-confir
 import { AsidePostsComponent } from './posts/aside-posts/aside-posts.component';
 import { CategoryPostsComponent } from './posts/category-posts/category-posts.component';
 import { FilterPipe } from './filter.pipe';
+import { EditorModule } from '@tinymce/tinymce-angular';
+
 
 @NgModule({
   declarations: [
@@ -91,7 +93,8 @@ import { FilterPipe } from './filter.pipe';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    EditorModule
     
   ],
   providers: [

@@ -14,6 +14,12 @@ export class PostDetailComponent implements OnInit {
 
   post: Post | any;
   editing: boolean = false;
+  title: string | any;
+  image: string | any;
+  content: string | any;
+  likes: number = 0;
+  category: string | any;
+  comments: string[] | any;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,13 +35,20 @@ export class PostDetailComponent implements OnInit {
 
   getPost() {
     const id = this.route.snapshot.paramMap.get('id');
-    return this.postService.getPostData(id).subscribe(data => this.post = data);
+    const result =  this.postService.getPostData(id)
+    .subscribe(data => this.post = data);
+    return result;
+  }
+
+  getUserData() {
+    const user = this.auth.currentUserId;
   }
 
   updatePost() {
     const formData = {
       title: this.post.title,
-      content: this.post.content
+      content: this.post.content,
+      category: this.post.category
     }
     const id = this.route.snapshot.paramMap.get('id');
     this.postService.update(id!, formData);

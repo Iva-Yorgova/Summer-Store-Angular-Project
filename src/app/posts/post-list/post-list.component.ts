@@ -16,14 +16,16 @@ export class PostListComponent implements OnInit {
   posts: Observable<Post[]> | any;
   postsByCategory: Observable<Post[]> | any;
   term: any;
+  isLoading: boolean = true;
 
   constructor(
     private postService: PostService, 
     public auth: AuthService,
     private dialogService: DialogService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
     this.posts = this.postService.getPosts();
+    this.isLoading = false;
   }
 
   delete(id: string) {

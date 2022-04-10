@@ -36,6 +36,7 @@ export class PostDashboardComponent implements OnInit {
   content: string | any;
   likes: number = 0;
   category: string | any;
+  comments: string[] | any;
 
   buttonText: string = 'Create Post';
 
@@ -61,20 +62,19 @@ export class PostDashboardComponent implements OnInit {
       posts: 1
     }
     this.postService.create(data);
-    if(this.postService.getCategories())
-     {
-      console.log('found match');
-    }
-    else {
+    // if(this.postService.getCategories())
+    //  {
+    //   console.log('found match');
+    // }
       this.postService.createCategory(categoryData);
       console.log('created');
-    }
+      setTimeout(() => this.buttonText = 'Create Post', 3000);
     this.title = '';
     this.content = '';
     this.image = '';
     this.category = '';
     this.buttonText = 'Post Created'
-    setTimeout(() => this.buttonText = 'Create Post', 3000);
+    
     this.router.navigate(["/blog"]);
   }
 
@@ -95,6 +95,10 @@ export class PostDashboardComponent implements OnInit {
       }))
       .subscribe();
     }
+  }
+
+  parseHtml(string: any): any {
+    return string.replace(/<(?:.|\n)*?>/gm, ' ');
   }
 
   

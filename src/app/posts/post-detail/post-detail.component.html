@@ -5,11 +5,24 @@
 
         <div [hidden]="!editing" class="editing-box">
             <mat-form-field>
+                <mat-label>Category</mat-label>
+                <input matInput placeholder="Post Category" [(ngModel)]="post.category">
+            </mat-form-field>
+            <mat-form-field>
                 <mat-label>Title</mat-label>
                 <input matInput placeholder="Post Title" [(ngModel)]="post.title">
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Content</mat-label>
+                 <!-- <editor apiKey="vi87d1gjroxj4d14mmefijxmo23v54ck3cuaxhqic1vgowx3" matInput [(ngModel)]="content" [init]="{
+                    icons: 'material',
+                    skin: 'borderless',
+                    plugins: 'wordcount',
+                    menubar: false,
+                    min_height: 150
+                  }">
+                  <textarea matInput placeholder="Content" [(ngModel)]="post.content" rows="10"></textarea>
+                </editor>  -->
                 <textarea matInput placeholder="Content" [(ngModel)]="post.content" rows="10"></textarea>
             </mat-form-field>
             <br>
@@ -24,16 +37,8 @@
                     <h5 class="category-bar">{{post.category}}</h5> 
                 </div> 
                 <h1>{{post.title}}</h1>
-
-                <!-- <editor apiKey="vi87d1gjroxj4d14mmefijxmo23v54ck3cuaxhqic1vgowx3" [init]="{
-                    icons: 'material',
-                    skin: 'borderless',
-                    plugins: 'wordcount',
-                    menubar: false,
-                    min_height: 150
-                  }">{{post.content}}</editor> -->
-
-                <p>{{post.content}}</p>
+                <hr>
+                    <p [innerHTML]="post.content"></p>
                 <hr>
                 <div class="info-box">
                     <div class="author-info">
@@ -66,7 +71,15 @@
 
             </div>
         </div>
+    </div>
 
+    <div class="comments-wrapper">
+        <h1>Post Comment</h1>
+    <hr>
+    <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="Post Title" [(ngModel)]="title">
+    </mat-form-field>
     </div>
 </div>
 </ng-container>

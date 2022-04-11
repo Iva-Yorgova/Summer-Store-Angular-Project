@@ -27,6 +27,13 @@ Project is created with:
     
     Angular Material
     
+    HTML
+    
+    SCSS
+    
+    JavaScript
+    
+    
 # Setup:
 
   To run this project install it locally using npm:

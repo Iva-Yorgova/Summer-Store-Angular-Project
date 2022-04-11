@@ -5,6 +5,7 @@ import { DialogService } from 'src/app/shared/dialog.service';
 import { Post } from '../post';
 import { PostService } from '../post.service';
 import { FilterPipe } from '../filter.pipe';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-post-list',
@@ -21,7 +22,8 @@ export class PostListComponent implements OnInit {
   constructor(
     private postService: PostService, 
     public auth: AuthService,
-    private dialogService: DialogService) { }
+    private dialogService: DialogService,
+    private afs: AngularFirestore) { }
 
   ngOnInit(): void { 
     this.posts = this.postService.getPosts();
@@ -41,5 +43,6 @@ export class PostListComponent implements OnInit {
     this.postsByCategory = this.postService.getPostsByCategory(name);
   }
 
+  
 
 }

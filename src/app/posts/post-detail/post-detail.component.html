@@ -51,10 +51,16 @@
                 <hr>
                 <mat-card-actions>
                     <div class="icons-wrapper">
-                        <button mat-icon-button (click)="likePost()">
-                            <mat-icon>favorite_border</mat-icon>
-                            <span class="likes">{{post.likes}}</span>
-                        </button>
+                        <div class="icons-left">
+                            <button mat-icon-button (click)="likePost()">
+                                <mat-icon>favorite_border</mat-icon>
+                                <span class="likes">{{post.likes}}</span>
+                            </button>
+                            <button mat-icon-button>
+                                <mat-icon>insert_comment</mat-icon>
+                                <span class="likes">{{post.comments}}</span>
+                            </button>
+                        </div>
                         <div>
                             <button mat-icon-button *ngIf="auth.currentUserId === post.authorId" (click)="editing=true">
                                 <mat-icon>edit</mat-icon>
@@ -67,27 +73,40 @@
                 </mat-card-actions>
 
             </div>
+
+            <div class="comments-box">
+                <h1>Comments</h1>
+                <mat-card *ngFor="let comment of comments" class="comments-card">
+                    <div class="info-box">
+                        <div class="author-info">
+                            <mat-icon> person_pin</mat-icon>By <strong>{{comment.author}}</strong>
+                        </div>
+                        <div>
+                            <mat-icon>date_range</mat-icon>{{comment.published.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}
+                        </div>
+                    </div>
+                    <hr>
+                    <p>{{comment.text}}</p>
+                </mat-card>
+            </div>
+            
+            <div class="comments-wrapper" *ngIf="getUserData()">
+                <h1>Write Comment</h1>
+                <hr>
+                <mat-form-field>
+                    <mat-label>Comment</mat-label>
+                    <input matInput placeholder="Comment" [(ngModel)]="text">
+                </mat-form-field>
+                <button class="create-post-btn" mat-raised-button (click)="addComment()">Add</button>
+            
+            </div>
+
+
         </div>
     </div>
 
 
-<div class="comments-box">
-    <h1>Comments</h1>
-    <mat-card *ngFor="let comment of comments" class="comments-card">
-            <p>{{comment.text}}</p>
-    </mat-card>
-</div>
 
-    <div class="comments-wrapper" *ngIf="getUserData()">
-        <h1>Write Comment</h1>
-        <hr>
-        <mat-form-field>
-            <mat-label>Comment</mat-label>
-            <input matInput placeholder="Comment" [(ngModel)]="text">
-        </mat-form-field>
-        <button class="create-post-btn" mat-raised-button (click)="addComment()">Add</button>
-
-    </div>
 </div>
 </ng-container>
 

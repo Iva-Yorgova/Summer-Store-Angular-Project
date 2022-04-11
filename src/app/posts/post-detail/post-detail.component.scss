@@ -15,6 +15,11 @@
     justify-content: space-between;
 }
 
+.icons-left {
+    display: flex;
+    gap: 20px;
+}
+
 .post-detail-box {
     border: 1px solid gray;
     border-radius: 3px;

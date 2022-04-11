@@ -1,56 +1,7 @@
 <div class="about-wrapper">
 
-    <div class="header" fxLayout="column" fxLayoutAlign="center center">
+    <div class="header" fxLayout="column">
         <div class="wrapper">
-
-            <button (click)="onAdd()" class="btn btn-secondary mb-3">Add Course</button>
-
-            <div class="courses-btn mb-4" *ngIf="courses.length > 0">
-                <h1>List of courses:</h1>
-
-                <ul class="about-ul mb-4 d-flex">
-                    <li class="my-btn" [class.active]="viewMode == 'table'">
-                        <a (click)="viewMode = 'table'">Table View</a>
-                    </li>
-                    <li class="my-btn" [class.active]="viewMode == 'list'">
-                        <a (click)="viewMode = 'list'">List View</a>
-                    </li>
-                </ul>
-                <div class="view-content" [ngSwitch]="viewMode">
-                    <div *ngSwitchCase="'table'">
-                        <table class="courses-tbl">
-                            <tr>
-                                <th>N:</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                            </tr>
-                            <tr *ngFor="let course of courses; index as i; even as isEven">
-                                <td>{{i + 1}}</td>
-                                <td>{{ course.name}}</td>
-                                <td>{{ course.description}}</td>
-                                <td><button (click)="onDelete(course)" class="btn btn-danger">Delete</button></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div *ngSwitchCase="'list'">
-                        <ul>
-                            <li *ngFor="let course of courses; index as i; even as isEven">
-                                {{i + 1}}.
-                                <span class="course-title">{{ course.name}}: </span> {{ course.description}}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <hr>
-
-            </div>
-            <div *ngIf="courses.length == 0">
-                No courses
-            </div>
-
-
-
 
             <h1>Ice Cream Story</h1>
             <p>Ice cream is a sweetened frozen food typically eaten as a snack or dessert. It may be made from milk or cream and is flavoured with a sweetener, either sugar or an alternative, and a spice, such as cocoa or vanilla, or with fruit such as strawberries
@@ -67,6 +18,59 @@
             <p>The first recipe in French for flavoured ices appears in 1674, in Nicholas Lemery's Recueil de curiositéz rares et nouvelles de plus admirables effets de la nature. Recipes for sorbetti saw publication in the 1694 edition of Antonio Latini's
                 Lo Scalco alla Moderna (The Modern Steward).
             </p>
+
         </div>
+
+        <!-- <button (click)="onAdd()" class="btn btn-secondary mb-3">Add Course</button> -->
+
+    <div class="courses-btn mb-4" *ngIf="products.length > 0">
+        <h1>List of our products:</h1>
+    
+        <ul class="about-ul mb-4 d-flex">
+            <li class="my-btn" [class.active]="viewMode == 'table'">
+                <a (click)="viewMode = 'table'">Table View</a>
+            </li>
+            <li class="my-btn" [class.active]="viewMode == 'list'">
+                <a (click)="viewMode = 'list'">List View</a>
+            </li>
+        </ul>
+        <div class="view-content" [ngSwitch]="viewMode">
+            <div *ngSwitchCase="'table'">
+                <table class="courses-tbl">
+                    <tr>
+                        <th>N:</th>
+                        <th>Name</th>
+                        <th>Flavors</th>
+                        <th>Price</th>
+                    </tr>
+                    <tr *ngFor="let product of products; index as i; even as isEven">
+                        <td>{{i + 1}}</td>
+                        <td>{{ product.name}}</td>
+                        <td>{{ product.flavors}}</td>
+                        <td>{{ product.price}}</td>
+                        <!-- <td><button (click)="onDelete(product)" class="btn btn-danger">Delete</button></td> -->
+                    </tr>
+                </table>
+            </div>
+            <div *ngSwitchCase="'list'">
+                <ul>
+                    <li *ngFor="let product of products; index as i; even as isEven">
+                        {{i + 1}}.
+                        <span class="course-title">{{ product.name}}: </span> {{ product.flavors}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+        <hr>
+    
     </div>
+
+    <div *ngIf="products.length == 0">
+        No products.
+    </div>
+    </div>
+
+    
+
 </div>

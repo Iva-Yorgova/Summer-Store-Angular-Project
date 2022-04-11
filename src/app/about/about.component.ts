@@ -10,40 +10,34 @@ export class AboutComponent implements OnInit {
 
   viewMode = 'table';
 
-  courses = [
+  products = [
     { 
-      name: 'Angular', 
-      description: 'Some Angular info here...' 
+      name: 'Ice Cream', 
+      flavors: 'prune, squash, cherry',
+      price: '$10.00'
     },
     { 
-      name: 'CSS', 
-      description: 'Some CSS info here...' 
+      name: 'Popsicle', 
+      flavors: 'lime, lettuce, cherry',
+      price: '$8.00' 
     },
     { 
-      name: 'HTML', 
-      description: 'Some HTML info here...' 
+      name: 'Cake', 
+      flavors: 'choco, vanila, candy',
+      price: '$20.00'
     },
     { 
-      name: 'JavaScript', 
-      description: 'Some JavaScript info here...' 
+      name: 'Cookie', 
+      flavors: 'choco, red, vanila',
+      price: '$4.00' 
     },
     { 
-      name: 'TypeScript', 
-      description: 'Some TypeScript info here...' 
+      name: 'Frozen Yogurt', 
+      flavors: 'raspberry, blueberry, choco',
+      price: '$16.00' 
     }
 ];
 
-onAdd() {
-  this.courses.push({ 
-    name: 'Database', 
-    description: 'Some Database info here'
-  });
-}
-
-onDelete(course: any) {
-  let index = this.courses.indexOf(course);
-  this.courses.splice(index, 1);
-}
 
   ngOnInit(): void {}
 }

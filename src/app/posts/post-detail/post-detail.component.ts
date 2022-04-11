@@ -93,6 +93,11 @@ export class PostDetailComponent implements OnInit {
       likes: 1,
     }
     this.postService.createComment(data);
+    const formData = {
+      comments: this.post.comments + 1
+    }
+    this.postService.update(id!, formData);
+    this.text = '';
   }
 
   delete() {

@@ -8,5 +8,5 @@ export class Post {
     likes!: number;
     category!: string;
     published!: Date;
-    comments?: string[]
+    comments?: number
 }

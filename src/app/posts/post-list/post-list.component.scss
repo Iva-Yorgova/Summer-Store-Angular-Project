@@ -40,9 +40,13 @@
 
 mat-card {
     max-width: 700px;
-    background-color:azure;
+    background-color: azure;
     color: darkslategray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
 .aside {
     margin: 30px auto;
     display: flex;
@@ -60,10 +64,29 @@ mat-icon.heart-icon {
     color:rgb(243, 133, 168)
 }
 
+mat-icon.comments-icon {
+    font-size: 16px;
+    color:rgb(142, 133, 243)
+}
+
+mat-icon.delete-btn {
+    opacity: 0.7;
+}
+
+mat-icon.delete-btn:hover {
+    opacity: 1;
+}
+
 .icons-wrapper {
     display: flex;
     justify-content: space-between;
     margin-left: 8px;
+    gap: 16px;
+}
+
+.icons-left {
+    display: flex;
+    gap: 16px;
 }
 
 .mat-icon-button {

@@ -46,12 +46,9 @@
                     </div>
                      <div>
                         <mat-icon>date_range</mat-icon>{{post.published.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}
-                     </div>
-                     
-                </div>
-                              
+                     </div>                   
+                </div>                            
                 <hr>
-
                 <mat-card-actions>
                     <div class="icons-wrapper">
                         <button mat-icon-button (click)="likePost()">
@@ -73,13 +70,23 @@
         </div>
     </div>
 
-    <div class="comments-wrapper">
-        <h1>Post Comment</h1>
-    <hr>
-    <mat-form-field>
-        <mat-label>Title</mat-label>
-        <input matInput placeholder="Post Title" [(ngModel)]="title">
-    </mat-form-field>
+
+<div class="comments-box">
+    <h1>Comments</h1>
+    <mat-card *ngFor="let comment of comments" class="comments-card">
+            <p>{{comment.text}}</p>
+    </mat-card>
+</div>
+
+    <div class="comments-wrapper" *ngIf="getUserData()">
+        <h1>Write Comment</h1>
+        <hr>
+        <mat-form-field>
+            <mat-label>Comment</mat-label>
+            <input matInput placeholder="Comment" [(ngModel)]="text">
+        </mat-form-field>
+        <button class="create-post-btn" mat-raised-button (click)="addComment()">Add</button>
+
     </div>
 </div>
 </ng-container>

@@ -4,6 +4,8 @@ import { AuthService } from 'src/app/blog/auth.service';
 import { DialogService } from 'src/app/shared/dialog.service';
 import { Post } from '../post';
 import { PostService } from '../post.service';
+import { Comment } from '../comment';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-post-detail',
@@ -12,6 +14,8 @@ import { PostService } from '../post.service';
 })
 export class PostDetailComponent implements OnInit {
 
+  comments: Observable<Comment[]> | any;
+
   post: Post | any;
   editing: boolean = false;
   title: string | any;
@@ -19,7 +23,11 @@ export class PostDetailComponent implements OnInit {
   content: string | any;
   likes: number = 0;
   category: string | any;
-  comments: string[] | any;
+  comment: string | any;
+
+  postComment: Comment | any;
+  text: string | any;
+  commentLikes: number | any;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,7 +38,9 @@ export class PostDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPost();
-    console.log(this)
+    this.getPostComments();
+    this.comments = this.getPostComments();
+    this.getUserData();
   }
 
   getPost() {
@@ -40,8 +50,16 @@ export class PostDetailComponent implements OnInit {
     return result;
   }
 
+  getPostComments() {
+    const id = this.route.snapshot.paramMap.get('id');
+    const result =  this.postService.getCommentsByPostId(id)
+    .subscribe(data => this.comments = data);
+    return result;
+  }
+
   getUserData() {
     const user = this.auth.currentUserId;
+    return user;
   }
 
   updatePost() {
@@ -62,6 +80,19 @@ export class PostDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.postService.update(id!, formData);
     this.editing = false;
+  }
+
+  addComment() {
+    const id = this.route.snapshot.paramMap.get('id');
+    const data = {
+      author: this.auth.authState.displayName || this.auth.authState.email,
+      authorId: this.auth.currentUserId,
+      postId: id,
+      text: this.text,
+      published: new Date(),
+      likes: 1,
+    }
+    this.postService.createComment(data);
   }
 
   delete() {

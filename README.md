@@ -51,7 +51,9 @@ Angular Web Application
 # Screenshots:
 
 ![home](https://user-images.githubusercontent.com/84331691/162885503-b7c65af3-d8a3-416b-aefa-af6f2275cd3b.jpg)
-![store](https://user-images.githubusercontent.com/84331691/162885672-6543136c-2e94-464b-90cb-57b62f548b1e.jpg)
 
+![store](https://user-images.githubusercontent.com/84331691/162886410-560a420e-c8c7-4973-973b-16c344ab738a.jpg)
 
+![product](https://user-images.githubusercontent.com/84331691/162886415-b5681436-97bb-4f15-8d16-9953add4420a.jpg)
 
+![cart](https://user-images.githubusercontent.com/84331691/162886428-52d352b4-3d37-4a34-acb0-3299e72160e5.jpg)

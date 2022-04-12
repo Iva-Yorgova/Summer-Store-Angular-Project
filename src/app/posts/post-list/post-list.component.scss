@@ -156,6 +156,13 @@ h2 {
     position: relative;
 }
 
+.loading {
+    color:rgb(53, 31, 103);
+    font-size: 25px;
+    margin-top: 30px;
+    margin-left: 40px;
+}
+
 @media only screen and (max-width: 780px) {
     .post-list-wrapper {
         display:block;

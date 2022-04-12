@@ -55,7 +55,8 @@ export class PostDashboardComponent implements OnInit {
       published: new Date(),
       title: this.title,
       likes: this.likes,
-      category: this.category
+      category: this.category,
+      comments: 0
     }
     const categoryData = {
       name: this.category,

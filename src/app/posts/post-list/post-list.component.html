@@ -2,9 +2,7 @@
 
     <h1>Posts</h1>
     <hr>
-    <div *ngIf="isLoading" style="text-align: center;" class="loading-text">
-        <p>Loading...</p>
-    </div>
+  
     <div class="filter-posts">
         <form class="filter-box" id="filter">
             <label>Filter posts by category:</label>
@@ -14,8 +12,9 @@
     
     <div class="post-list-wrapper">
 
-    <section class="post-box">
-        <mat-card *ngFor="let post of posts | async | filter:term">
+    <section *ngIf="posts | async as posts; else indicator" class="post-box">
+        
+        <mat-card *ngFor="let post of posts | filter:term">
 
             <mat-card-content routerLink="{{post.id}}">
                 <div class="image-box">
@@ -55,6 +54,10 @@
 
         </mat-card>
     </section>
+
+    <ng-template #indicator>
+        <h3  class="loading">Loading...</h3>
+    </ng-template>
 
     <section class="aside">
         <app-aside-posts></app-aside-posts>

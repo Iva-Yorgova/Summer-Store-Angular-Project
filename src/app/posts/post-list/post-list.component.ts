@@ -6,6 +6,7 @@ import { Post } from '../post';
 import { PostService } from '../post.service';
 import { FilterPipe } from '../filter.pipe';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-post-list',
@@ -17,7 +18,7 @@ export class PostListComponent implements OnInit {
   posts: Observable<Post[]> | any;
   postsByCategory: Observable<Post[]> | any;
   term: any;
-  isLoading: boolean = true;
+  loading = true;
 
   constructor(
     private postService: PostService, 
@@ -27,7 +28,7 @@ export class PostListComponent implements OnInit {
 
   ngOnInit(): void { 
     this.posts = this.postService.getPosts();
-    this.isLoading = false;
+    //this.postService.getPosts().subscribe(posts => {this.posts = posts});
   }
 
   delete(id: string) {

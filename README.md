@@ -5,6 +5,8 @@ Angular Web Application
     SUMMER STORE is a web project that combines e-commerce store, 
     where you can order your favorite summer sweets and a blog, 
     where you can read, write and comment interesting articles.
+    The project use SNIPCART - HTML/JavaScript shopping cart platform, 
+    which is flexible, developer-friendly and easy to use.
     Summer is here! Order your favorite delicacies! 🍦
     
 # Firebase Hosting:     
@@ -57,3 +59,5 @@ Angular Web Application
 ![product](https://user-images.githubusercontent.com/84331691/162886415-b5681436-97bb-4f15-8d16-9953add4420a.jpg)
 
 ![cart](https://user-images.githubusercontent.com/84331691/162886428-52d352b4-3d37-4a34-acb0-3299e72160e5.jpg)
+
+![photos](https://user-images.githubusercontent.com/84331691/162887069-96282ab8-ab57-40a8-90e4-b0bf25724428.jpg)

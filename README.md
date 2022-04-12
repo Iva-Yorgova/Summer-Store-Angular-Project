@@ -51,13 +51,15 @@ Angular Web Application
     $ npm s --open
 
 # Screenshots:
-
+**Home page**
 ![home](https://user-images.githubusercontent.com/84331691/162885503-b7c65af3-d8a3-416b-aefa-af6f2275cd3b.jpg)
-
+**Store**
 ![store](https://user-images.githubusercontent.com/84331691/162886410-560a420e-c8c7-4973-973b-16c344ab738a.jpg)
-
+**Product page**
 ![product](https://user-images.githubusercontent.com/84331691/162886415-b5681436-97bb-4f15-8d16-9953add4420a.jpg)
-
+**Shopping cart**
 ![cart](https://user-images.githubusercontent.com/84331691/162886428-52d352b4-3d37-4a34-acb0-3299e72160e5.jpg)
-
+**Photos gallery**
 ![photos](https://user-images.githubusercontent.com/84331691/162887069-96282ab8-ab57-40a8-90e4-b0bf25724428.jpg)
+**Blog page**
+![blog](https://user-images.githubusercontent.com/84331691/162892187-422cf883-2e4c-40e4-b542-c61533a2cb6a.jpg)

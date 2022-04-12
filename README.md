@@ -15,27 +15,27 @@ Angular Web Application
 
 Project is created with:
 
-    - Angular  11.2.12
+- Angular  11.2.12
 
-    - Node 14.17.6 
+- Node 14.17.6 
 
-    - Firebase
+- Firebase
 
-    - Vercel
+- Vercel
 
-    - TypeScript  4.1.5
+- TypeScript  4.1.5
 
-    - Snipcart
+- Snipcart
 
-    - Bootstrap
+- Bootstrap
     
-    - Angular Material
+- Angular Material
     
-    - HTML
+- HTML
     
-    - SCSS
+- SCSS
     
-    - JavaScript
+- JavaScript
     
     
 # Setup:

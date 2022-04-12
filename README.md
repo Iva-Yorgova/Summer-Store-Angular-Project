@@ -7,6 +7,9 @@ Angular Web Application
     where you can read, write and comment interesting articles.
     The project use SNIPCART - HTML/JavaScript shopping cart platform, 
     which is flexible, developer-friendly and easy to use.
+    Interaction with The Pexels RESTful JSON API on the photos page, 
+    enables users to search Pexels for any topic that they would like.
+    --------------------------------------------------
     Summer is here! Order your favorite delicacies! 🍦
     
 # Firebase Hosting:     

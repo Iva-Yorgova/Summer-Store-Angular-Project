@@ -50,5 +50,6 @@ Angular Web Application
 
 # Screenshots:
 
-![homepage](https://user-images.githubusercontent.com/84331691/162882525-2805fa35-15b8-4fa0-a610-d02230b00113.jpg)
+![home](https://user-images.githubusercontent.com/84331691/162884519-4a6def47-8876-498f-bcba-e9a8738c7537.jpg)
+
 

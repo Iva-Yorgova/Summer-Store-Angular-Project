@@ -8,7 +8,7 @@ Angular Web Application
     
 # Firebase Hosting:     
     
-    [summer-store](https://summer-blog-dfc3e.web.app)
+[summer-store](https://summer-blog-dfc3e.web.app)
 
 
 # Technology stack:

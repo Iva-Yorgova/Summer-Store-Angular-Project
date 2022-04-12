@@ -29,7 +29,7 @@ export class PostService {
   }
 
   getPosts() {
-    return this.postsCollection.snapshotChanges().pipe(map((actions) => {
+    return this.postsCollection.snapshotChanges().pipe(delay(3000), map((actions) => {
       return actions.map(a => {
         const data = a.payload.doc.data() as Post;
         const id = a.payload.doc.id;

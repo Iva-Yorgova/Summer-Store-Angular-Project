@@ -1,12 +1,6 @@
 
 <div class="photos-wrapper">
 
-<!-- 
-<h1>TinyMCE 6 Angular Demo</h1>
-<editor
-  [init]="{ plugins: 'lists link image table code help wordcount' }"
-></editor> -->
-
     <div class="photos">
         <h1>Search for your favourite photos:</h1>
         <input class="p-2" type="text" [(ngModel)]="search" placeholder="keyword...">
@@ -15,7 +9,9 @@
     </div>
 
         <div class="grid">
+            
             <div class="item photo" *ngFor="let photo of data">
+               
                 <a href="{{photo.url}}" target="blank">
                     <div class="content">
             
@@ -39,7 +35,17 @@
 
         <div class="wrapper">
         <h1 class="gallery-title">Ice Cream Gallery</h1>  
-        <div class="grid">                     
+        <div class="grid"> 
+            <div *ngIf="!gallery">
+                <!-- <h3 class="loading">Loading...</h3> -->
+                <div class="loading">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                  </div>
+            </div>                    
             <div class="item photo" *ngFor="let photo of gallery">
                 <a href="{{photo.url}}" target="blank">
                     <div class="content">        

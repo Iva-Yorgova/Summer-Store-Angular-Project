@@ -13,7 +13,7 @@ Angular Web Application
 
 # Technology stack:
 
-Project is created with:
+*Project is created with:*
 
 - Angular  11.2.12
 

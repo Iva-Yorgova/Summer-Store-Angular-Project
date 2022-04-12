@@ -5,6 +5,7 @@ Angular Web Application
     SUMMER STORE is a e-commerce project that combines sweet store, 
     where you can order your favorite summer delicacies and a blog, 
     where you can read, write and comment on interesting articles.
+    Summer is here! Order your favorite delicacies! 😂
     
 # Firebase Hosting:     
     

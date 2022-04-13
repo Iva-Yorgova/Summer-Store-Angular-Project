@@ -5,18 +5,12 @@
 
     <section class="post-box">
         <div class="category" *ngFor="let category of categories | async">
-
-          <!-- <a [routerLink]="['/blog', category.name]" >{{category.name}}</a>-->
-
-          <span [routerLink]="['/blog']" 
+           <span [routerLink]="['/blog']" 
           [queryParams]="{category:category.name}">{{category.name}}
-        </span><span>{{category.posts}}</span>
-
-          <!-- <a routerLink="{{category.name}}">{{category.name}}</a>
-          <span>{{category.posts}}</span> -->
-
-          <!-- <h3 class="category-name" >{{category.name}}</h3>
-          <span>{{category.posts}}</span> -->
+        </span>
+        <!-- <button (click)="showCategoryPosts(category.name)">{{category.name}}
+        </button> -->
+        <span>{{category.posts}}</span>
         </div>
     </section>
 

@@ -5,9 +5,14 @@
   
     <div class="filter-posts">
         <form class="filter-box" id="filter">
-            <label>Filter posts by category:</label>
-            <input type="text" [ngModelOptions]="{standalone:true}" [(ngModel)]="term" />
+            <div class="filter-input">
+                <label>Filter posts by category: </label>
+                <input type="text" [ngModelOptions]="{standalone:true}" [(ngModel)]="term" />
+            </div>          
+            <span class="spacer"></span>
+            <button mat-raised-button (click)="ngOnInit()" class="showAllBtn">Show All Categories</button>
         </form>
+        
     </div>
     
     <div class="post-list-wrapper">
@@ -68,6 +73,22 @@
 
     <section class="aside">
         <app-aside-posts></app-aside-posts>
+        <!-- <div >
+
+            <h2 class="categories-title">Categories</h2>
+              <hr>
+          
+              <section class="post-box">
+                  <div class="category" *ngFor="let category of categories | async">
+    
+                  <button mat-raised-button (click)="showCategoryPosts(category.name)">{{category.name}}
+                  </button>
+                  <span>{{category.posts}}</span>
+
+                  </div>
+              </section>
+          
+          </div> -->
         <app-latest-posts></app-latest-posts>
     </section>
 

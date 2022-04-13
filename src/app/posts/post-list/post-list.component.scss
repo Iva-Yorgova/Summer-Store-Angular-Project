@@ -32,10 +32,16 @@
     align-items: center;
     margin-top: 10px;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .filter-box input {
     width: 300px;
+}
+
+.filter-input {
+    display: flex;
+    gap: 10px;
 }
 
 mat-card {
@@ -167,6 +173,10 @@ h2 {
     width: 100px;
 }
 
+.filter-box .showAllBtn {
+    background-color: #4682b4;
+}
+
 // loader
 .loading {
     $colors: #7ef9ff, #89cff0, #4682b4, #0f52ba, #000080;
@@ -187,7 +197,7 @@ h2 {
         height: 100%;
         background: inherit;
         border-radius: inherit;
-        animation: wave 2s ease-out infinite;
+        animation: wave 1s ease-out infinite;
       }
   
       @for $i from 1 through 5 {

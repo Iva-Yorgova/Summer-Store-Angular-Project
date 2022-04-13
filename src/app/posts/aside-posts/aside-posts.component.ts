@@ -36,4 +36,8 @@ export class AsidePostsComponent implements OnInit {
       console.log('here');
    });
   }
+
+  showCategoryPosts(name: string) {
+    this.posts = this.postService.getPostsByCategory(name);
+  }
 }

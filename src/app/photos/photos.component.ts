@@ -32,12 +32,17 @@ export interface Photo {
 })
 export class PhotosComponent implements OnInit {
 
-  public photos: Array<Photo> | undefined;
+  config: any;
+
+  public photos: Array<Photo> | any;
 
   search!: string;
   perPage!: number;
   data!: Photo[];
   gallery!: Photo[];
+
+  startIndex = 0;
+  endIndex = 10;
 
   constructor(private httpClient: HttpClient, private photoService: PhotosService) 
   {
@@ -60,6 +65,14 @@ export class PhotosComponent implements OnInit {
       this.gallery = gallery.photos;
   }, (error) => console.log(error));
   }
+
+  getArrayFromNumber(length: any) {
+    return new Array(length/10);
+  }
  
+  updateIndex(pageIndex: any) {
+    this.startIndex = pageIndex * 10;
+    this.endIndex = this.startIndex + 10;
+  }
 
 }

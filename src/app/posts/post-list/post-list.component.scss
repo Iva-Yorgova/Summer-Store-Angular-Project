@@ -15,13 +15,17 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-auto-rows: auto;
     grid-gap: 20px;
-    margin: 30px auto;
     width: 77%;
 }
 
 .post-box:hover {
     cursor: pointer;
 }
+
+.paging {
+    margin-top: 1rem;
+} 
+
 
 .filter-box {
     display: flex;
@@ -185,9 +189,9 @@ h2 {
   
     .dot {
       position: relative;
-      width: 1em;
-      height: 1em;
-      margin: 0.8em;
+      width: 0.5em;
+      height: 0.5em;
+      margin: 0.5em;
       border-radius: 50%;
   
       &::before {

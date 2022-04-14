@@ -34,39 +34,64 @@
         </div>
 
         <div class="wrapper">
-        <h1 class="gallery-title">Ice Cream Gallery</h1>  
-        <div class="grid"> 
-            <div *ngIf="!gallery">
-                <!-- <h3 class="loading">Loading...</h3> -->
-                <div class="loading">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                  </div>
-            </div>                    
-            <div class="item photo" *ngFor="let photo of gallery">
-                <a href="{{photo.url}}" target="blank">
-                    <div class="content">        
-                        <div class="title">
-                            <h5 class="photographer-name">{{photo.photographer}}</h5>
-                        </div>
-                        <div class="photo-div">
-                            <img class="photothumb" src="{{photo.src.landscape}}">
-                        </div>
-                        <div class="desc">
-                            <p>{{photo.alt}}</p>
-                        </div>
+
+            <h1 class="gallery-title">Ice Cream Gallery</h1>
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            
+                    <li *ngFor="let i of getArrayFromNumber(gallery.length); let in = index" class="page-item"><a class="page-link"
+                            (click)="updateIndex(in)">{{in + 1}}</a></li>
+            
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+
+            <div class="grid">
+                <div *ngIf="!gallery">
+                    <!-- <h3 class="loading">Loading...</h3> -->
+                    <div class="loading">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
                     </div>
-                    <div class="icon-home" >
-                        <img src="assets/home-location.svg">
-                        <p>Go to photo's page</p>
-                    </div>
-                </a>          
-            </div>          
+                </div>
+                <div class="item photo" *ngFor="let photo of gallery | slice:startIndex:endIndex">
+                    <a href="{{photo.url}}" target="blank">
+                        <div class="content">
+                            <div class="title">
+                                <h5 class="photographer-name">{{photo.photographer}}</h5>
+                            </div>
+                            <div class="photo-div">
+                                <img class="photothumb" src="{{photo.src.landscape}}">
+                            </div>
+                            <div class="desc">
+                                <p>{{photo.alt}}</p>
+                            </div>
+                        </div>
+                        <div class="icon-home">
+                            <img src="assets/home-location.svg">
+                            <p>Go to photo's page</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            
+                    <li *ngFor="let i of getArrayFromNumber(gallery.length); let in = index" class="page-item"><a class="page-link"
+                            (click)="updateIndex(in)">{{in + 1}}</a></li>
+            
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+
         </div>
-    </div>
 
 </div>
 

@@ -23,6 +23,8 @@ import { LatestPostsComponent } from './latest-posts/latest-posts.component';
 import { CategoryPostsComponent } from './category-posts/category-posts.component';
 import { FilterPipe } from './filter.pipe';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const routes: Routes = [
   {path: 'blog', component: PostListComponent},
@@ -56,7 +58,9 @@ const routes: Routes = [
     MatButtonModule,
     MatProgressBarModule,
     MatDialogModule,
-    EditorModule
+    EditorModule,
+    MatPaginatorModule,
+    NgxPaginationModule
   ],
   providers: [ PostService ]
 })

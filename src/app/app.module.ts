@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -46,7 +46,8 @@ import { AsidePostsComponent } from './posts/aside-posts/aside-posts.component';
 import { CategoryPostsComponent } from './posts/category-posts/category-posts.component';
 import { FilterPipe } from './filter.pipe';
 import { EditorModule } from '@tinymce/tinymce-angular';
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     FilterPipe
     ],
   imports: [
+    NgxPaginationModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -94,8 +96,8 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
-    EditorModule
-    
+    EditorModule,
+    MatPaginatorModule
   ],
   providers: [
   //   {
@@ -105,6 +107,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
   // }
 ],
   bootstrap: [AppComponent],
-  entryComponents: [MatConfirmDialogComponent]
+  entryComponents: [MatConfirmDialogComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
 export class AppModule { }

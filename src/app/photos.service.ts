@@ -25,7 +25,7 @@ export class PhotosService {
   }
 
   getGalleryData(): Observable<any> {
-    const url = "https://api.pexels.com/v1/search?query=IceCream&per_page=12";
+    const url = "https://api.pexels.com/v1/search?query=IceCream&per_page=100";
     return this.http.get<any>(url, httpOptions)
     .pipe(catchError(this.handleError));
   }

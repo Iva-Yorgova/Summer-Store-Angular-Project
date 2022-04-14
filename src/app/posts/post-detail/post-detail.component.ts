@@ -38,7 +38,7 @@ export class PostDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPost();
-    this.getPostComments();
+    //this.getPostComments();
     this.comments = this.getPostComments();
     this.getUserData();
   }

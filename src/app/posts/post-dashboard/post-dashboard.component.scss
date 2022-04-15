@@ -47,3 +47,13 @@ img {
 .create-post-btn:hover {
     background-color: #013587;;
 }
+
+@media only screen and (max-width: 780px) {
+    .wrapper {
+        padding: 40px;
+    }
+
+    .dashboard-wrapper {
+        width: 70vw;
+    }
+}

@@ -58,7 +58,13 @@ export class PostService {
 
   getMyPosts() {
     const userId = this.auth.currentUserId;
-    return this.afs.collection('posts', ref => ref.where('authorId','==', userId)).valueChanges();
+    return this.afs.collection('posts', ref => ref.where('authorId','==', userId)).snapshotChanges().pipe(delay(1000), map((actions) => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as Post;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      })
+    }));
 };
 
 

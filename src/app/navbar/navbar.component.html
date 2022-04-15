@@ -13,8 +13,10 @@
     </div>
     <span class="spacer"></span>
 
-    <div *ngIf="auth.afAuth.authState | async as user; else showLogin">
+    <div class="right-buttons" *ngIf="auth.afAuth.authState | async as user; else showLogin">
       <!-- <span>Hello {{user.displayName}}</span> -->
+      
+      <!-- <button mat-raised-button  class="my-btn" color="accent" routerLink="/user-posts">My Posts</button> -->
       <button mat-raised-button  class="post-btn" color="accent" routerLink="/dashboard">Write a Post</button>
       <button mat-button class="logout-btn" (click)="auth.logout()">Logout</button>
     </div>

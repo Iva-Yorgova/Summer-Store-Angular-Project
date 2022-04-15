@@ -40,6 +40,10 @@ export class PostListComponent implements OnInit  {
     });
   }
 
+  getMyPosts(){
+    this.posts = this.postService.getMyPosts();
+  }
+
   delete(id: string) {
     this.dialogService.openConfirmDialog('Are you sure you want to delete this post?')
     .afterClosed().subscribe(res => {

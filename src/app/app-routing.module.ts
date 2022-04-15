@@ -7,6 +7,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { StoreComponent } from './store/store.component';
 import { PostsModule } from './posts/posts.module';
+import { UserPostsComponent } from './posts/user-posts/user-posts.component';
 
 const routes: Routes = [
   {path: "about", component: AboutComponent},

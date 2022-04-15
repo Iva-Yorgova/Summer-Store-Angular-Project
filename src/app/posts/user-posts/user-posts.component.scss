@@ -182,17 +182,6 @@ h2 {
 
 .filter-box .showAllBtn {
     background-color: #4682b4;
-    color:white;
-}
-
-.filter-box .showMyPostsBtn {
-    background-color: #c92d76;
-    color:white;
-}
-
-.right-buttons {
-    display: flex;
-    gap: 20px;
 }
 
 // loader
@@ -242,8 +231,6 @@ h2 {
     }
   }
   
-
-
 
 @media only screen and (max-width: 780px) {
     .post-list-wrapper {

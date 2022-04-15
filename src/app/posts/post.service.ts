@@ -7,18 +7,26 @@ import { Category } from './category';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Post } from './post';
 import { Comment } from './comment';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../blog/auth.service';
 
 @Injectable()
 export class PostService {
 
   postsCollection: AngularFirestoreCollection<Post>;
+  userPostsCollection: AngularFirestoreCollection<Post>;
   categoriesCollection: AngularFirestoreCollection<Category>;
   commentsCollection: AngularFirestoreCollection<Comment>;
   postDoc!: AngularFirestoreDocument<Post>;
   categoryDoc!: AngularFirestoreDocument<Category>;
+
+  filteredPosts: any;
   
-  constructor(private afs: AngularFirestore) { 
+  constructor(private afs: AngularFirestore, private route: ActivatedRoute,public auth: AuthService) { 
     this.postsCollection = this.afs.collection('posts', ref => 
+    ref.orderBy('published', 'desc'));
+
+    this.userPostsCollection = this.afs.collection('posts', ref => 
     ref.orderBy('published', 'desc'));
 
     this.categoriesCollection = this.afs.collection('categories', ref => 
@@ -37,6 +45,21 @@ export class PostService {
       })
     }))
   }
+
+  getUserPosts() {
+    return this.userPostsCollection.snapshotChanges().pipe(delay(1000), map((actions) => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as Post;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      })
+    }))
+  }
+
+  getMyPosts() {
+    const userId = this.auth.currentUserId;
+    return this.afs.collection('posts', ref => ref.where('authorId','==', userId)).valueChanges();
+};
 
 
   getCategories() {

@@ -1,21 +1,7 @@
 <div class="posts-wrapper">
 
-    <h1>Posts</h1>
+    <h1>My Posts</h1>
     <hr>
-  
-    <div class="filter-posts">
-        <form class="filter-box" id="filter">
-            <div class="filter-input">
-                <label>Filter posts by category: </label>
-                <input type="text" [ngModelOptions]="{standalone:true}" [(ngModel)]="term" />
-            </div>          
-            <span class="spacer"></span>
-            <div class="right-buttons">
-            <button mat-raised-button *ngIf="auth.afAuth.authState | async" (click)="getMyPosts()" class="showMyPostsBtn">My Posts</button>
-            <button mat-raised-button (click)="ngOnInit()" class="showAllBtn">Show All</button>
-            </div>
-        </form>      
-    </div>
 
     <div class="paging">    
         <pagination-controls (pageChange)="page = $event"></pagination-controls>
@@ -66,10 +52,7 @@
 
         </mat-card>
 
-        
-
     </section>
-
  
     <ng-template #indicator class="loader-box">
         <!-- <h3 class="loading">Loading...</h3> -->
@@ -82,15 +65,6 @@
           </div>
     </ng-template>
 
-    <section class="aside">
-        <app-aside-posts></app-aside-posts>
-        <app-latest-posts></app-latest-posts>
-    </section>
-
 </div>
 
 </div>
-
-
-
-

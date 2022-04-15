@@ -77,6 +77,11 @@
     color: white;
 }
 
+.my-btn {
+    background-color: rgb(149, 11, 96);
+    color: white;
+}
+
 .post-btn:hover {
     background-color: rgb(2, 94, 164);
 }
@@ -97,6 +102,10 @@
     color:white;
     cursor: pointer;
     display:none;
+}
+
+.right-buttons {
+    display: flex;
 }
 
 //Responsive

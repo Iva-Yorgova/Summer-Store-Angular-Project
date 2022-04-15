@@ -61,6 +61,18 @@ export const PRODUCTS: Product[] = [
       { name: 'choco', color: '#fec28c' },
     ],
     sizes: [Size.SMALL, Size.MEDIUM, Size.LARGE],
+  },
+  {
+    id: 6,
+    name: 'Smoothie',
+    imageUrls: ['../assets/smoothie-mango.jpg', '../assets/smoothie-spenat.jpg', '../assets/smoothie-berry.jpg'],
+    price: 16,
+    flavors: [
+      { name: 'mango', color: '#FEC73B' },
+      { name: 'spenat', color: '#587235' },
+      { name: 'berry', color: '#855889' },
+    ],
+    sizes: [Size.SMALL, Size.MEDIUM, Size.LARGE],
   }
   
 ];

@@ -17,6 +17,8 @@ export class AsidePostsComponent implements OnInit {
   categories: Observable<Category[]> | any;
   postsByCategory: Observable<Post[]> | any;
   category!: string | any;
+  count: number;
+  res: number;
 
   constructor(
     private postService: PostService, 
@@ -31,7 +33,7 @@ export class AsidePostsComponent implements OnInit {
      this.router.queryParamMap.subscribe(queryParams => {
       this.category = queryParams.get("category");
       console.log(this.category);
-      this.postsByCategory = this.postService.getPostsByCategory(this.category);
+
       console.log(this.postsByCategory);
       console.log('here');
    });

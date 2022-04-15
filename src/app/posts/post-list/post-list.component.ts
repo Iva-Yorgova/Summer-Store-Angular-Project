@@ -21,7 +21,7 @@ export class PostListComponent implements OnInit  {
   term: any;
   loading = true;
 
-  totalLength: any = 11;
+  totalLength: number;
   page: number = 1;
 
   constructor(

@@ -67,7 +67,7 @@ export class PostService {
     }));
   };
 
-  getCategoriesByName(name: string) {
+  getCategoryByName(name: string) {
     return this.afs.collection('categories', ref => ref.where('name','==', name))
     .snapshotChanges().pipe(map((actions) => {
       return actions.map(a => {
@@ -121,7 +121,7 @@ export class PostService {
     // ref => ref.where('name', '==', name));
     // return category;
 
-    return this.afs.doc<Category>(`categories/${name}`);
+    return this.afs.doc<Category>(`categories/${name}`).valueChanges();
   }
 
   getPostsByCategory(name: string): Observable<any> {
@@ -152,8 +152,8 @@ export class PostService {
     return this.afs.doc<Post>(`posts/${id}`);
   }
 
-  getCategory(id: string) {
-    return this.afs.doc<Category>(`categories/${id}`);
+  getCategory(name: string) {
+    return this.afs.doc<Category>(`categories/${name}`);
   }
 
   delete(id: any) {
@@ -164,8 +164,8 @@ export class PostService {
     return this.getPost(id).update(formData);
   }
 
-  // updateCategory(name: string, formData: Partial<Category>) {
-  //   return this.getCategoryData(name).update(formData);
-  // }
+  updateCat(name: string, formData: Partial<Category>) {
+    return this.getCategory(name).update(formData);
+  }
 
 }

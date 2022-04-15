@@ -73,15 +73,19 @@ export class PostDashboardComponent implements OnInit {
       posts: 1
     }
     this.postService.create(data);
-    this.cat = this.postService.getCategoriesByName(this.category);
     
-    if(this.cat){
-       console.log('found match');
-       this.postService.updateCategory(this.category);
-    }
-    else {
-      this.postService.createCategory(categoryData);
-    }
+    // if(this.getCategory(this.category)){
+    //    console.log('found match');
+    //    const formData = {
+    //     posts: this.cat.posts + 1
+    //   }
+    //   this.postService.updateCat(this.category, formData);
+    // }
+    // else {
+    //   this.postService.createCategory(categoryData);
+    // }
+
+    this.postService.createCategory(categoryData);
     console.log('created');
     setTimeout(() => this.buttonText = 'Create Post', 3000);
     this.title = '';
@@ -115,6 +119,13 @@ export class PostDashboardComponent implements OnInit {
   parseHtml(string: any): any {
     return string.replace(/<(?:.|\n)*?>/gm, ' ');
   }
+
+  getCategory(name: string) {
+    const result =  this.postService.getCategoryData(name)
+    .subscribe(data => this.cat = data);
+    return result;
+  }
+
 
   
 

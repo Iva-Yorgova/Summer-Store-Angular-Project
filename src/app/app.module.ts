@@ -23,7 +23,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContactComponent } from './contact/contact.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PhotosComponent } from './photos/photos.component';
 import { AuthModule } from '@auth0/auth0-angular';
@@ -49,6 +49,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatContactDialogComponent } from './contact/mat-contact-dialog/mat-contact-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,8 @@ import { MatContactDialogComponent } from './contact/mat-contact-dialog/mat-cont
     MatDialogModule,
     NgbModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
     HttpClientModule,
     AuthModule.forRoot({
        ...env.auth,
@@ -99,7 +102,8 @@ import { MatContactDialogComponent } from './contact/mat-contact-dialog/mat-cont
     AngularFireStorageModule,
     AngularFireAuthModule,
     EditorModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatFormFieldModule
   ],
   providers: [
   //   {

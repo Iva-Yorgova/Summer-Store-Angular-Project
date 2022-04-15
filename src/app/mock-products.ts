@@ -30,7 +30,7 @@ export const PRODUCTS: Product[] = [
     id: 3,
     name: 'Cake',
     imageUrls: ['../assets/cake-choco.jpg', '../assets/cake-vanila.jpg', '../assets/cake-candy.jpg'],
-    price: 20,
+    price: 34,
     flavors: [
       { name: 'choco', color: '#640420' },
       { name: 'vanila', color: '#F88532' },
@@ -66,7 +66,7 @@ export const PRODUCTS: Product[] = [
     id: 6,
     name: 'Smoothie',
     imageUrls: ['../assets/smoothie-mango.jpg', '../assets/smoothie-spenat.jpg', '../assets/smoothie-berry.jpg'],
-    price: 16,
+    price: 20,
     flavors: [
       { name: 'mango', color: '#FEC73B' },
       { name: 'spenat', color: '#587235' },

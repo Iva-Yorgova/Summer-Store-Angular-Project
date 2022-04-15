@@ -1,22 +1,25 @@
 <div class="contact-bg">
 
-    <div class="contact-form">
+    <div class="contact-form" [formGroup]="form">
 
         <h1>Contact Us</h1>
 
         <mat-form-field>
             <mat-label>Name</mat-label>
-            <input matInput placeholder="Name" [(ngModel)]="name">
+            <input matInput formControlName="name" placeholder="Your Name" required>
+            <mat-error *ngIf="form.dirty">Name is required and must be at least 3 symbols.</mat-error>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Email</mat-label>
-            <input matInput placeholder="Email" [(ngModel)]="email">
+            <input matInput formControlName="email" placeholder="Your Email" required>
+            <mat-error *ngIf="form.dirty">Email is required and must be a valid email address.</mat-error>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Message</mat-label>
-            <input matInput placeholder="Your Message" [(ngModel)]="message">
+            <textarea matInput formControlName="message" placeholder="Your Message"  rows="7" required></textarea>
+            <mat-error *ngIf="form.dirty">Message is required and must be at least 20 symbols.</mat-error>
         </mat-form-field>
 
         <!-- <div class="form-group">
@@ -84,7 +87,8 @@
             </div>
         </div> -->
 
-        <button class="contact-btn" mat-button (click)="createContact()" [disabled]="!name || !email || !message">{{buttonText}}</button>
+        <button class="contact-btn" mat-button (click)="createContact()" [disabled]="!form.valid">{{buttonText}}</button>
+
     </div>
 
 </div>

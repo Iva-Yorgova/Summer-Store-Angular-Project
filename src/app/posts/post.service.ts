@@ -65,7 +65,18 @@ export class PostService {
         return { id, ...data };
       })
     }));
-};
+  };
+
+  getCategoriesByName(name: string) {
+    return this.afs.collection('categories', ref => ref.where('name','==', name))
+    .snapshotChanges().pipe(map((actions) => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as Category;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      })
+    }));
+  };
 
 
   getCategories() {
@@ -74,6 +85,18 @@ export class PostService {
         const data = a.payload.doc.data() as Category;
         const id = a.payload.doc.id;
         return { id, ...data };
+      })
+    }))
+  }
+
+  updateCategory(name: string) {
+    this.categoriesCollection.snapshotChanges().pipe(map((actions) => {
+      actions.map(a => {
+        const data = a.payload.doc.data() as Category;
+        if(data.name === name){
+          data.posts = data.posts + 1;
+          console.log('update cat')
+        }
       })
     }))
   }
@@ -94,9 +117,11 @@ export class PostService {
   }
 
   getCategoryData(name: string) {
-    const category = this.afs.collection<Category>('categories', 
-    ref => ref.where('name', '==', name));
-    return category;
+    // const category = this.afs.data<Category>('categories', 
+    // ref => ref.where('name', '==', name));
+    // return category;
+
+    return this.afs.doc<Category>(`categories/${name}`);
   }
 
   getPostsByCategory(name: string): Observable<any> {
@@ -127,6 +152,10 @@ export class PostService {
     return this.afs.doc<Post>(`posts/${id}`);
   }
 
+  getCategory(id: string) {
+    return this.afs.doc<Category>(`categories/${id}`);
+  }
+
   delete(id: any) {
     return this.getPost(id).delete();
   }
@@ -134,5 +163,9 @@ export class PostService {
   update(id: string, formData: Partial<Post>) {
     return this.getPost(id).update(formData);
   }
+
+  // updateCategory(name: string, formData: Partial<Category>) {
+  //   return this.getCategoryData(name).update(formData);
+  // }
 
 }

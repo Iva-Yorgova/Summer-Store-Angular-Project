@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Post } from '../post';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Category } from '../category';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -18,17 +19,26 @@ import { Category } from '../category';
 export class PostDashboardComponent implements OnInit {
 
   posts: Observable<Post[]> | any;
+  cat: Observable<Category> | any;
   itemDoc!: AngularFirestoreDocument<Category>;
   categories: Observable<Category[]> | any;
+  form: FormGroup;
 
   constructor(
     private auth: AuthService, 
     private postService: PostService,
     private storage: AngularFireStorage,
     private router: Router,
-    private afs: AngularFirestore) 
+    private afs: AngularFirestore,
+    private formBuilder: FormBuilder) 
     { 
       this.categories = this.afs.collection('categories').snapshotChanges();
+
+      this.form = this.formBuilder.group({
+        title: ['', [Validators.required, Validators.minLength(3)]],
+        content: ['', [Validators.required, Validators.minLength(20)]],
+        category: ['', [Validators.required, Validators.minLength(3)]]
+      });
   }
 
   title: string | any;
@@ -63,13 +73,17 @@ export class PostDashboardComponent implements OnInit {
       posts: 1
     }
     this.postService.create(data);
-    // if(this.postService.getCategories())
-    //  {
-    //   console.log('found match');
-    // }
+    this.cat = this.postService.getCategoriesByName(this.category);
+    
+    if(this.cat){
+       console.log('found match');
+       this.postService.updateCategory(this.category);
+    }
+    else {
       this.postService.createCategory(categoryData);
-      console.log('created');
-      setTimeout(() => this.buttonText = 'Create Post', 3000);
+    }
+    console.log('created');
+    setTimeout(() => this.buttonText = 'Create Post', 3000);
     this.title = '';
     this.content = '';
     this.image = '';

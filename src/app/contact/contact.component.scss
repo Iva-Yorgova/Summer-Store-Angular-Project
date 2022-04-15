@@ -11,6 +11,9 @@
 .contact-form {
     width: 70vw;
     margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 .form-group {
@@ -18,13 +21,24 @@
 }
 
 .contact-btn {
-    background-color: rgb(213, 74, 248);
+    background-color: rgb(103, 74, 248);
     border: none;
     padding: 10px 15px;
     color: white;
     border-radius: 5px;
+    font-size: 21px;
 }
 
 .contact-btn:hover {
-    background-color: rgb(201, 17, 247);
+    background-color: rgb(55, 17, 247);
+}
+
+.mat-button.mat-button-disabled.mat-button-disabled {
+    color: white;
+    //cursor: pointer;
+}
+
+.mat-button.mat-button-disabled.mat-button-disabled:hover {
+    background-color: rgb(103, 74, 248);
+
 }

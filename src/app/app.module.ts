@@ -48,6 +48,7 @@ import { FilterPipe } from './filter.pipe';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatContactDialogComponent } from './contact/mat-contact-dialog/mat-contact-dialog.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     LogoutButtonComponent,
     LoadingComponent,
     StoreComponent,
-    FilterPipe
+    FilterPipe,
+    MatContactDialogComponent
     ],
   imports: [
     NgxPaginationModule,

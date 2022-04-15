@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DoCheck, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/blog/auth.service';
 import { DialogService } from 'src/app/shared/dialog.service';

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { delay, map } from 'rxjs/operators';
 //import 'rxjs/add/operator/map';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 
 import { Observable } from 'rxjs';
 import { Category } from './category';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Post } from './post';
 import { Comment } from './comment';
 
@@ -29,7 +29,7 @@ export class PostService {
   }
 
   getPosts() {
-    return this.postsCollection.snapshotChanges().pipe(delay(2000), map((actions) => {
+    return this.postsCollection.snapshotChanges().pipe(delay(1000), map((actions) => {
       return actions.map(a => {
         const data = a.payload.doc.data() as Post;
         const id = a.payload.doc.id;

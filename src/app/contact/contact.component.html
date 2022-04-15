@@ -1,14 +1,31 @@
 <div class="contact-bg">
 
-    <form class="contact-form">
+    <div class="contact-form">
+
         <h1>Contact Us</h1>
-        <div class="form-group">
+
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" [(ngModel)]="name">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" [(ngModel)]="email">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Message</mat-label>
+            <input matInput placeholder="Your Message" [(ngModel)]="message">
+        </mat-form-field>
+
+        <!-- <div class="form-group">
             <label for="fullName">Full Name</label>
             <input 
             required 
             minlength="3" 
-            maxlength="10" 
-            ngModel 
+            maxlength="30" 
+            ngModel
             name="fullName" 
             id="fullName" 
             type="text" 
@@ -24,28 +41,50 @@
                 </div>
             </div>
         </div>
+
         <div class="form-group">
-            <label for="Email">Email</label>
+            <label for="email">Email</label>
             <input 
             required 
             ngModel 
-            name="Email" 
-            id="Email" 
+            name="email" 
+            id="email" 
             type="text" 
-            #Email="ngModel" 
+            #email="ngModel" 
             class="form-control">
             <div class="alert alert-danger" 
-            *ngIf="Email.touched && !fullName.valid">
-                <div *ngIf="Email.errors?.required">
+            *ngIf="email.touched && !email.valid">
+                <div *ngIf="email.errors?.required">
                     Email is required.
                 </div>               
             </div>
         </div>
+
         <div class="form-group">
-            <label for="Message">Message</label>
-            <textarea name="Message" id="" cols="30" rows="10" class="form-control"></textarea>
-        </div>
-        <button class="contact-btn">Send</button>
-    </form>
+            <label for="message">Message</label>
+            <textarea
+            required
+            minlength="25" 
+            maxlength="1000"
+            ngModel
+            name="message" 
+            id="message"
+            #message="ngModel" 
+            cols="30" 
+            rows="10" 
+            class="form-control"></textarea>
+            <div class="alert alert-danger" 
+            *ngIf="message.touched && !message.valid">
+                <div *ngIf="message.errors?.required">
+                    Message is required.
+                </div>
+                <div *ngIf="message.errors?.minlength">
+                    Message should be at least {{message.errors?.minlength.requiredLength}} symbols.
+                </div>               
+            </div>
+        </div> -->
+
+        <button class="contact-btn" mat-button (click)="createContact()" [disabled]="!name || !email || !message">{{buttonText}}</button>
+    </div>
 
 </div>

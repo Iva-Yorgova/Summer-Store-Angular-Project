@@ -25,8 +25,7 @@
             <input matInput placeholder="Post Title" [(ngModel)]="title">
         </mat-form-field>
         
-            <!-- <mat-label>Content</mat-label> -->
-            <editor apiKey="vi87d1gjroxj4d14mmefijxmo23v54ck3cuaxhqic1vgowx3" matInput [(ngModel)]="content"
+            <!-- <editor apiKey="vi87d1gjroxj4d14mmefijxmo23v54ck3cuaxhqic1vgowx3" matInput [(ngModel)]="content"
         [init]="{ 
             plugins: 'lists link image table code help wordcount visualaid',
             skin: 'borderless',
@@ -34,14 +33,12 @@
             toolbar: ['undo redo | bold italic underline | cut copy paste selectall checklist bulletlist | alignleft alignright aligncenter alignjustify lineheight | outdent indent | image media table | forecolor | backcolor | fontsize fontname | code formatselect link print emoticons fullscreen preview'] 
         }">
         <textarea matInput [placeholder]="content" [(ngModel)]="content"></textarea>
-            </editor>
+            </editor> -->
 
-    
-<!-- 
         <mat-form-field>
             <mat-label>Content</mat-label>
-            <textarea  matInput placeholder="Content" [(ngModel)]="content"></textarea>
-        </mat-form-field> -->
+            <textarea  matInput placeholder="Content" [(ngModel)]="content" rows="16"></textarea>
+        </mat-form-field>
 
         <br>
         <button class="create-post-btn" mat-button (click)="createPost()" [disabled]="!title || !content || !image">{{buttonText}}</button>

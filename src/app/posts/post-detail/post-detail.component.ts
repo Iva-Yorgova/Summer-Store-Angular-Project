@@ -5,7 +5,13 @@ import { DialogService } from 'src/app/shared/dialog.service';
 import { Post } from '../post';
 import { PostService } from '../post.service';
 import { Comment } from '../comment';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { AngularFirestore } from 'angularfire2/firestore';
+import * as firebase from 'firebase/app';
+
+const arrayRemove = firebase.firestore.FieldValue.arrayRemove;
+const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
+
 
 @Component({
   selector: 'app-post-detail',
@@ -28,19 +34,21 @@ export class PostDetailComponent implements OnInit {
   postComment: Comment | any;
   text: string | any;
   commentLikes: number | any;
+  userCanLike: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private postService: PostService,
     public auth: AuthService,
-    private dialogService: DialogService) { }
+    private dialogService: DialogService,
+    private afs: AngularFirestore) { }
 
   ngOnInit(): void {
     this.getPost();
-    //this.getPostComments();
     this.comments = this.getPostComments();
     this.getUserData();
+    this.checkUserLikes();
   }
 
   getPost() {
@@ -73,13 +81,64 @@ export class PostDetailComponent implements OnInit {
     this.editing = false;
   }
 
+  checkUserLikes() {
+    const postId = this.route.snapshot.paramMap.get('id');   
+    const userId = this.auth.currentUserId;
+    this.afs.doc(`/posts/${postId}`).get().subscribe(snap => {
+      const data = snap.data() as Post;
+
+      if(data.usersLikes.includes(userId)){
+        console.log('You can not like two times'); 
+        this.userCanLike = false; 
+        console.log(this.userCanLike);  
+      }
+    })
+  }
+
   likePost() {
-    const formData = {
-      likes: this.post.likes + 1
-    }
-    const id = this.route.snapshot.paramMap.get('id');
-    this.postService.update(id!, formData);
-    this.editing = false;
+    const postId = this.route.snapshot.paramMap.get('id');   
+    const userId = this.auth.currentUserId;
+    console.log(postId);
+    console.log(userId);
+    const likes = this.postService.getLikesByPostAndUser(userId, postId);
+
+    this.afs.doc(`/posts/${postId}`).get().subscribe(snap => {
+      console.log(snap.id);
+      console.log(' this is the data:', snap.data());
+      const data = snap.data() as Post;
+
+      if(data.usersLikes.includes(userId)){
+        console.log('you can not like two times'); 
+        this.userCanLike = false;   
+      }
+      else{
+        console.log('in the else...')
+        const formData = {
+          likes: this.post.likes + 1
+        }
+        const likeData = {
+          userId: userId
+        }
+
+        const doc = this.afs.doc(`/posts/${postId}`);
+
+        doc.update({
+            usersLikes: arrayUnion(userId)
+        });
+
+        this.postService.update(postId!, formData);
+        this.editing = false;
+        this.checkUserLikes();
+      }
+    });
+
+    this.afs.collection('posts').valueChanges().subscribe(val => {
+      console.log('this is val:', val)
+    });
+
+   
+    
+    
   }
 
   addComment() {

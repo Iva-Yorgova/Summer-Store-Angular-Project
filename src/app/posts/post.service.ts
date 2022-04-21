@@ -9,6 +9,7 @@ import { Post } from './post';
 import { Comment } from './comment';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../blog/auth.service';
+import { Like } from './like';
 
 @Injectable()
 export class PostService {
@@ -16,9 +17,11 @@ export class PostService {
   postsCollection: AngularFirestoreCollection<Post>;
   userPostsCollection: AngularFirestoreCollection<Post>;
   categoriesCollection: AngularFirestoreCollection<Category>;
+  likesCollection: AngularFirestoreCollection<Like>;
   commentsCollection: AngularFirestoreCollection<Comment>;
   postDoc!: AngularFirestoreDocument<Post>;
   categoryDoc!: AngularFirestoreDocument<Category>;
+  categoriesByName: AngularFirestoreCollection<Category>;
 
   filteredPosts: any;
   
@@ -34,6 +37,9 @@ export class PostService {
 
     this.commentsCollection = this.afs.collection('comments', ref => 
     ref.orderBy('published', 'desc'));
+
+    this.likesCollection = this.afs.collection('likes', ref => 
+    ref.orderBy('published', 'desc'));
   }
 
   getPosts() {
@@ -46,19 +52,10 @@ export class PostService {
     }))
   }
 
-  getUserPosts() {
-    return this.userPostsCollection.snapshotChanges().pipe(delay(1000), map((actions) => {
-      return actions.map(a => {
-        const data = a.payload.doc.data() as Post;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      })
-    }))
-  }
-
   getMyPosts() {
     const userId = this.auth.currentUserId;
-    return this.afs.collection('posts', ref => ref.where('authorId','==', userId)).snapshotChanges().pipe(delay(1000), map((actions) => {
+    return this.afs.collection('posts', ref => ref.where('authorId','==', userId))
+    .snapshotChanges().pipe(delay(1000), map((actions) => {
       return actions.map(a => {
         const data = a.payload.doc.data() as Post;
         const id = a.payload.doc.id;
@@ -67,17 +64,36 @@ export class PostService {
     }));
   };
 
-  getCategoryByName(name: string) {
-    return this.afs.collection('categories', ref => ref.where('name','==', name))
-    .snapshotChanges().pipe(map((actions) => {
-      return actions.map(a => {
-        const data = a.payload.doc.data() as Category;
-        const id = a.payload.doc.id;
+  getCategoriesByName(name: string) {
+    const array = this.afs.collection<Category>('categories', 
+    ref => ref.where('name', '==', name)).valueChanges();
+    return array;
+  };
+
+  getLikesByPostAndUser(userId: any, postId: any): Observable<Post[]> {
+    return this.afs.collection('likes', 
+    ref => ref.where('userId', '==', userId)
+    .where('postId', '==', postId))
+    .snapshotChanges().pipe(map(snaps => {
+      return snaps.map(snap => {
+        
+          const data = snap.payload.doc.data() as Post;
+        const id = snap.payload.doc.id;
         return { id, ...data };
+        
       })
     }));
   };
 
+  filterCategoriesByName(name: string) {
+    return this.afs.collection('categories', ref => ref.where('name','==', name)).valueChanges();
+  };
+
+  getPostsByCategory(name: string) {
+    const posts = this.afs.collection<Post>('posts', 
+    ref => ref.where('category', '==', name)).valueChanges();
+    return posts;
+  }
 
   getCategories() {
     return this.categoriesCollection.snapshotChanges().pipe(map((actions) => {
@@ -85,18 +101,6 @@ export class PostService {
         const data = a.payload.doc.data() as Category;
         const id = a.payload.doc.id;
         return { id, ...data };
-      })
-    }))
-  }
-
-  updateCategory(name: string) {
-    this.categoriesCollection.snapshotChanges().pipe(map((actions) => {
-      actions.map(a => {
-        const data = a.payload.doc.data() as Category;
-        if(data.name === name){
-          data.posts = data.posts + 1;
-          console.log('update cat')
-        }
       })
     }))
   }
@@ -116,25 +120,28 @@ export class PostService {
     return this.postDoc.valueChanges();
   }
 
-  getCategoryData(name: string) {
-    // const category = this.afs.data<Category>('categories', 
-    // ref => ref.where('name', '==', name));
-    // return category;
-
-    return this.afs.doc<Category>(`categories/${name}`).valueChanges();
+  getCategoryData(id: string) {
+    this.categoryDoc = this.afs.doc<Category>(`categories/${id}`);
+    return this.categoryDoc.valueChanges();
   }
 
-  getPostsByCategory(name: string): Observable<any> {
-    const posts = this.afs.collection<Post>('posts', 
-    ref => ref.where('category', '==', name)).valueChanges();
-    return posts;
-  }
 
   getCommentsByPostId(id: any): Observable<any> {
     const comments = this.afs.collection<Comment>('comments', 
     ref => ref.where('postId', '==', id)).valueChanges();
     return comments;
   }
+
+  getLikeByPostAndUser(userId: any, postId: any) {
+    return this.afs.collection('likes', ref => ref.where('postId','==', postId).where('userId', '==', 'userId'))
+    .snapshotChanges().pipe(map((actions) => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as Like;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      })
+    }));
+  };
 
   create(data: Post) {
     this.postsCollection.add(data);
@@ -146,6 +153,10 @@ export class PostService {
 
   createCategory(data: Category) {
     this.categoriesCollection.add(data);
+  }
+
+  createLike(data: Like) {
+    this.likesCollection.add(data);
   }
 
   getPost(id: string) {
@@ -164,8 +175,8 @@ export class PostService {
     return this.getPost(id).update(formData);
   }
 
-  updateCat(name: string, formData: Partial<Category>) {
-    return this.getCategory(name).update(formData);
+  updateCat(id: string, formData: Partial<Category>) {
+    return this.getCategory(id).update(formData);
   }
 
 }

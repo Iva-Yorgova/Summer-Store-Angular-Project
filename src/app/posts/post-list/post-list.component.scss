@@ -1,5 +1,7 @@
+
+//posts
 .posts-wrapper {
-    padding: 30px;
+    padding: 43px;
     margin: 0px auto;
     background: rgb(240, 239, 240);
     min-height: 90vh;
@@ -8,6 +10,7 @@
 .post-list-wrapper {
     display:flex;
     gap: 30px;
+    justify-content: space-between;
 }
 
 .post-box {
@@ -22,15 +25,18 @@
     cursor: pointer;
 }
 
+//pagination
 .paging {
+    display:flex;
     margin-top: 1rem;
 } 
 
 
+//filter
 .filter-box {
     display: flex;
     gap: 10px;
-    padding: 19px 40px;
+    padding: 19px 25px;
     background-color: #e7d3f6;
     width: 100%;
     align-items: center;
@@ -49,6 +55,22 @@
     align-items: center;
 }
 
+.filter-box .showAllBtn {
+    background-color: #4682b4;
+    color:white;
+}
+
+.filter-box .showMyPostsBtn {
+    background-color: #c92d76;
+    color:white;
+}
+
+.right-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+//mat-card
 mat-card {
     max-width: 700px;
     background-color: azure;
@@ -59,12 +81,6 @@ mat-card {
     max-height: 450px;
 }
 
-.aside {
-    margin: 30px auto;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
 mat-icon {
     top: 2px;
     position: relative;
@@ -151,6 +167,13 @@ h2 {
     margin:0;
 }
 
+.aside {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+//categories
 .category-box{
     display: flex;
     justify-content: end;
@@ -180,20 +203,7 @@ h2 {
     width: 100px;
 }
 
-.filter-box .showAllBtn {
-    background-color: #4682b4;
-    color:white;
-}
 
-.filter-box .showMyPostsBtn {
-    background-color: #c92d76;
-    color:white;
-}
-
-.right-buttons {
-    display: flex;
-    gap: 20px;
-}
 
 // loader
 .loading {
@@ -252,6 +262,7 @@ h2 {
 
     .post-box {
         width: 100%;
+        margin-bottom: 30px;
     }
 
     .filter-input {

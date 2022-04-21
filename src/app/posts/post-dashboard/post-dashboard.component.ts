@@ -5,10 +5,11 @@ import { PostService } from '../post.service';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { finalize, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Post } from '../post';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Category } from '../category';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { filter } from 'rxjs/operators'
+import { newArray } from '@angular/compiler/src/util';
 
 
 @Component({
@@ -18,11 +19,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class PostDashboardComponent implements OnInit {
 
-  posts: Observable<Post[]> | any;
-  cat: Observable<Category> | any;
-  itemDoc!: AngularFirestoreDocument<Category>;
-  categories: Observable<Category[]> | any;
+  categoriesCollection: AngularFirestoreCollection<Category>;
+
+  categoriesArray: Observable<Category[]>;
+
+  cat: Category | any;
+  catPosts: number;
+  itemDoc: AngularFirestoreDocument<Category>;
   form: FormGroup;
+
 
   constructor(
     private auth: AuthService, 
@@ -32,14 +37,20 @@ export class PostDashboardComponent implements OnInit {
     private afs: AngularFirestore,
     private formBuilder: FormBuilder) 
     { 
-      this.categories = this.afs.collection('categories').snapshotChanges();
-
       this.form = this.formBuilder.group({
         title: ['', [Validators.required, Validators.minLength(3)]],
         content: ['', [Validators.required, Validators.minLength(20)]],
         category: ['', [Validators.required, Validators.minLength(3)]]
       });
+
+      this.categoriesCollection = this.afs.collection('categories', ref => 
+    ref.orderBy('name', 'asc'));
   }
+
+  result: { id: string, postsNum: number};
+  
+  categoryId: string;
+  categoryPosts: number | any;
 
   title: string | any;
   image: string | any;
@@ -47,6 +58,7 @@ export class PostDashboardComponent implements OnInit {
   likes: number = 0;
   category: string | any;
   comments: string[] | any;
+  userLikes: any;
 
   buttonText: string = 'Create Post';
 
@@ -54,6 +66,7 @@ export class PostDashboardComponent implements OnInit {
   downloadURL: Observable<string> | undefined;
 
   ngOnInit(): void {
+
   }
 
   createPost() {
@@ -66,27 +79,20 @@ export class PostDashboardComponent implements OnInit {
       title: this.title,
       likes: this.likes,
       category: this.category,
-      comments: 0
+      comments: 0,
+      usersLikes: new Array<string>()
     }
     const categoryData = {
       name: this.category,
-      posts: 1
+      posts: 1,
+      published: new Date()
     }
     this.postService.create(data);
-    
-    // if(this.getCategory(this.category)){
-    //    console.log('found match');
-    //    const formData = {
-    //     posts: this.cat.posts + 1
-    //   }
-    //   this.postService.updateCat(this.category, formData);
-    // }
-    // else {
-    //   this.postService.createCategory(categoryData);
-    // }
 
-    this.postService.createCategory(categoryData);
-    console.log('created');
+    //this.afs.collection('categories').doc(id).update({posts: postsNum + 1});
+
+    //this.postService.createCategory(categoryData);
+    
     setTimeout(() => this.buttonText = 'Create Post', 3000);
     this.title = '';
     this.content = '';
@@ -120,13 +126,22 @@ export class PostDashboardComponent implements OnInit {
     return string.replace(/<(?:.|\n)*?>/gm, ' ');
   }
 
-  getCategory(name: string) {
-    const result =  this.postService.getCategoryData(name)
+  getCategory(id: string) {
+    const result =  this.postService.getCategoryData(id)
     .subscribe(data => this.cat = data);
     return result;
   }
 
-
+  getCategoryByName(name: string) {
+    return this.afs.collection('categories', ref => ref.where('name','==', name))
+    .snapshotChanges().pipe(map((actions) => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as Category;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      })
+    }));
+  };
   
 
 }

@@ -11,8 +11,8 @@
             </div>          
             <span class="spacer"></span>
             <div class="right-buttons">
-            <button mat-raised-button *ngIf="auth.afAuth.authState | async" (click)="getMyPosts()" class="showMyPostsBtn">My Posts</button>
-            <button mat-raised-button (click)="ngOnInit()" class="showAllBtn">Show All</button>
+                <button mat-raised-button *ngIf="auth.afAuth.authState | async" (click)="getMyPosts()" class="showMyPostsBtn">My Posts</button>
+                <button mat-raised-button (click)="ngOnInit()" class="showAllBtn">Show All</button>
             </div>
         </form>      
     </div>
@@ -71,7 +71,7 @@
     </section>
 
  
-    <ng-template #indicator class="loader-box">
+    <ng-template #indicator class="loader-box" alt="Loading...">
         <!-- <h3 class="loading">Loading...</h3> -->
         <div class="loading">
             <div class="dot"></div>

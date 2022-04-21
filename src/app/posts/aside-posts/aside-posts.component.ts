@@ -13,12 +13,14 @@ import { PostService } from '../post.service';
 })
 export class AsidePostsComponent implements OnInit {
 
-  posts: Observable<Post[]> | any;
-  categories: Observable<Category[]> | any;
-  postsByCategory: Observable<Post[]> | any;
+  posts: Observable<Post[]>;
+  categories: Observable<Category[]>;
+  postsByCategory: Observable<Post[]>;
   category!: string | any;
   count: number;
   res: number;
+
+  term: any;
 
   constructor(
     private postService: PostService, 
@@ -33,9 +35,6 @@ export class AsidePostsComponent implements OnInit {
      this.router.queryParamMap.subscribe(queryParams => {
       this.category = queryParams.get("category");
       console.log(this.category);
-
-      console.log(this.postsByCategory);
-      console.log('here');
    });
   }
 

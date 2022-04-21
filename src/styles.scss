@@ -7,18 +7,18 @@ $custom-typography: mat-typography-config($font-family: '"Comfortaa", cursive;')
 
 html,
 body {
-    //height: 100%;
     background-color: #ffffff;
 }
 
 body {
     margin: 0;
-    //font-family: Roboto, "Helvetica Neue", sans-serif;
     font-family: 'Comfortaa', cursive;
 }
 
-
-
+//pagination
+ul.ngx-pagination {
+    padding-left: 0;
+}
 
 .main-div {
     background: url('./assets/summer.jpg'), ;
@@ -45,7 +45,6 @@ body {
 
 
 /* Importing Bootstrap SCSS file. */
-
 @import '~bootstrap/scss/bootstrap';
 
 

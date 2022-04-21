@@ -14,9 +14,9 @@ import { Category } from '../category';
 })
 export class PostListComponent implements OnInit  {
 
-  posts: Observable<Post[]> | any;
-  postsByCategory: Observable<Post[]> | any;
-  categories: Observable<Category[]> | any;
+  posts: Observable<Post[]>;
+  postsByCategory: Observable<Post[]>;
+  categories: Observable<Category[]>;
 
   term: any;
   loading = true;
@@ -38,6 +38,13 @@ export class PostListComponent implements OnInit  {
       this.totalLength = result.length;
       console.log(result.length);
     });
+
+    // this.postService.getCategories().forEach(c => {
+    //   c.forEach(x => {
+    //     console.log('category name is: ', x.name);
+    //     console.log('category id is: ', x.id);
+    //   })
+    // });
   }
 
   getMyPosts(){
@@ -51,10 +58,6 @@ export class PostListComponent implements OnInit  {
         this.postService.delete(id);
       }
     });
-  }
-
-  categoryPosts(name: string) {
-    this.postsByCategory = this.postService.getPostsByCategory(name);
   }
 
   showCategoryPosts(name: string) {

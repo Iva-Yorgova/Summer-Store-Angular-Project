@@ -1,15 +1,13 @@
 <div class="post-list-wrapper">
 
-  <h2 class="categories-title" routerLink="/category">Categories</h2>
+  <h2 class="categories-title">Categories</h2>
     <hr>
 
     <section class="post-box">
         <div class="category" *ngFor="let category of categories | async">
-           <span [routerLink]="['/blog']" 
+           <span #categoryName [routerLink]="['/blog']" 
           [queryParams]="{category:category.name}">{{category.name}}
         </span>
-        <!-- <button (click)="showCategoryPosts(category.name)">{{category.name}}
-        </button> -->
         <span>{{category.posts}}</span>
         </div>
     </section>

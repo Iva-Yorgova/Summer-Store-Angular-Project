@@ -25,14 +25,10 @@ import { FilterPipe } from './filter.pipe';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { UserPostsComponent } from './user-posts/user-posts.component';
 
 const routes: Routes = [
-  // {path: 'user-posts', component: UserPostsComponent},
-  // {path: 'user-posts/:id', component: PostDetailComponent},
   {path: 'blog', component: PostListComponent},
   {path: 'blog/:id', component: PostDetailComponent},
-  {path: 'category', component: CategoryPostsComponent},
   {path: 'dashboard', component: PostDashboardComponent},
   
 ]
@@ -46,8 +42,7 @@ const routes: Routes = [
     AsidePostsComponent,
     LatestPostsComponent,
     CategoryPostsComponent,
-    FilterPipe,
-    UserPostsComponent
+    FilterPipe
   ],
   imports: [
     FormsModule,

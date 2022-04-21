@@ -42,8 +42,6 @@ import { environment } from '../environments/environment';
 import { PostsModule } from './posts/posts.module';
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatConfirmDialogComponent } from './posts/mat-confirm-dialog/mat-confirm-dialog.component';
-import { AsidePostsComponent } from './posts/aside-posts/aside-posts.component';
-import { CategoryPostsComponent } from './posts/category-posts/category-posts.component';
 import { FilterPipe } from './filter.pipe';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { NgxPaginationModule } from 'ngx-pagination';

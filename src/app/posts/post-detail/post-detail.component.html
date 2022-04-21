@@ -43,12 +43,18 @@
                 <mat-card-actions>
                     <div class="icons-wrapper">
                         <div class="icons-left">
-                            <button mat-icon-button (click)="likePost()">
-                                <mat-icon>favorite_border</mat-icon>
+                            <button class="icon-box" mat-icon-button [hidden]="!userCanLike" (click)="likePost()">
+                                <mat-icon class="heart" >favorite_border</mat-icon>
                                 <span class="likes">{{post.likes}}</span>
                             </button>
-                            <button mat-icon-button>
-                                <mat-icon>insert_comment</mat-icon>
+
+                            <button class="icon-box" mat-icon-button [hidden]="userCanLike">
+                                <mat-icon class="like-icon heart">favorite</mat-icon>
+                                <span class="likes">{{post.likes}}</span>
+                            </button>
+
+                            <button class="icon-box"  mat-icon-button>
+                                <mat-icon class="comment-icon">insert_comment</mat-icon>
                                 <span class="likes">{{post.comments}}</span>
                             </button>
                         </div>

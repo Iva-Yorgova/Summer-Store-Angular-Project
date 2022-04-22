@@ -100,7 +100,6 @@ export class PostDetailComponent implements OnInit {
     const userId = this.auth.currentUserId;
     console.log(postId);
     console.log(userId);
-    const likes = this.postService.getLikesByPostAndUser(userId, postId);
 
     this.afs.doc(`/posts/${postId}`).get().subscribe(snap => {
       console.log(snap.id);

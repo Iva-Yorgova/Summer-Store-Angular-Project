@@ -3,6 +3,11 @@
     <h1>Create Post</h1>
     <hr>
 
+    <div *ngFor="let cat of categories | async">
+        <h2>{{cat.name}}: {{cat.posts}}</h2>
+
+    </div>
+
     <div class="dashboard-wrapper">
         
         <mat-form-field>

@@ -9,7 +9,8 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Category } from '../category';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { filter } from 'rxjs/operators'
-import { newArray } from '@angular/compiler/src/util';
+import * as firebase from 'firebase/app';
+
 
 
 @Component({
@@ -19,9 +20,13 @@ import { newArray } from '@angular/compiler/src/util';
 })
 export class PostDashboardComponent implements OnInit {
 
+  categories: Observable<Category[]>;
+
   categoriesCollection: AngularFirestoreCollection<Category>;
 
   categoriesArray: Observable<Category[]>;
+  currentCategoryArray: Observable<Category[]>;
+  ctgrsArrayLength: number;
 
   cat: Category | any;
   catPosts: number;
@@ -50,13 +55,14 @@ export class PostDashboardComponent implements OnInit {
   result: { id: string, postsNum: number};
   
   categoryId: string;
+  catName: string;
   categoryPosts: number | any;
 
   title: string | any;
   image: string | any;
   content: string | any;
   likes: number = 0;
-  category: string | any;
+  category: string;
   comments: string[] | any;
   userLikes: any;
 
@@ -66,6 +72,18 @@ export class PostDashboardComponent implements OnInit {
   downloadURL: Observable<string> | undefined;
 
   ngOnInit(): void {
+    this.categories = this.postService.getCategories();
+    console.log(this.categories);
+
+    this.categoriesArray = this.afs.collection('categories').snapshotChanges()
+    .pipe(map(snaps => {
+      return snaps.map(snap => {
+        const data = snap.payload.doc.data() as Category;
+        const id = snap.payload.doc.id;
+        console.log(data.name);
+        return { id, ...data };
+      })
+    }));
 
   }
 
@@ -82,16 +100,33 @@ export class PostDashboardComponent implements OnInit {
       comments: 0,
       usersLikes: new Array<string>()
     }
+
     const categoryData = {
       name: this.category,
       posts: 1,
       published: new Date()
     }
+
+    this.currentCategoryArray = this.categories.pipe(map(ctgrs => ctgrs.filter(
+      ctgr => ctgr.name == data.category)));
+
+    
+    this.currentCategoryArray.subscribe((result: any) => {
+      this.ctgrsArrayLength = result.length;
+      console.log('ctgrsArrLength is:', result.length);
+
+      if(result.length == 0){
+        this.postService.createCategory(categoryData);
+      }
+      else{
+        console.log('here in the else...');
+
+      }
+    });
+
     this.postService.create(data);
 
     //this.afs.collection('categories').doc(id).update({posts: postsNum + 1});
-
-    //this.postService.createCategory(categoryData);
     
     setTimeout(() => this.buttonText = 'Create Post', 3000);
     this.title = '';
@@ -132,7 +167,7 @@ export class PostDashboardComponent implements OnInit {
     return result;
   }
 
-  getCategoryByName(name: string) {
+  getCategoryByName(name: string){
     return this.afs.collection('categories', ref => ref.where('name','==', name))
     .snapshotChanges().pipe(map((actions) => {
       return actions.map(a => {
@@ -142,6 +177,15 @@ export class PostDashboardComponent implements OnInit {
       })
     }));
   };
+
+  updateDoc(name: string) {
+    let doc = this.afs.collection('categories', ref => ref.where('name', '==', name));
+    doc.snapshotChanges().subscribe((res: any) => {
+      let id = res[0].payload.doc.id;
+      let data = res[0].payload.doc.data() as Category;
+      this.afs.doc(`categories/${id}`).update({posts: data.posts + 1});
+    });
+  }
   
 
 }

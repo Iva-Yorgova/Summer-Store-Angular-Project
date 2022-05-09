@@ -76,7 +76,7 @@
                 <mat-card *ngFor="let comment of comments" class="comments-card">
                     <div class="info-box">
                         <div class="author-info">
-                            <mat-icon> person_pin</mat-icon>By <strong>{{comment.author}}</strong>
+                            <mat-icon class="person">person_pin</mat-icon>By <strong>{{comment.author}}</strong>
                         </div>
                         <div>
                             <mat-icon>date_range</mat-icon>{{comment.published.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}

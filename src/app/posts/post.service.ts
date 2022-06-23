@@ -4,7 +4,11 @@ import { delay, map } from 'rxjs/operators';
 
 import { Observable } from 'rxjs';
 import { Category } from './category';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument,
+} from 'angularfire2/firestore';
 import { Post } from './post';
 import { Comment } from './comment';
 import { ActivatedRoute } from '@angular/router';
@@ -13,7 +17,6 @@ import { Like } from './like';
 
 @Injectable()
 export class PostService {
-
   postsCollection: AngularFirestoreCollection<Post>;
   userPostsCollection: AngularFirestoreCollection<Post>;
   categoriesCollection: AngularFirestoreCollection<Category>;
@@ -24,95 +27,124 @@ export class PostService {
   categoriesByName: AngularFirestoreCollection<Category>;
 
   filteredPosts: any;
-  
-  constructor(private afs: AngularFirestore, private route: ActivatedRoute,public auth: AuthService) { 
-    this.postsCollection = this.afs.collection('posts', ref => 
-    ref.orderBy('published', 'desc'));
 
-    this.userPostsCollection = this.afs.collection('posts', ref => 
-    ref.orderBy('published', 'desc'));
+  constructor(
+    private afs: AngularFirestore,
+    private route: ActivatedRoute,
+    public auth: AuthService
+  ) {
+    this.postsCollection = this.afs.collection('posts', (ref) =>
+      ref.orderBy('published', 'desc')
+    );
 
-    this.categoriesCollection = this.afs.collection('categories', ref => 
-    ref.orderBy('name', 'asc'));
+    this.userPostsCollection = this.afs.collection('posts', (ref) =>
+      ref.orderBy('published', 'desc')
+    );
 
-    this.commentsCollection = this.afs.collection('comments', ref => 
-    ref.orderBy('published', 'desc'));
+    this.categoriesCollection = this.afs.collection('categories', (ref) =>
+      ref.orderBy('name', 'asc')
+    );
 
-    this.likesCollection = this.afs.collection('likes', ref => 
-    ref.orderBy('published', 'desc'));
+    this.commentsCollection = this.afs.collection('comments', (ref) =>
+      ref.orderBy('published', 'desc')
+    );
+
+    this.likesCollection = this.afs.collection('likes', (ref) =>
+      ref.orderBy('published', 'desc')
+    );
   }
 
   getPosts() {
-    return this.postsCollection.snapshotChanges().pipe(delay(1000), map((actions) => {
-      return actions.map(a => {
-        const data = a.payload.doc.data() as Post;
-        const id = a.payload.doc.id;
-        return { id, ...data };
+    return this.postsCollection.snapshotChanges().pipe(
+      delay(1000),
+      map((actions) => {
+        return actions.map((a) => {
+          const data = a.payload.doc.data() as Post;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
       })
-    }))
+    );
   }
 
   getMyPosts() {
     const userId = this.auth.currentUserId;
-    return this.afs.collection('posts', ref => ref.where('authorId','==', userId))
-    .snapshotChanges().pipe(delay(1000), map((actions) => {
-      return actions.map(a => {
-        const data = a.payload.doc.data() as Post;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      })
-    }));
-  };
+    return this.afs
+      .collection('posts', (ref) => ref.where('authorId', '==', userId))
+      .snapshotChanges()
+      .pipe(
+        delay(1000),
+        map((actions) => {
+          return actions.map((a) => {
+            const data = a.payload.doc.data() as Post;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
+  }
 
   getCategoriesByName(name: string) {
-    const array = this.afs.collection<Category>('categories', 
-    ref => ref.where('name', '==', name)).valueChanges();
+    const array = this.afs
+      .collection<Category>('categories', (ref) =>
+        ref.where('name', '==', name)
+      )
+      .valueChanges();
     return array;
-  };
+  }
 
   getLikesByPostAndUser(userId: any, postId: any): Observable<Post[]> {
-    return this.afs.collection('likes', 
-    ref => ref.where('userId', '==', userId)
-    .where('postId', '==', postId))
-    .snapshotChanges().pipe(map(snaps => {
-      return snaps.map(snap => {
-        
-          const data = snap.payload.doc.data() as Post;
-        const id = snap.payload.doc.id;
-        return { id, ...data };
-        
-      })
-    }));
-  };
+    return this.afs
+      .collection('likes', (ref) =>
+        ref.where('userId', '==', userId).where('postId', '==', postId)
+      )
+      .snapshotChanges()
+      .pipe(
+        map((snaps) => {
+          return snaps.map((snap) => {
+            const data = snap.payload.doc.data() as Post;
+            const id = snap.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
+  }
 
   filterCategoriesByName(name: string) {
-    return this.afs.collection('categories', ref => ref.where('name','==', name)).valueChanges();
-  };
+    return this.afs
+      .collection('categories', (ref) => ref.where('name', '==', name))
+      .valueChanges();
+  }
 
   getPostsByCategory(name: string) {
-    const posts = this.afs.collection<Post>('posts', 
-    ref => ref.where('category', '==', name)).valueChanges();
+    const posts = this.afs
+      .collection<Post>('posts', (ref) => ref.where('category', '==', name))
+      .valueChanges();
     return posts;
   }
 
   getCategories() {
-    return this.categoriesCollection.snapshotChanges().pipe(map((actions) => {
-      return actions.map(a => {
-        const data = a.payload.doc.data() as Category;
-        const id = a.payload.doc.id;
-        return { id, ...data };
+    return this.categoriesCollection.snapshotChanges().pipe(
+      map((actions) => {
+        return actions.map((a) => {
+          const data = a.payload.doc.data() as Category;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
       })
-    }))
+    );
   }
 
   getComments() {
-    return this.commentsCollection.snapshotChanges().pipe(map((actions) => {
-      return actions.map(a => {
-        const data = a.payload.doc.data() as Comment;
-        const id = a.payload.doc.id;
-        return { id, ...data };
+    return this.commentsCollection.snapshotChanges().pipe(
+      map((actions) => {
+        return actions.map((a) => {
+          const data = a.payload.doc.data() as Comment;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
       })
-    }))
+    );
   }
 
   getPostData(id: any) {
@@ -125,23 +157,31 @@ export class PostService {
     return this.categoryDoc.valueChanges();
   }
 
-
   getCommentsByPostId(id: any): Observable<any> {
-    const comments = this.afs.collection<Comment>('comments', 
-    ref => ref.where('postId', '==', id)).valueChanges();
+    const comments = this.afs
+      .collection<Comment>('comments', (ref) =>
+        ref.where('postId', '==', id).orderBy('published', 'desc')
+      )
+      .valueChanges();
     return comments;
   }
 
   getLikeByPostAndUser(userId: any, postId: any) {
-    return this.afs.collection('likes', ref => ref.where('postId','==', postId).where('userId', '==', 'userId'))
-    .snapshotChanges().pipe(map((actions) => {
-      return actions.map(a => {
-        const data = a.payload.doc.data() as Like;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      })
-    }));
-  };
+    return this.afs
+      .collection('likes', (ref) =>
+        ref.where('postId', '==', postId).where('userId', '==', 'userId')
+      )
+      .snapshotChanges()
+      .pipe(
+        map((actions) => {
+          return actions.map((a) => {
+            const data = a.payload.doc.data() as Like;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
+  }
 
   create(data: Post) {
     this.postsCollection.add(data);
@@ -178,5 +218,4 @@ export class PostService {
   updateCat(id: string, formData: Partial<Category>) {
     return this.getCategory(id).update(formData);
   }
-
 }

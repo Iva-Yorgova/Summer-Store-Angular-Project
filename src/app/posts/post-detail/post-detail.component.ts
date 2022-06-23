@@ -12,14 +12,12 @@ import * as firebase from 'firebase/app';
 const arrayRemove = firebase.firestore.FieldValue.arrayRemove;
 const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
 
-
 @Component({
   selector: 'app-post-detail',
   templateUrl: './post-detail.component.html',
-  styleUrls: ['./post-detail.component.scss']
+  styleUrls: ['./post-detail.component.scss'],
 })
 export class PostDetailComponent implements OnInit {
-
   comments: Observable<Comment[]> | any;
 
   post: Post | any;
@@ -42,7 +40,8 @@ export class PostDetailComponent implements OnInit {
     private postService: PostService,
     public auth: AuthService,
     private dialogService: DialogService,
-    private afs: AngularFirestore) { }
+    private afs: AngularFirestore
+  ) {}
 
   ngOnInit(): void {
     this.getPost();
@@ -53,15 +52,17 @@ export class PostDetailComponent implements OnInit {
 
   getPost() {
     const id = this.route.snapshot.paramMap.get('id');
-    const result =  this.postService.getPostData(id)
-    .subscribe(data => this.post = data);
+    const result = this.postService
+      .getPostData(id)
+      .subscribe((data) => (this.post = data));
     return result;
   }
 
   getPostComments() {
     const id = this.route.snapshot.paramMap.get('id');
-    const result =  this.postService.getCommentsByPostId(id)
-    .subscribe(data => this.comments = data);
+    const result = this.postService
+      .getCommentsByPostId(id)
+      .subscribe((data) => (this.comments = data));
     return result;
   }
 
@@ -74,70 +75,84 @@ export class PostDetailComponent implements OnInit {
     const formData = {
       title: this.post.title,
       content: this.post.content,
-      category: this.post.category
-    }
+      category: this.post.category,
+    };
     const id = this.route.snapshot.paramMap.get('id');
     this.postService.update(id!, formData);
     this.editing = false;
   }
 
   checkUserLikes() {
-    const postId = this.route.snapshot.paramMap.get('id');   
+    const postId = this.route.snapshot.paramMap.get('id');
     const userId = this.auth.currentUserId;
-    this.afs.doc(`/posts/${postId}`).get().subscribe(snap => {
-      const data = snap.data() as Post;
+    this.afs
+      .doc(`/posts/${postId}`)
+      .get()
+      .subscribe((snap) => {
+        const data = snap.data() as Post;
 
-      if(data.usersLikes.includes(userId)){
-        console.log('You can not like two times'); 
-        this.userCanLike = false; 
-        console.log(this.userCanLike);  
-      }
-    })
+        if (data.usersLikes.includes(userId)) {
+          console.log('You can not like two times');
+          this.userCanLike = false;
+          console.log(this.userCanLike);
+        }
+      });
   }
 
   likePost() {
-    const postId = this.route.snapshot.paramMap.get('id');   
+    const postId = this.route.snapshot.paramMap.get('id');
     const userId = this.auth.currentUserId;
     console.log(postId);
     console.log(userId);
 
-    this.afs.doc(`/posts/${postId}`).get().subscribe(snap => {
-      console.log(snap.id);
-      console.log(' this is the data:', snap.data());
-      const data = snap.data() as Post;
+    this.afs
+      .doc(`/posts/${postId}`)
+      .get()
+      .subscribe((snap) => {
+        console.log(snap.id);
+        console.log(' this is the data:', snap.data());
+        const data = snap.data() as Post;
 
-      if(data.usersLikes.includes(userId)){
-        console.log('you can not like two times'); 
-        this.userCanLike = false;   
-      }
-      else{
-        console.log('in the else...')
-        const formData = {
-          likes: this.post.likes + 1
+        if (data.usersLikes.includes(userId)) {
+          console.log('you can not like two times');
+
+          const formData = {
+            likes: this.post.likes - 1,
+          };
+          const doc = this.afs.doc(`/posts/${postId}`);
+
+          doc.update({
+            usersLikes: arrayRemove(userId),
+          });
+          this.postService.update(postId!, formData);
+          this.userCanLike = true;
+        } else {
+          console.log('in the else...');
+          const formData = {
+            likes: this.post.likes + 1,
+          };
+          const likeData = {
+            userId: userId,
+          };
+
+          const doc = this.afs.doc(`/posts/${postId}`);
+
+          doc.update({
+            usersLikes: arrayUnion(userId),
+          });
+          this.userCanLike = false;
+          this.postService.update(postId!, formData);
+          this.editing = false;
+          this.checkUserLikes();
         }
-        const likeData = {
-          userId: userId
-        }
+      });
 
-        const doc = this.afs.doc(`/posts/${postId}`);
-
-        doc.update({
-            usersLikes: arrayUnion(userId)
-        });
-
-        this.postService.update(postId!, formData);
-        this.editing = false;
-        this.checkUserLikes();
-      }
-    });
-
-    this.afs.collection('posts').valueChanges().subscribe(val => {
-      console.log('this is val:', val)
-    });
-
-   
-    
-    
+    this.afs
+      .collection('posts')
+      .valueChanges()
+      .subscribe((val) => {
+        console.log('this is val:', val);
+      });
   }
 
   addComment() {
@@ -149,25 +164,25 @@ export class PostDetailComponent implements OnInit {
       text: this.text,
       published: new Date(),
       likes: 1,
-    }
+    };
     this.postService.createComment(data);
     const formData = {
-      comments: this.post.comments + 1
-    }
+      comments: this.post.comments + 1,
+    };
     this.postService.update(id!, formData);
     this.text = '';
   }
 
   delete() {
-    const id = this.route.snapshot.paramMap.get("id");
-    this.dialogService.openConfirmDialog('Are you sure you want to delete this post?')
-    .afterClosed().subscribe(res => {
-      if(res) {
-        this.postService.delete(id);
-        this.router.navigate(["/blog"]);
-      }
-    });
-    
+    const id = this.route.snapshot.paramMap.get('id');
+    this.dialogService
+      .openConfirmDialog('Are you sure you want to delete this post?')
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.postService.delete(id);
+          this.router.navigate(['/blog']);
+        }
+      });
   }
-
 }

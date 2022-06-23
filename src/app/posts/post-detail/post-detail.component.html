@@ -1,110 +1,110 @@
 <ng-container *ngIf="post">
     <div class="wrapper">
 
-    <div class="post-wrapper">
+        <div class="post-wrapper">
 
-        <div [hidden]="!editing" class="editing-box">
-            <mat-form-field>
-                <mat-label>Category</mat-label>
-                <input matInput placeholder="Post Category" [(ngModel)]="post.category">
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Title</mat-label>
-                <input matInput placeholder="Post Title" [(ngModel)]="post.title">
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Content</mat-label>
-                <textarea matInput placeholder="Content" [(ngModel)]="post.content" rows="10"></textarea>
-            </mat-form-field>
-            <br>
-            <button mat-raised-button color="basic" (click)="updatePost()">Save</button>
-            <button mat-button class="cancel-btn" color="accent" (click)="editing=false">Cancel</button>
-        </div>
-
-        <div [hidden]="editing">
-            <div class="post-detail-box">
-                <img src="{{post.image}}" alt="{{post.title}}">
-                <div class="category-box">
-                    <h5 class="category-bar">{{post.category}}</h5> 
-                </div> 
-                <h1>{{post.title}}</h1>
-                <hr>
-                    <p [innerHTML]="post.content"></p>
-                <hr>
-                <div class="info-box">
-                    <div class="author-info">
-                        <mat-icon> person_pin</mat-icon>posted by <strong>{{post.author}}</strong>
-                    </div>
-                     <div>
-                        <mat-icon>date_range</mat-icon>{{post.published.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}
-                     </div>                   
-                </div>                            
-                <hr>
-                <mat-card-actions>
-                    <div class="icons-wrapper">
-                        <div class="icons-left">
-                            <button class="icon-box" mat-icon-button [hidden]="!userCanLike" (click)="likePost()">
-                                <mat-icon class="heart" >favorite_border</mat-icon>
-                                <span class="likes">{{post.likes}}</span>
-                            </button>
-
-                            <button class="icon-box" mat-icon-button [hidden]="userCanLike">
-                                <mat-icon class="like-icon heart">favorite</mat-icon>
-                                <span class="likes">{{post.likes}}</span>
-                            </button>
-
-                            <button class="icon-box"  mat-icon-button>
-                                <mat-icon class="comment-icon">insert_comment</mat-icon>
-                                <span class="likes">{{post.comments}}</span>
-                            </button>
-                        </div>
-                        <div>
-                            <button mat-icon-button *ngIf="auth.currentUserId === post.authorId" (click)="editing=true">
-                                <mat-icon>edit</mat-icon>
-                            </button>
-                            <button mat-icon-button *ngIf="auth.currentUserId === post.authorId" (click)="delete()">
-                                <mat-icon>delete_outline</mat-icon>
-                            </button>
-                        </div>
-                    </div>
-                </mat-card-actions>
-
+            <div [hidden]="!editing" class="editing-box">
+                <mat-form-field>
+                    <mat-label>Category</mat-label>
+                    <input matInput placeholder="Post Category" [(ngModel)]="post.category">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Title</mat-label>
+                    <input matInput placeholder="Post Title" [(ngModel)]="post.title">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Content</mat-label>
+                    <textarea matInput placeholder="Content" [(ngModel)]="post.content" rows="10"></textarea>
+                </mat-form-field>
+                <br>
+                <button mat-raised-button color="basic" (click)="updatePost()">Save</button>
+                <button mat-button class="cancel-btn" color="accent" (click)="editing=false">Cancel</button>
             </div>
 
-            <div class="comments-box">
-                <h1>Comments</h1>
-                <mat-card *ngFor="let comment of comments" class="comments-card">
+            <div [hidden]="editing">
+                <div class="post-detail-box">
+                    <img src="{{post.image}}" alt="{{post.title}}">
+                    <div class="category-box">
+                        <h5 class="category-bar">{{post.category}}</h5>
+                    </div>
+                    <h1>{{post.title}}</h1>
+                    <hr>
+                    <p [innerHTML]="post.content"></p>
+                    <hr>
                     <div class="info-box">
                         <div class="author-info">
-                            <mat-icon class="person">person_pin</mat-icon>By <strong>{{comment.author}}</strong>
+                            <mat-icon> person_pin</mat-icon>posted by <strong>{{post.author}}</strong>
                         </div>
                         <div>
-                            <mat-icon>date_range</mat-icon>{{comment.published.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}
+                            <mat-icon>date_range</mat-icon>{{post.published.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}
                         </div>
                     </div>
                     <hr>
-                    <p>{{comment.text}}</p>
-                </mat-card>
-            </div>
-            
-            <div class="comments-wrapper" *ngIf="getUserData()">
-                <h1>Write Comment</h1>
-                <hr>
-                <mat-form-field>
-                    <mat-label>Comment</mat-label>
-                    <input matInput placeholder="Comment" [(ngModel)]="text">
-                </mat-form-field>
-                <button class="create-post-btn" mat-raised-button (click)="addComment()">Add</button>
-            
-            </div>
+                    <mat-card-actions>
+                        <div class="icons-wrapper">
+                            <div class="icons-left">
+                                <button class="icon-box" mat-icon-button [hidden]="!userCanLike" (click)="likePost()">
+                                    <mat-icon class="heart">favorite_border</mat-icon>
+                                    <span class="likes">{{post.likes}}</span>
+                                </button>
+
+                                <button class="icon-box" mat-icon-button [hidden]="userCanLike" (click)="likePost()">
+                                    <mat-icon class="like-icon heart">favorite</mat-icon>
+                                    <span class="likes">{{post.likes}}</span>
+                                </button>
+
+                                <button class="icon-box" mat-icon-button>
+                                    <mat-icon class="comment-icon">insert_comment</mat-icon>
+                                    <span class="likes">{{post.comments}}</span>
+                                </button>
+                            </div>
+                            <div>
+                                <button mat-icon-button *ngIf="auth.currentUserId === post.authorId"
+                                    (click)="editing=true">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <button mat-icon-button *ngIf="auth.currentUserId === post.authorId" (click)="delete()">
+                                    <mat-icon>delete_outline</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </mat-card-actions>
+
+                </div>
+
+                <div class="comments-box">
+                    <h1>Comments</h1>
+                    <mat-card *ngFor="let comment of comments" class="comments-card">
+                        <div class="info-box">
+                            <div class="author-info">
+                                <mat-icon class="person">person_pin</mat-icon>By <strong>{{comment.author}}</strong>
+                            </div>
+                            <div>
+                                <mat-icon>date_range</mat-icon>{{comment.published.toDate() | date:'yyyy/MM/dd h:mm:ss
+                                a'}}
+                            </div>
+                        </div>
+                        <hr>
+                        <p>{{comment.text}}</p>
+                    </mat-card>
+                </div>
+
+                <div class="comments-wrapper" *ngIf="getUserData()">
+                    <h1>Write Comment</h1>
+                    <hr>
+                    <mat-form-field>
+                        <mat-label>Comment</mat-label>
+                        <input matInput placeholder="Comment" [(ngModel)]="text">
+                    </mat-form-field>
+                    <button class="create-post-btn" mat-raised-button (click)="addComment()">Add</button>
+
+                </div>
 
 
+            </div>
         </div>
+
+
+
     </div>
-
-
-
-</div>
 </ng-container>
-
-

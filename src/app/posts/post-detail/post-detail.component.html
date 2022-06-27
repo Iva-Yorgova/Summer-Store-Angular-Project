@@ -8,6 +8,20 @@
                     <mat-label>Category</mat-label>
                     <input matInput placeholder="Post Category" [(ngModel)]="post.category">
                 </mat-form-field>
+
+                <img src="{{post.image}}" alt="{{post.title}}">
+
+                <div class="image-upload">
+                    <input type="file" name="file" id="file" (change)="uploadImage($event)">
+                    <div [hidden]="!uploadPercent" class="mt-3">
+                        <mat-progress-bar color="accent" mode="determinate" value="{{uploadPercent | async}}">
+                        </mat-progress-bar>
+                    </div>
+                </div>
+                <div [hidden]="!image" class="mb-3">
+                    <img [src]="image || '//:0'">
+                </div>
+
                 <mat-form-field>
                     <mat-label>Title</mat-label>
                     <input matInput placeholder="Post Title" [(ngModel)]="post.title">
@@ -63,7 +77,8 @@
                                     (click)="editing=true">
                                     <mat-icon>edit</mat-icon>
                                 </button>
-                                <button mat-icon-button *ngIf="auth.currentUserId === post.authorId" (click)="delete()">
+                                <button mat-icon-button *ngIf="auth.currentUserId === post.authorId"
+                                    (click)="deletePost()">
                                     <mat-icon>delete_outline</mat-icon>
                                 </button>
                             </div>
@@ -73,19 +88,43 @@
                 </div>
 
                 <div class="comments-box">
+
+                    <div *ngIf="commentsWithId.length > 0">
+                        <ul *ngFor="let cmmnt of commentsWithId">
+                            <li>{{cmmnt.id}} | {{cmmnt.author}} | {{cmmnt.text}}</li>
+                        </ul>
+                    </div>
+
+                    <div *ngIf="commentsWithId.length == 0">
+                        <h3>No comments with Ids</h3>
+                    </div>
+
                     <h1>Comments</h1>
-                    <mat-card *ngFor="let comment of comments" class="comments-card">
-                        <div class="info-box">
-                            <div class="author-info">
-                                <mat-icon class="person">person_pin</mat-icon>By <strong>{{comment.author}}</strong>
+                    <mat-card *ngFor="let cmmnt of commentsWithId" class="comments-card">
+                        <mat-card-content class="info-box">
+                            <div>
+                                <div class="author-info">
+                                    <mat-icon class="person">person_pin</mat-icon>By <strong>{{cmmnt.author}}</strong>
+                                </div>
+                                <div>
+                                    <mat-icon>date_range</mat-icon>{{cmmnt.published.toDate() | date:'yyyy/MM/dd
+                                    h:mm:ss
+                                    a'}}
+                                </div>
                             </div>
                             <div>
-                                <mat-icon>date_range</mat-icon>{{comment.published.toDate() | date:'yyyy/MM/dd h:mm:ss
-                                a'}}
+                                <button mat-icon-button *ngIf="auth.currentUserId === cmmnt.authorId"
+                                    (click)="editing=true">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <button mat-icon-button *ngIf="auth.currentUserId === cmmnt.authorId"
+                                    (click)="deleteComment(cmmnt.text, cmmnt.author, cmmnt.id)">
+                                    <mat-icon>delete_outline</mat-icon>
+                                </button>
                             </div>
-                        </div>
+                        </mat-card-content>
                         <hr>
-                        <p>{{comment.text}}</p>
+                        <p>{{cmmnt.text}}</p>
                     </mat-card>
                 </div>
 

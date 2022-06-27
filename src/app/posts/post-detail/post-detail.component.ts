@@ -7,7 +7,9 @@ import { PostService } from '../post.service';
 import { Comment } from '../comment';
 import { Observable, of } from 'rxjs';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireStorage } from 'angularfire2/storage';
 import * as firebase from 'firebase/app';
+import { finalize, map } from 'rxjs/operators';
 
 const arrayRemove = firebase.firestore.FieldValue.arrayRemove;
 const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
@@ -19,6 +21,7 @@ const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
 })
 export class PostDetailComponent implements OnInit {
   comments: Observable<Comment[]> | any;
+  commentsWithId: Observable<Comment[]> | any;
 
   post: Post | any;
   editing: boolean = false;
@@ -34,18 +37,23 @@ export class PostDetailComponent implements OnInit {
   commentLikes: number | any;
   userCanLike: boolean = true;
 
+  uploadPercent: Observable<number> | any;
+  downloadURL: Observable<string> | undefined;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private postService: PostService,
     public auth: AuthService,
     private dialogService: DialogService,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private storage: AngularFireStorage
   ) {}
 
   ngOnInit(): void {
     this.getPost();
     this.comments = this.getPostComments();
+    this.commentsWithId = this.getCommentsList();
     this.getUserData();
     this.checkUserLikes();
   }
@@ -66,6 +74,17 @@ export class PostDetailComponent implements OnInit {
     return result;
   }
 
+  getCommentsList() {
+    const id = this.route.snapshot.paramMap.get('id');
+    const result = this.afs
+      .collection<Comment>('comments', (ref) =>
+        ref.where('postId', '==', id).orderBy('published', 'desc')
+      )
+      .valueChanges({ idField: 'id' })
+      .subscribe((data) => (this.commentsWithId = data));
+    return result;
+  }
+
   getUserData() {
     const user = this.auth.currentUserId;
     return user;
@@ -76,6 +95,7 @@ export class PostDetailComponent implements OnInit {
       title: this.post.title,
       content: this.post.content,
       category: this.post.category,
+      image: this.post.image,
     };
     const id = this.route.snapshot.paramMap.get('id');
     this.postService.update(id!, formData);
@@ -173,7 +193,7 @@ export class PostDetailComponent implements OnInit {
     this.text = '';
   }
 
-  delete() {
+  deletePost() {
     const id = this.route.snapshot.paramMap.get('id');
     this.dialogService
       .openConfirmDialog('Are you sure you want to delete this post?')
@@ -184,5 +204,42 @@ export class PostDetailComponent implements OnInit {
           this.router.navigate(['/blog']);
         }
       });
+  }
+
+  deleteComment(commentText: string, commentAuthor: string, commentId: string) {
+    const id = this.route.snapshot.paramMap.get('id');
+    console.log(commentText, commentAuthor, commentId);
+    console.log(id);
+    this.dialogService
+      .openConfirmDialog('Are you sure you want to delete this comment?')
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.postService.deleteComment(commentId);
+          this.router.navigate([`/blog/${id}`]);
+        }
+      });
+  }
+
+  uploadImage(event: any) {
+    const file = event.target.files[0];
+    const path = `posts/${file.name}`;
+    if (file.type.split('/')[0] !== 'image') {
+      return alert('only image files');
+    } else {
+      const task = this.storage.upload(path, file);
+      const ref = this.storage.ref(path);
+      this.uploadPercent = task.percentageChanges();
+      console.log('Image uploaded!');
+      task
+        .snapshotChanges()
+        .pipe(
+          finalize(() => {
+            this.downloadURL = ref.getDownloadURL();
+            this.downloadURL.subscribe((url) => (this.image = url));
+          })
+        )
+        .subscribe();
+    }
   }
 }

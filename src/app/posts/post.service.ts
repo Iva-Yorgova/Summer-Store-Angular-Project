@@ -22,6 +22,7 @@ export class PostService {
   categoriesCollection: AngularFirestoreCollection<Category>;
   likesCollection: AngularFirestoreCollection<Like>;
   commentsCollection: AngularFirestoreCollection<Comment>;
+  userComment: AngularFirestoreDocument<Comment>;
   postDoc!: AngularFirestoreDocument<Post>;
   categoryDoc!: AngularFirestoreDocument<Category>;
   categoriesByName: AngularFirestoreCollection<Category>;
@@ -166,6 +167,24 @@ export class PostService {
     return comments;
   }
 
+  getCommentByAuthorAndText(text: string, author: string) {
+    const comment = this.afs
+      .collection<Comment>('comments', (ref) =>
+        ref.where('text', '==', text).where('author', '==', author)
+      )
+      .snapshotChanges()
+      .pipe(
+        map((actions) => {
+          return actions.map((a) => {
+            const data = a.payload.doc.data() as Comment;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
+    return comment;
+  }
+
   getLikeByPostAndUser(userId: any, postId: any) {
     return this.afs
       .collection('likes', (ref) =>
@@ -191,6 +210,10 @@ export class PostService {
     this.commentsCollection.add(data);
   }
 
+  deleteComment(id: any) {
+    return this.getComment(id).delete();
+  }
+
   createCategory(data: Category) {
     this.categoriesCollection.add(data);
   }
@@ -201,6 +224,10 @@ export class PostService {
 
   getPost(id: string) {
     return this.afs.doc<Post>(`posts/${id}`);
+  }
+
+  getComment(id: string) {
+    return this.afs.doc<Comment>(`comments/${id}`);
   }
 
   getCategory(name: string) {

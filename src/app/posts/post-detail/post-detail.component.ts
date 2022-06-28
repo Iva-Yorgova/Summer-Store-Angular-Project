@@ -6,7 +6,10 @@ import { Post } from '../post';
 import { PostService } from '../post.service';
 import { Comment } from '../comment';
 import { Observable, of } from 'rxjs';
-import { AngularFirestore } from 'angularfire2/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from 'angularfire2/firestore';
 import { AngularFireStorage } from 'angularfire2/storage';
 import * as firebase from 'firebase/app';
 import { finalize, map } from 'rxjs/operators';
@@ -59,6 +62,11 @@ export class PostDetailComponent implements OnInit {
     this.checkUserLikes();
   }
 
+  getUserData() {
+    const user = this.auth.currentUserId;
+    return user;
+  }
+
   getPost() {
     const id = this.route.snapshot.paramMap.get('id');
     const result = this.postService
@@ -67,13 +75,38 @@ export class PostDetailComponent implements OnInit {
     return result;
   }
 
-  checkComment(id: any) {
-    this.commentEdit = true;
-    const result = this.postService
-      .getCommentData(id)
-      .subscribe((data) => (this.postComment = data));
-    return result;
+  updatePost() {
+    const formData = {
+      title: this.post.title,
+      content: this.post.content,
+      category: this.post.category,
+      image: this.post.image,
+    };
+    const id = this.route.snapshot.paramMap.get('id');
+    this.postService.update(id!, formData);
+    this.editing = false;
   }
+
+  deletePost() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.dialogService
+      .openConfirmDialog('Are you sure you want to delete this post?')
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.postService.delete(id);
+          this.router.navigate(['/blog']);
+        }
+      });
+  }
+
+  // checkComment(id: any) {
+  //   this.commentEdit = true;
+  //   const result = this.postService
+  //     .getCommentData(id)
+  //     .subscribe((data) => (this.postComment = data));
+  //   return result;
+  // }
 
   getPostComments() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -93,31 +126,6 @@ export class PostDetailComponent implements OnInit {
       .subscribe((data) => (this.commentsWithId = data));
     return result;
   }
-
-  getUserData() {
-    const user = this.auth.currentUserId;
-    return user;
-  }
-
-  updatePost() {
-    const formData = {
-      title: this.post.title,
-      content: this.post.content,
-      category: this.post.category,
-      image: this.post.image,
-    };
-    const id = this.route.snapshot.paramMap.get('id');
-    this.postService.update(id!, formData);
-    this.editing = false;
-  }
-
-  // updateComment(id: any) {
-  //   const formData = {
-  //     text: this.postComment.text,
-  //   };
-  //   this.postService.updateComment(id!, formData);
-  //   this.commentEdit = false;
-  // }
 
   checkUserLikes() {
     const postId = this.route.snapshot.paramMap.get('id');
@@ -210,15 +218,22 @@ export class PostDetailComponent implements OnInit {
     this.text = '';
   }
 
-  deletePost() {
+  updateCommentDialog(comment: Comment, commentId: string) {
     const id = this.route.snapshot.paramMap.get('id');
+    this.postComment = comment;
+    console.log(this.postComment.text);
     this.dialogService
-      .openConfirmDialog('Are you sure you want to delete this post?')
+      .openFormDialog(comment, commentId)
       .afterClosed()
       .subscribe((res) => {
         if (res) {
-          this.postService.delete(id);
-          this.router.navigate(['/blog']);
+          const formData = {
+            text: comment.text,
+          };
+          console.log('This is the text:', comment.text);
+          this.postService.updateComment(commentId, formData);
+          this.commentEdit = false;
+          this.router.navigate([`/blog/${id}`]);
         }
       });
   }

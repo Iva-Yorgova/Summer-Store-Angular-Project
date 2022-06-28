@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,9 +11,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input'; 
-import { MatExpansionModule } from '@angular/material/expansion'; 
-import { MatProgressBarModule } from '@angular/material/progress-bar'; 
+import { MatInputModule } from '@angular/material/input';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 import { ProductPageComponent } from './product-page/product-page.component';
@@ -40,7 +40,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { PostsModule } from './posts/posts.module';
-import { MatDialogModule } from '@angular/material/dialog'
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatConfirmDialogComponent } from './posts/mat-confirm-dialog/mat-confirm-dialog.component';
 import { FilterPipe } from './filter.pipe';
 import { EditorModule } from '@tinymce/tinymce-angular';
@@ -48,6 +48,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatContactDialogComponent } from './contact/mat-contact-dialog/mat-contact-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { DialogWithFormComponent } from './posts/dialog-with-form/dialog-with-form.component';
 
 @NgModule({
   declarations: [
@@ -66,8 +67,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     LoadingComponent,
     StoreComponent,
     FilterPipe,
-    MatContactDialogComponent
-    ],
+    MatContactDialogComponent,
+  ],
   imports: [
     NgxPaginationModule,
     BrowserModule,
@@ -90,7 +91,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatSelectModule,
     HttpClientModule,
     AuthModule.forRoot({
-       ...env.auth,
+      ...env.auth,
     }),
     BlogModule,
     SharedModule,
@@ -101,17 +102,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     AngularFireAuthModule,
     EditorModule,
     MatPaginatorModule,
-    MatFormFieldModule
+    MatFormFieldModule,
   ],
   providers: [
-  //   {
-  //   provide: HTTP_INTERCEPTORS,
-  //   useClass: HttpHeadersInterceptor,
-  //   multi: true,
-  // }
-],
+    //   {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: HttpHeadersInterceptor,
+    //   multi: true,
+    // }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [MatConfirmDialogComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule {}

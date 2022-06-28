@@ -103,10 +103,10 @@
                                 </div>
                             </div>
                             <div>
-                                <!-- <button mat-icon-button *ngIf="auth.currentUserId === cmmnt.authorId"
-                                    (click)="checkComment(cmmnt.id)">
+                                <button mat-icon-button *ngIf="auth.currentUserId === cmmnt.authorId"
+                                    (click)="updateCommentDialog(cmmnt, cmmnt.id)">
                                     <mat-icon>edit</mat-icon>
-                                </button> -->
+                                </button>
                                 <button mat-icon-button *ngIf="auth.currentUserId === cmmnt.authorId"
                                     (click)="deleteComment(cmmnt.text, cmmnt.author, cmmnt.id)">
                                     <mat-icon>delete_outline</mat-icon>
@@ -121,7 +121,7 @@
                                 <textarea matInput placeholder="Text" [(ngModel)]="cmmnt.text" rows="10"></textarea>
                             </mat-form-field>
                             <br>
-                            <button mat-raised-button color="basic" (click)="updateComment(cmmnt.id)">Save</button>
+                            <button mat-raised-button color="basic" (click)="updateCommentDialog(cmmnt.id)">Save</button>
                             <button mat-button class="cancel-btn" color="accent"
                                 (click)="commentEdit=false">Cancel</button>
                         </div> -->

@@ -25,6 +25,7 @@ import { FilterPipe } from './filter.pipe';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { DialogWithFormComponent } from './dialog-with-form/dialog-with-form.component';
 
 const routes: Routes = [
   {path: 'blog', component: PostListComponent},
@@ -42,7 +43,8 @@ const routes: Routes = [
     AsidePostsComponent,
     LatestPostsComponent,
     CategoryPostsComponent,
-    FilterPipe
+    FilterPipe,
+    DialogWithFormComponent
   ],
   imports: [
     FormsModule,

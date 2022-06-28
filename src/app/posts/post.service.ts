@@ -158,6 +158,11 @@ export class PostService {
     return this.userComment.valueChanges();
   }
 
+  getComment(id: any) {
+    this.userComment = this.afs.doc<Comment>(`comments/${id}`);
+    return this.userComment;
+  }
+
   getCategoryData(id: string) {
     this.categoryDoc = this.afs.doc<Category>(`categories/${id}`);
     return this.categoryDoc.valueChanges();
@@ -231,9 +236,9 @@ export class PostService {
     return this.afs.doc<Post>(`posts/${id}`);
   }
 
-  getComment(id: string) {
-    return this.afs.doc<Comment>(`comments/${id}`);
-  }
+  // getComment(id: string) {
+  //   return this.afs.doc<Comment>(`comments/${id}`);
+  // }
 
   getCategory(name: string) {
     return this.afs.doc<Category>(`categories/${name}`);

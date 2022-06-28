@@ -1,0 +1,15 @@
+<div class="form-dialog">
+    <div mat-dialog-content>
+        <!-- <mat-form-field>
+            <input placeholder="Id" matInput [(ngModel)]="data.id">
+        </mat-form-field><br> -->
+        <mat-form-field>
+            <textarea placeholder="Text" matInput [(ngModel)]="data.text" rows="20" cols="50"></textarea>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button class="submit-btn" mat-button (click)="displayText(data)">Submit</button>
+        <!-- <button mat-button (click)="onNoClick()">Close</button> -->
+        <button class="cansel-btn" mat-button (click)="onCansel()">Cansel</button>
+    </div>
+</div>

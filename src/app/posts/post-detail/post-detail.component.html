@@ -11,13 +11,13 @@
 
                 <img src="{{post.image}}" alt="{{post.title}}">
 
-                <div class="image-upload">
+                <!-- <div class="image-upload">
                     <input type="file" name="file" id="file" (change)="uploadImage($event)">
                     <div [hidden]="!uploadPercent" class="mt-3">
                         <mat-progress-bar color="accent" mode="determinate" value="{{uploadPercent | async}}">
                         </mat-progress-bar>
                     </div>
-                </div>
+                </div> -->
                 <div [hidden]="!image" class="mb-3">
                     <img [src]="image || '//:0'">
                 </div>
@@ -89,16 +89,6 @@
 
                 <div class="comments-box">
 
-                    <div *ngIf="commentsWithId.length > 0">
-                        <ul *ngFor="let cmmnt of commentsWithId">
-                            <li>{{cmmnt.id}} | {{cmmnt.author}} | {{cmmnt.text}}</li>
-                        </ul>
-                    </div>
-
-                    <div *ngIf="commentsWithId.length == 0">
-                        <h3>No comments with Ids</h3>
-                    </div>
-
                     <h1>Comments</h1>
                     <mat-card *ngFor="let cmmnt of commentsWithId" class="comments-card">
                         <mat-card-content class="info-box">
@@ -113,10 +103,10 @@
                                 </div>
                             </div>
                             <div>
-                                <button mat-icon-button *ngIf="auth.currentUserId === cmmnt.authorId"
-                                    (click)="editing=true">
+                                <!-- <button mat-icon-button *ngIf="auth.currentUserId === cmmnt.authorId"
+                                    (click)="checkComment(cmmnt.id)">
                                     <mat-icon>edit</mat-icon>
-                                </button>
+                                </button> -->
                                 <button mat-icon-button *ngIf="auth.currentUserId === cmmnt.authorId"
                                     (click)="deleteComment(cmmnt.text, cmmnt.author, cmmnt.id)">
                                     <mat-icon>delete_outline</mat-icon>
@@ -124,6 +114,18 @@
                             </div>
                         </mat-card-content>
                         <hr>
+
+                        <!-- <div [hidden]="!commentEdit">
+                            <mat-form-field>
+                                <mat-label>Text</mat-label>
+                                <textarea matInput placeholder="Text" [(ngModel)]="cmmnt.text" rows="10"></textarea>
+                            </mat-form-field>
+                            <br>
+                            <button mat-raised-button color="basic" (click)="updateComment(cmmnt.id)">Save</button>
+                            <button mat-button class="cancel-btn" color="accent"
+                                (click)="commentEdit=false">Cancel</button>
+                        </div> -->
+
                         <p>{{cmmnt.text}}</p>
                     </mat-card>
                 </div>

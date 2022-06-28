@@ -25,6 +25,7 @@ export class PostDetailComponent implements OnInit {
 
   post: Post | any;
   editing: boolean = false;
+  commentEdit: boolean = false;
   title: string | any;
   image: string | any;
   content: string | any;
@@ -66,6 +67,14 @@ export class PostDetailComponent implements OnInit {
     return result;
   }
 
+  checkComment(id: any) {
+    this.commentEdit = true;
+    const result = this.postService
+      .getCommentData(id)
+      .subscribe((data) => (this.postComment = data));
+    return result;
+  }
+
   getPostComments() {
     const id = this.route.snapshot.paramMap.get('id');
     const result = this.postService
@@ -101,6 +110,14 @@ export class PostDetailComponent implements OnInit {
     this.postService.update(id!, formData);
     this.editing = false;
   }
+
+  // updateComment(id: any) {
+  //   const formData = {
+  //     text: this.postComment.text,
+  //   };
+  //   this.postService.updateComment(id!, formData);
+  //   this.commentEdit = false;
+  // }
 
   checkUserLikes() {
     const postId = this.route.snapshot.paramMap.get('id');
@@ -216,6 +233,10 @@ export class PostDetailComponent implements OnInit {
       .subscribe((res) => {
         if (res) {
           this.postService.deleteComment(commentId);
+          const formData = {
+            comments: this.post.comments - 1,
+          };
+          this.postService.update(id!, formData);
           this.router.navigate([`/blog/${id}`]);
         }
       });

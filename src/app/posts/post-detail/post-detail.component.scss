@@ -43,8 +43,14 @@ h1 {
 }
 
 mat-card {
-    background-color: whitesmoke;
+    background-color: #e6e4fc;
     color: black;
+    border: 5px solid white;
+}
+
+mat-card p {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
 mat-card-actions {
@@ -54,11 +60,11 @@ mat-card-actions {
 
 
 mat-form-field {
-    padding: 10px;
+    padding: 20px;
     width: 100%;
-    color: gray;
+    color: black;
     margin-bottom: 10px;
-    background-color:rgb(240, 237, 237);
+    background-color: #e6e4fc;
 }
 
 mat-label {
@@ -69,11 +75,13 @@ mat-icon {
     top: 2px;
     position: relative;
     font-size: 20px;
+    color:rgba(47, 79, 79, 0.7);
 }
 
-.person {
-    color:darkslategrey;
+mat-icon:hover {
+    color: rgb(64, 51, 183);
 }
+
 
 .like-icon {
     cursor:pointer;
@@ -102,9 +110,20 @@ mat-icon {
     border-radius: 50%;
 }
 
+.editing-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.editing-box img {
+    width: 50%;
+    margin: 0 auto;
+}
+
 .editing-box button {
-    margin-right: 20px;
     border: 2px solid;
+    width: 40%;
+    margin: 11px auto;
 }
 
 .likes {

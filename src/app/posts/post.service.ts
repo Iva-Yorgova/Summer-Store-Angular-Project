@@ -153,6 +153,11 @@ export class PostService {
     return this.postDoc.valueChanges();
   }
 
+  getCommentData(id: any) {
+    this.userComment = this.afs.doc<Comment>(`comments/${id}`);
+    return this.userComment.valueChanges();
+  }
+
   getCategoryData(id: string) {
     this.categoryDoc = this.afs.doc<Category>(`categories/${id}`);
     return this.categoryDoc.valueChanges();
@@ -240,6 +245,10 @@ export class PostService {
 
   update(id: string, formData: Partial<Post>) {
     return this.getPost(id).update(formData);
+  }
+
+  updateComment(id: string, formData: Partial<Comment>) {
+    return this.getComment(id).update(formData);
   }
 
   updateCat(id: string, formData: Partial<Category>) {

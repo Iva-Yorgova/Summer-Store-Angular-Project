@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/blog/auth.service';
 import { DialogService } from 'src/app/shared/dialog.service';
@@ -10,10 +10,9 @@ import { Category } from '../category';
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
-  styleUrls: ['./post-list.component.scss']
+  styleUrls: ['./post-list.component.scss'],
 })
-export class PostListComponent implements OnInit  {
-
+export class PostListComponent implements OnInit {
   posts: Observable<Post[]>;
   postsByCategory: Observable<Post[]>;
   categories: Observable<Category[]>;
@@ -25,13 +24,13 @@ export class PostListComponent implements OnInit  {
   page: number = 1;
 
   constructor(
-    private postService: PostService, 
+    private postService: PostService,
     public auth: AuthService,
     private dialogService: DialogService,
-    private afs: AngularFirestore) { }
+    private afs: AngularFirestore
+  ) {}
 
-  ngOnInit(): void { 
-
+  ngOnInit(): void {
     this.posts = this.postService.getPosts();
     this.categories = this.postService.getCategories();
     this.posts.subscribe((result: any) => {
@@ -47,24 +46,23 @@ export class PostListComponent implements OnInit  {
     // });
   }
 
-  getMyPosts(){
+  getMyPosts() {
     this.posts = this.postService.getMyPosts();
   }
 
   delete(id: string) {
-    this.dialogService.openConfirmDialog('Are you sure you want to delete this post?')
-    .afterClosed().subscribe(res => {
-      if(res) {
-        this.postService.delete(id);
-      }
-    });
+    this.dialogService
+      .openConfirmDialog('Are you sure you want to delete this post?')
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.postService.delete(id);
+        }
+      });
   }
 
   showCategoryPosts(name: string) {
     this.posts = this.postService.getPostsByCategory(name);
     console.log(this.posts);
   }
-
-
-
 }

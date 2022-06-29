@@ -13,7 +13,7 @@ import {
 import { AngularFireStorage } from 'angularfire2/storage';
 import * as firebase from 'firebase/app';
 import { finalize, map } from 'rxjs/operators';
-import tinymce from 'dist/snipcart-angular/tinymce/tinymce';
+import tinymce from 'tinymce';
 
 const arrayRemove = firebase.firestore.FieldValue.arrayRemove;
 const arrayUnion = firebase.firestore.FieldValue.arrayUnion;

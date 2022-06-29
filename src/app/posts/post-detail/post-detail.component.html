@@ -37,7 +37,7 @@
                     plugins: 'lists link image table code help wordcount visualaid',
                     skin: 'borderless',
                     toolbar_mode: 'floating',
-                    toolbar: ['undo redo | bold italic underline | cut copy paste selectall checklist bulletlist | alignleft alignright aligncenter alignjustify lineheight | outdent indent | image media table | forecolor | backcolor | fontsize fontname | code formatselect link print emoticons fullscreen preview'] 
+                    toolbar: ['undo redo | bold italic underline | cut copy paste selectall checklist bulletlist | alignleft alignright aligncenter alignjustify lineheight blockquote | outdent indent | image media table | forecolor | backcolor | fontsize fontname | code formatselect link print emoticons fullscreen preview'] 
                 }">
                     <textarea id="myEditor" matInput [placeholder]="post.content" [(ngModel)]="post.content"></textarea>
                 </editor>
@@ -142,7 +142,9 @@
                                 (click)="commentEdit=false">Cancel</button>
                         </div> -->
 
-                            <p>{{cmmnt.text}}</p>
+                            <!-- <p>{{cmmnt.text}}</p> -->
+                            <p [innerHTML]="cmmnt.text"></p>
+
                         </mat-card>
                     </div>
                     <div *ngIf="commentsWithId.length == 0">
@@ -153,10 +155,22 @@
                 <div class="comments-wrapper" *ngIf="getUserData()">
                     <h1>Write Comment</h1>
                     <hr>
-                    <mat-form-field>
+
+                    <!-- <mat-form-field>
                         <mat-label>Comment</mat-label>
                         <input matInput placeholder="Comment" [(ngModel)]="text">
-                    </mat-form-field>
+                    </mat-form-field> -->
+
+                    <editor class="custom-editor" apiKey="vi87d1gjroxj4d14mmefijxmo23v54ck3cuaxhqic1vgowx3" matInput
+                        [(ngModel)]="text" [init]="{ 
+                    plugins: 'lists link image table code help wordcount visualaid',
+                    skin: 'borderless',
+                    toolbar_mode: 'floating',
+                    toolbar: ['undo redo | bold italic underline | cut copy paste selectall checklist bulletlist | alignleft alignright aligncenter alignjustify lineheight blockquote | outdent indent | image media table | forecolor | backcolor | fontsize fontname | code formatselect link print emoticons fullscreen preview'] 
+                }">
+                        <textarea id="myEditor" matInput [placeholder]="text" [(ngModel)]="text"></textarea>
+                    </editor>
+
                     <button class="create-post-btn" mat-raised-button (click)="addComment()">Add</button>
                 </div>
                 <div *ngIf="!user" class="must-login">You Must Be <span (click)="auth.login()" class="login">Logged

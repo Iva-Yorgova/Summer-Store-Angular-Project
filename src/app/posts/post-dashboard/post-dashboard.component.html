@@ -26,7 +26,8 @@
             <input matInput placeholder="Post Title" [(ngModel)]="title">
         </mat-form-field>
 
-        <editor apiKey="vi87d1gjroxj4d14mmefijxmo23v54ck3cuaxhqic1vgowx3" matInput [(ngModel)]="content" [init]="{ 
+        <editor class="custom-editor" apiKey="vi87d1gjroxj4d14mmefijxmo23v54ck3cuaxhqic1vgowx3" matInput
+            [(ngModel)]="content" [init]="{ 
             plugins: 'lists link image table code help wordcount visualaid',
             skin: 'borderless',
             toolbar_mode: 'floating',

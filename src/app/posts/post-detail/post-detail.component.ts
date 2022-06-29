@@ -13,6 +13,7 @@ import {
 import { AngularFireStorage } from 'angularfire2/storage';
 import * as firebase from 'firebase/app';
 import { finalize, map } from 'rxjs/operators';
+import tinymce from 'dist/snipcart-angular/tinymce/tinymce';
 
 const arrayRemove = firebase.firestore.FieldValue.arrayRemove;
 const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
@@ -35,6 +36,7 @@ export class PostDetailComponent implements OnInit {
   likes: number = 0;
   category: string | any;
   comment: string | any;
+  user: string | any;
 
   postComment: Comment | any;
   text: string | any;
@@ -64,7 +66,14 @@ export class PostDetailComponent implements OnInit {
 
   getUserData() {
     const user = this.auth.currentUserId;
+    this.user = user;
     return user;
+  }
+
+  cleanContent(): string | any {
+    let text = tinymce.activeEditor.getContent({ format: 'text' });
+    console.log(text);
+    return this.post.content.replace(/<[^>]*>/g, '');
   }
 
   getPost() {
@@ -74,6 +83,15 @@ export class PostDetailComponent implements OnInit {
       .subscribe((data) => (this.post = data));
     return result;
   }
+
+  // getPost() {
+  //   const id = this.route.snapshot.paramMap.get('id');
+  //   const result = this.postService.getPostData(id).subscribe((data) => {
+  //     this.post = data;
+  //     this.post.content.replace(/<[^>]*>/g, '');
+  //   });
+  //   return result;
+  // }
 
   updatePost() {
     const formData = {

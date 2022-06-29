@@ -9,36 +9,46 @@ import { PostService } from '../post.service';
 @Component({
   selector: 'app-aside-posts',
   templateUrl: './aside-posts.component.html',
-  styleUrls: ['./aside-posts.component.scss']
+  styleUrls: ['./aside-posts.component.scss'],
 })
 export class AsidePostsComponent implements OnInit {
-
   posts: Observable<Post[]>;
   categories: Observable<Category[]>;
   postsByCategory: Observable<Post[]>;
   category!: string | any;
-  count: number;
+  count: number | any;
   res: number;
 
   term: any;
 
   constructor(
-    private postService: PostService, 
+    private postService: PostService,
     public auth: AuthService,
     private router: ActivatedRoute,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.categories = this.postService.getCategories();
     this.posts = this.postService.getPosts();
 
-     this.router.queryParamMap.subscribe(queryParams => {
-      this.category = queryParams.get("category");
-      console.log(this.category);
-   });
+    this.router.queryParamMap.subscribe((queryParams) => {
+      this.category = queryParams.get('category');
+      console.log('The category from params is:', this.category);
+    });
+
+    this.postService.getPostsByCategory('Design').subscribe((result: any) => {
+      this.count = result.length;
+      console.log('This count is:', this.count);
+      return result.length;
+    });
   }
 
-  showCategoryPosts(name: string) {
-    this.posts = this.postService.getPostsByCategory(name);
+  showCategoryPosts(name: string): number | any {
+    this.postService.getPostsByCategory(name).subscribe((result: any) => {
+      this.count = result.length;
+      console.log('This count is:', this.count);
+      return result.length;
+    });
   }
 }

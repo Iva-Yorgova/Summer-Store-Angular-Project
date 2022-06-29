@@ -26,10 +26,22 @@
                     <mat-label>Title</mat-label>
                     <input matInput placeholder="Post Title" [(ngModel)]="post.title">
                 </mat-form-field>
-                <mat-form-field>
+
+                <!-- <mat-form-field>
                     <mat-label>Content</mat-label>
                     <textarea matInput placeholder="Content" [(ngModel)]="post.content" rows="10"></textarea>
-                </mat-form-field>
+                </mat-form-field> -->
+
+                <editor apiKey="vi87d1gjroxj4d14mmefijxmo23v54ck3cuaxhqic1vgowx3" matInput [(ngModel)]="post.content"
+                    [init]="{ 
+                    plugins: 'lists link image table code help wordcount visualaid',
+                    skin: 'borderless',
+                    toolbar_mode: 'floating',
+                    toolbar: ['undo redo | bold italic underline | cut copy paste selectall checklist bulletlist | alignleft alignright aligncenter alignjustify lineheight | outdent indent | image media table | forecolor | backcolor | fontsize fontname | code formatselect link print emoticons fullscreen preview'] 
+                }">
+                    <textarea id="myEditor" matInput [placeholder]="post.content" [(ngModel)]="post.content"></textarea>
+                </editor>
+
                 <br>
                 <button mat-raised-button color="basic" (click)="updatePost()">Save</button>
                 <button mat-button class="cancel-btn" color="accent" (click)="editing=false">Cancel</button>
@@ -44,6 +56,8 @@
                     <h1>{{post.title}}</h1>
                     <hr>
                     <p [innerHTML]="post.content"></p>
+                    <!-- <p>{{post.content}}</p> -->
+
                     <hr>
                     <div class="info-box">
                         <div class="author-info">
@@ -90,32 +104,34 @@
                 <div class="comments-box">
 
                     <h1>Comments</h1>
-                    <mat-card *ngFor="let cmmnt of commentsWithId" class="comments-card">
-                        <mat-card-content class="info-box">
-                            <div>
-                                <div class="author-info">
-                                    <mat-icon class="person">person_pin</mat-icon>By <strong>{{cmmnt.author}}</strong>
+                    <div class="comments-wrapper" *ngIf="commentsWithId.length > 0">
+                        <mat-card *ngFor="let cmmnt of commentsWithId" class="comments-card">
+                            <mat-card-content class="info-box">
+                                <div>
+                                    <div class="author-info">
+                                        <mat-icon class="person">person_pin</mat-icon>By
+                                        <strong>{{cmmnt.author}}</strong>
+                                    </div>
+                                    <div>
+                                        <mat-icon>date_range</mat-icon>{{cmmnt.published.toDate() | date:'yyyy/MM/dd
+                                        h:mm:ss
+                                        a'}}
+                                    </div>
                                 </div>
                                 <div>
-                                    <mat-icon>date_range</mat-icon>{{cmmnt.published.toDate() | date:'yyyy/MM/dd
-                                    h:mm:ss
-                                    a'}}
+                                    <button mat-icon-button *ngIf="auth.currentUserId === cmmnt.authorId"
+                                        (click)="updateCommentDialog(cmmnt, cmmnt.id)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                    <button mat-icon-button *ngIf="auth.currentUserId === cmmnt.authorId"
+                                        (click)="deleteComment(cmmnt.text, cmmnt.author, cmmnt.id)">
+                                        <mat-icon>delete_outline</mat-icon>
+                                    </button>
                                 </div>
-                            </div>
-                            <div>
-                                <button mat-icon-button *ngIf="auth.currentUserId === cmmnt.authorId"
-                                    (click)="updateCommentDialog(cmmnt, cmmnt.id)">
-                                    <mat-icon>edit</mat-icon>
-                                </button>
-                                <button mat-icon-button *ngIf="auth.currentUserId === cmmnt.authorId"
-                                    (click)="deleteComment(cmmnt.text, cmmnt.author, cmmnt.id)">
-                                    <mat-icon>delete_outline</mat-icon>
-                                </button>
-                            </div>
-                        </mat-card-content>
-                        <hr>
+                            </mat-card-content>
+                            <hr>
 
-                        <!-- <div [hidden]="!commentEdit">
+                            <!-- <div [hidden]="!commentEdit">
                             <mat-form-field>
                                 <mat-label>Text</mat-label>
                                 <textarea matInput placeholder="Text" [(ngModel)]="cmmnt.text" rows="10"></textarea>
@@ -126,8 +142,12 @@
                                 (click)="commentEdit=false">Cancel</button>
                         </div> -->
 
-                        <p>{{cmmnt.text}}</p>
-                    </mat-card>
+                            <p>{{cmmnt.text}}</p>
+                        </mat-card>
+                    </div>
+                    <div *ngIf="commentsWithId.length == 0">
+                        <h3>Write the first comment!</h3>
+                    </div>
                 </div>
 
                 <div class="comments-wrapper" *ngIf="getUserData()">
@@ -138,9 +158,9 @@
                         <input matInput placeholder="Comment" [(ngModel)]="text">
                     </mat-form-field>
                     <button class="create-post-btn" mat-raised-button (click)="addComment()">Add</button>
-
                 </div>
-
+                <div *ngIf="!user" class="must-login">You Must Be <span (click)="auth.login()" class="login">Logged
+                        In</span> In To Post Comment.</div>
 
             </div>
         </div>

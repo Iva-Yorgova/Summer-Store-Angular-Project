@@ -42,8 +42,14 @@ h1 {
     gap: 20px;
 }
 
+.comments-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 mat-card {
-    background-color: #e6e4fc;
+    background-color: #f0e9fa;
     color: black;
     border: 5px solid white;
 }
@@ -63,8 +69,10 @@ mat-form-field {
     padding: 20px;
     width: 100%;
     color: black;
-    margin-bottom: 10px;
-    background-color: #e6e4fc;
+    // margin-bottom: 10px;
+    background-color: #f5f4ff;
+    border-radius: 5px;
+
 }
 
 mat-label {
@@ -160,4 +168,29 @@ mat-icon:hover {
 
 .author-info {
     margin-right: 10px;
+}
+
+.create-post-btn {
+    background-color: rgb(129, 129, 203);
+    color: white;
+}
+
+.create-post-btn:hover {
+    background-color: rgb(74, 74, 156);
+}
+
+.must-login {
+    padding: 10px;
+    border: 2px solid palevioletred;
+    text-align: center;
+    color: palevioletred;
+}
+
+.login {
+    color:black;
+    font-weight: 900;
+    cursor: pointer;
+    background-color: rgb(252, 226, 230);
+    padding: 5px;
+    border-radius: 5px;
 }

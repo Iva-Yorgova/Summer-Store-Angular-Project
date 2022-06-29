@@ -67,7 +67,7 @@ ul.ngx-pagination {
 cursor: pointer;
 }
 
-.confirm-dialog-container #no-button{
+.confirm-dialog-container #yes-button{
 height: 50px;
 width: 50%;
 background-color: #fc7169;
@@ -75,11 +75,11 @@ color:white;
 border-radius: 0px;
 }
 
-.confirm-dialog-container #no-button:hover{
+.confirm-dialog-container #yes-button:hover{
     background-color: #e1382f;
     }
 
-.confirm-dialog-container #yes-button{
+.confirm-dialog-container #no-button{
     height: 50px;
     width: 50%;
     background-color: #b6bece;
@@ -87,7 +87,7 @@ border-radius: 0px;
     border-radius: 0px;
 }
 
-.confirm-dialog-container #yes-button:hover{
+.confirm-dialog-container #no-button:hover{
     background-color: #5484e6;
 }
 

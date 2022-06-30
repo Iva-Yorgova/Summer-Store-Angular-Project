@@ -30,13 +30,13 @@
 
                 <mat-card-content routerLink="{{post.id}}">
                     <div class="image-box">
-                        <img src="{{post.image}}" alt="{{post.title}}">
+                        <img class="post-image" src="{{post.image}}" alt="{{post.title}}">
                     </div>
                     <div class="category-box">
                         <h5 class="category-bar">{{post.category}}</h5>
                     </div>
-                    <h2 *ngIf="post.title.length > 30">{{(post.title | slice:0:30) + '...'}}</h2>
-                    <h2 *ngIf="post.title.length <= 30">{{post.title}}</h2>
+                    <h2 *ngIf="post.title.length > 20">{{(post.title | slice:0:20) + '...'}}</h2>
+                    <h2 *ngIf="post.title.length <= 20">{{post.title}}</h2>
                     <p><small>
                             <mat-icon> person_pin</mat-icon>Posted by <strong>{{post.author}}</strong> <br>
                             <mat-icon>date_range</mat-icon>

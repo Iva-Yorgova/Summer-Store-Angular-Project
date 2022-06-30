@@ -83,7 +83,7 @@ mat-card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-height: 450px;
+    // max-height: 450px;
 }
 
 mat-icon {
@@ -282,5 +282,9 @@ h2 {
 
     .filter-box input {
         width: 234px;
+    }
+    img {
+        max-width: 277px;
+        height: auto;
     }
 }

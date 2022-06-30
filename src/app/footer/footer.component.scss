@@ -1,13 +1,15 @@
-mat-toolbar {
+div {
     justify-content: center;
     background-color: black;
+    padding: 20px;
 }
 
-mat-toolbar p {
+div p {
     font-size: 12px;
     text-align: center;
     margin: 0;
     color: gray;
+    white-space:unset;
 }
 
 .web-link {

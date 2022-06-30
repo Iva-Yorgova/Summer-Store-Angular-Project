@@ -25,6 +25,7 @@
     border-radius: 3px;
     padding: 20px;
     background-color: white;
+    overflow: hidden;
 }
 
 img {
@@ -58,6 +59,7 @@ mat-card {
     background-color: #f0e9fa;
     color: black;
     border: 5px solid white;
+    overflow: hidden;
 }
 
 mat-card p {
@@ -199,4 +201,11 @@ mat-icon:hover {
     background-color: rgb(252, 226, 230);
     padding: 5px;
     border-radius: 5px;
+}
+
+@media only screen and (max-width: 780px) {
+    
+    .post-image {
+        width: 100%;;
+    }
 }

@@ -28,9 +28,9 @@
 
         <editor class="custom-editor" apiKey="vi87d1gjroxj4d14mmefijxmo23v54ck3cuaxhqic1vgowx3" matInput
             [(ngModel)]="content" [init]="{ 
-            plugins: 'lists link image table code help wordcount visualaid',
+            plugins: 'lists link image table code help wordcount visualaid pagebreak emoticons',
             skin: 'borderless',
-            toolbar_mode: 'floating',
+            toolbar_mode: 'scrolling',
             toolbar: ['undo redo | bold italic underline | cut copy paste selectall checklist bulletlist | alignleft alignright aligncenter alignjustify lineheight | outdent indent | image media table | forecolor | backcolor | fontsize fontname | code formatselect link print emoticons fullscreen preview'] 
         }">
             <textarea id="myEditor" matInput [placeholder]="content" [(ngModel)]="content"></textarea>

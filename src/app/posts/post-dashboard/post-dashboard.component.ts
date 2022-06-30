@@ -137,6 +137,12 @@ export class PostDashboardComponent implements OnInit {
         this.postService.createCategory(categoryData);
       } else {
         console.log('here in the else...');
+        this.postService.getCategory(this.category);
+        const categoryData = {
+          posts: 2,
+        };
+        this.postService.getCategory(data.category).update(categoryData);
+        // this.afs.collection('categories').doc(id).update({posts: postsNum + 1});
       }
     });
 

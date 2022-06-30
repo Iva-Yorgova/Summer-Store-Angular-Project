@@ -34,9 +34,9 @@
 
                 <editor apiKey="vi87d1gjroxj4d14mmefijxmo23v54ck3cuaxhqic1vgowx3" matInput [(ngModel)]="post.content"
                     [init]="{ 
-                    plugins: 'lists link image table code help wordcount visualaid',
+                    plugins: 'lists link image table code help wordcount visualaid pagebreak emoticons',
                     skin: 'borderless',
-                    toolbar_mode: 'floating',
+                    toolbar_mode: 'scrolling',
                     toolbar: ['undo redo | bold italic underline | cut copy paste selectall checklist bulletlist | alignleft alignright aligncenter alignjustify lineheight blockquote | outdent indent | image media table | forecolor | backcolor | fontsize fontname | code formatselect link print emoticons fullscreen preview'] 
                 }">
                     <textarea id="myEditor" matInput [placeholder]="post.content" [(ngModel)]="post.content"></textarea>
@@ -49,7 +49,7 @@
 
             <div [hidden]="editing">
                 <div class="post-detail-box">
-                    <img src="{{post.image}}" alt="{{post.title}}">
+                    <img class="post-image" src="{{post.image}}" alt="{{post.title}}">
                     <div class="category-box">
                         <h5 class="category-bar">{{post.category}}</h5>
                     </div>
@@ -163,9 +163,9 @@
 
                     <editor class="custom-editor" apiKey="vi87d1gjroxj4d14mmefijxmo23v54ck3cuaxhqic1vgowx3" matInput
                         [(ngModel)]="text" [init]="{ 
-                    plugins: 'lists link image table code help wordcount visualaid',
+                    plugins: 'lists link image table code help wordcount visualaid emoticons',
                     skin: 'borderless',
-                    toolbar_mode: 'floating',
+                    toolbar_mode: 'scrolling',
                     toolbar: ['undo redo | bold italic underline | cut copy paste selectall checklist bulletlist | alignleft alignright aligncenter alignjustify lineheight blockquote | outdent indent | image media table | forecolor | backcolor | fontsize fontname | code formatselect link print emoticons fullscreen preview'] 
                 }">
                         <textarea id="myEditor" matInput [placeholder]="text" [(ngModel)]="text"></textarea>
@@ -174,7 +174,7 @@
                     <button class="create-post-btn" mat-raised-button (click)="addComment()">Add</button>
                 </div>
                 <div *ngIf="!user" class="must-login">You Must Be <span (click)="auth.login()" class="login">Logged
-                        In</span> In To Post Comment.</div>
+                        In</span> To Post Comment.</div>
 
             </div>
         </div>

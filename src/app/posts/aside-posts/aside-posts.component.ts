@@ -16,7 +16,7 @@ export class AsidePostsComponent implements OnInit {
   categories: Observable<Category[]>;
   postsByCategory: Observable<Post[]>;
   category!: string | any;
-  count: number | any;
+  count: number;
   res: number;
 
   term: any;
@@ -32,22 +32,24 @@ export class AsidePostsComponent implements OnInit {
     this.categories = this.postService.getCategories();
     this.posts = this.postService.getPosts();
 
-    this.router.queryParamMap.subscribe((queryParams) => {
-      this.category = queryParams.get('category');
-      console.log('The category from params is:', this.category);
-    });
+    // this.router.queryParamMap.subscribe((queryParams) => {
+    //   this.category = queryParams.get('category');
+    //   console.log('The category from params is:', this.category);
+    // });
 
-    this.postService.getPostsByCategory('Design').subscribe((result: any) => {
-      this.count = result.length;
-      console.log('This count is:', this.count);
-      return result.length;
-    });
+    // this.postService.getPostsByCategory('Design').subscribe((result: any) => {
+    //   this.count = result.length;
+    //   console.log('The Design posts are:', this.count);
+    //   return result.length;
+    // });
+
+    // console.log('The number is: ', this.showCategoryPosts('Design'));
   }
 
-  showCategoryPosts(name: string): number | any {
+  showCategoryPosts(name: string) {
     this.postService.getPostsByCategory(name).subscribe((result: any) => {
       this.count = result.length;
-      console.log('This count is:', this.count);
+      console.log('From aside comp. This count is:', this.count);
       return result.length;
     });
   }

@@ -17,6 +17,11 @@ export class PostListComponent implements OnInit {
   postsByCategory: Observable<Post[]>;
   categories: Observable<Category[]>;
 
+  categoryId: string;
+  categoryPosts: number;
+
+  post: Post | any;
+
   term: any;
   loading = true;
 
@@ -38,12 +43,12 @@ export class PostListComponent implements OnInit {
       console.log(result.length);
     });
 
-    // this.postService.getCategories().forEach(c => {
-    //   c.forEach(x => {
-    //     console.log('category name is: ', x.name);
-    //     console.log('category id is: ', x.id);
-    //   })
-    // });
+    this.postService.getCategories().forEach((c) => {
+      c.forEach((x) => {
+        console.log('category name is: ', x.name);
+        console.log('category id is: ', x.id);
+      });
+    });
   }
 
   getMyPosts() {
@@ -51,12 +56,46 @@ export class PostListComponent implements OnInit {
   }
 
   delete(id: string) {
+    let postData: Post;
+
+    this.afs
+      .doc(`/posts/${id}`)
+      .get()
+      .subscribe((snap) => {
+        const data = snap.data() as Post;
+        postData = data;
+        console.log('This is post Data: ', postData);
+      });
+
     this.dialogService
       .openConfirmDialog('Are you sure you want to delete this post?')
       .afterClosed()
       .subscribe((res) => {
         if (res) {
           this.postService.delete(id);
+
+          this.postService.getCategories().forEach((c) => {
+            c.forEach((x) => {
+              if (x.name == postData.category) {
+                this.categoryId = x.id;
+                this.categoryPosts = x.posts;
+              }
+            });
+          });
+
+          this.afs
+            .doc(`/categories/${this.categoryId}`)
+            .get()
+            .subscribe((snap) => {
+              console.log(snap.id);
+              console.log(' this is the Category data:', snap.data());
+              const data = snap.data() as Category;
+              const doc = this.afs.doc(`/categories/${this.categoryId}`);
+
+              doc.update({
+                posts: this.categoryPosts - 1,
+              });
+            });
         }
       });
   }

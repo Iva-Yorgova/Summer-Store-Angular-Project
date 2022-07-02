@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, pipe } from 'rxjs';
 import { AuthService } from 'src/app/blog/auth.service';
 import { PostService } from '../post.service';
@@ -28,13 +28,8 @@ export class PostDashboardComponent implements OnInit {
 
   categoriesCollection: AngularFirestoreCollection<Category>;
 
-  categoriesArray: Observable<Category[]>;
-  currentCategoryArray: Observable<Category[]>;
-  ctgrsArrayLength: number;
   postsByCategory: Observable<Post[]>;
 
-  cat: Category | any;
-  catPosts: number | any;
   itemDoc: AngularFirestoreDocument<Category>;
   form: FormGroup;
 
@@ -79,20 +74,6 @@ export class PostDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.categories = this.postService.getCategories();
     console.log(this.categories);
-
-    this.categoriesArray = this.afs
-      .collection('categories')
-      .snapshotChanges()
-      .pipe(
-        map((snaps) => {
-          return snaps.map((snap) => {
-            const data = snap.payload.doc.data() as Category;
-            const id = snap.payload.doc.id;
-            console.log(data.name);
-            return { id, ...data };
-          });
-        })
-      );
   }
 
   createPost() {
@@ -121,34 +102,44 @@ export class PostDashboardComponent implements OnInit {
 
     this.postsByCategory = this.postService.getPostsByCategory(this.category);
     this.postsByCategory.subscribe((result: any) => {
-      this.catPosts = result.length;
-      console.log('The number of posts by category is:', this.catPosts);
+      this.categoryPosts = result.length;
+      console.log(
+        `The number of posts by category "${this.category}" is:`,
+        this.categoryPosts
+      );
     });
 
-    this.currentCategoryArray = this.categories.pipe(
-      map((ctgrs) => ctgrs.filter((ctgr) => ctgr.name == data.category))
-    );
-
-    this.currentCategoryArray.subscribe((result: any) => {
-      this.ctgrsArrayLength = result.length;
-      console.log('ctgrsArrLength is:', result.length);
-
-      if (result.length == 0) {
-        this.postService.createCategory(categoryData);
-      } else {
-        console.log('here in the else...');
-        this.postService.getCategory(this.category);
-        const categoryData = {
-          posts: 2,
-        };
-        this.postService.getCategory(data.category).update(categoryData);
-        // this.afs.collection('categories').doc(id).update({posts: postsNum + 1});
-      }
-    });
+    if (this.categoryPosts == 0) {
+      this.postService.createCategory(categoryData);
+    } else {
+      console.log('here in the else...');
+      this.postService.getCategories().forEach((c) => {
+        c.forEach((x) => {
+          if (x.name == data.category) {
+            this.categoryId = x.id;
+            this.categoryPosts = x.posts;
+          }
+        });
+      });
+    }
 
     this.postService.create(data);
 
-    //this.afs.collection('categories').doc(id).update({posts: postsNum + 1});
+    this.afs
+      .doc(`/categories/${this.categoryId}`)
+      .get()
+      .subscribe((snap) => {
+        console.log(snap.id);
+        console.log(' this is the Category data:', snap.data());
+        const data = snap.data() as Category;
+        const doc = this.afs.doc(`/categories/${this.categoryId}`);
+
+        doc.update({
+          posts: this.categoryPosts,
+        });
+      });
+
+    // this.postService.increaseCategoryPosts(this.categoryId, this.categoryPosts);
 
     setTimeout(() => (this.buttonText = 'Create Post'), 3000);
     this.title = '';
@@ -184,38 +175,5 @@ export class PostDashboardComponent implements OnInit {
 
   parseHtml(string: any): any {
     return string.replace(/<(?:.|\n)*?>/gm, ' ');
-  }
-
-  getCategory(id: string) {
-    const result = this.postService
-      .getCategoryData(id)
-      .subscribe((data) => (this.cat = data));
-    return result;
-  }
-
-  getCategoryByName(name: string) {
-    return this.afs
-      .collection('categories', (ref) => ref.where('name', '==', name))
-      .snapshotChanges()
-      .pipe(
-        map((actions) => {
-          return actions.map((a) => {
-            const data = a.payload.doc.data() as Category;
-            const id = a.payload.doc.id;
-            return { id, ...data };
-          });
-        })
-      );
-  }
-
-  updateDoc(name: string) {
-    let doc = this.afs.collection('categories', (ref) =>
-      ref.where('name', '==', name)
-    );
-    doc.snapshotChanges().subscribe((res: any) => {
-      let id = res[0].payload.doc.id;
-      let data = res[0].payload.doc.data() as Category;
-      this.afs.doc(`categories/${id}`).update({ posts: data.posts + 1 });
-    });
   }
 }

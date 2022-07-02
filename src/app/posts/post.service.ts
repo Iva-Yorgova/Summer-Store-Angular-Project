@@ -165,7 +165,7 @@ export class PostService {
 
   getCategoryData(id: string) {
     this.categoryDoc = this.afs.doc<Category>(`categories/${id}`);
-    return this.categoryDoc.valueChanges();
+    return this.categoryDoc;
   }
 
   getCommentsByPostId(id: any): Observable<any> {
@@ -246,6 +246,23 @@ export class PostService {
 
   delete(id: any) {
     return this.getPost(id).delete();
+  }
+
+  increaseCategoryPosts(categoryId: string, categoryPosts: number) {
+    console.log('This is the ID:', categoryId);
+
+    this.afs
+      .collection('categories')
+      .doc(categoryId)
+      .update({ posts: categoryPosts + 1 });
+  }
+
+  decreaseCategoryPosts(categoryId: string, categoryPosts: number) {
+    console.log('This is the ID:', categoryId);
+    this.afs
+      .collection('categories')
+      .doc(categoryId)
+      .update({ posts: categoryPosts - 1 });
   }
 
   update(id: string, formData: Partial<Post>) {

@@ -1,15 +1,13 @@
 <ng-container *ngIf="post">
     <div class="wrapper">
-
         <div class="post-wrapper">
-
             <div [hidden]="!editing" class="editing-box">
                 <mat-form-field>
                     <mat-label>Category</mat-label>
-                    <input matInput placeholder="Post Category" [(ngModel)]="post.category">
+                    <input matInput placeholder="Post Category" [(ngModel)]="post.category" />
                 </mat-form-field>
 
-                <img src="{{post.image}}" alt="{{post.title}}">
+                <img src="{{ post.image }}" alt="{{ post.title }}" />
 
                 <!-- <div class="image-upload">
                     <input type="file" name="file" id="file" (change)="uploadImage($event)">
@@ -19,12 +17,12 @@
                     </div>
                 </div> -->
                 <div [hidden]="!image" class="mb-3">
-                    <img [src]="image || '//:0'">
+                    <img [src]="image || '//:0'" />
                 </div>
 
                 <mat-form-field>
                     <mat-label>Title</mat-label>
-                    <input matInput placeholder="Post Title" [(ngModel)]="post.title">
+                    <input matInput placeholder="Post Title" [(ngModel)]="post.title" />
                 </mat-form-field>
 
                 <!-- <mat-form-field>
@@ -33,62 +31,70 @@
                 </mat-form-field> -->
 
                 <editor apiKey="vi87d1gjroxj4d14mmefijxmo23v54ck3cuaxhqic1vgowx3" matInput [(ngModel)]="post.content"
-                    [init]="{ 
-                    plugins: 'lists link image table code help wordcount visualaid pagebreak emoticons',
-                    skin: 'borderless',
-                    toolbar_mode: 'scrolling',
-                    toolbar: ['undo redo | bold italic underline | cut copy paste selectall checklist bulletlist | alignleft alignright aligncenter alignjustify lineheight blockquote | outdent indent | image media table | forecolor | backcolor | fontsize fontname | code formatselect link print emoticons fullscreen preview'] 
-                }">
+                    [init]="{
+            plugins:
+              'lists link image table code help wordcount visualaid pagebreak emoticons',
+            skin: 'borderless',
+            toolbar_mode: 'scrolling',
+            toolbar: [
+              'undo redo | bold italic underline | cut copy paste selectall checklist bulletlist | alignleft alignright aligncenter alignjustify lineheight blockquote | outdent indent | image media table | forecolor | backcolor | fontsize fontname | code formatselect link print emoticons fullscreen preview'
+            ]
+          }">
                     <textarea id="myEditor" matInput [placeholder]="post.content" [(ngModel)]="post.content"></textarea>
                 </editor>
 
-                <br>
-                <button mat-raised-button color="basic" (click)="updatePost()">Save</button>
-                <button mat-button class="cancel-btn" color="accent" (click)="editing=false">Cancel</button>
+                <br />
+                <button mat-raised-button color="basic" (click)="updatePost()">
+                    Save
+                </button>
+                <button mat-button class="cancel-btn" color="accent" (click)="editing = false">
+                    Cancel
+                </button>
             </div>
 
             <div [hidden]="editing">
                 <div class="post-detail-box">
-                    <img class="post-image" src="{{post.image}}" alt="{{post.title}}">
+                    <img class="post-image" src="{{ post.image }}" alt="{{ post.title }}" />
                     <div class="category-box">
-                        <h5 class="category-bar">{{post.category}}</h5>
+                        <h5 class="category-bar">{{ post.category }}</h5>
                     </div>
-                    <h1>{{post.title}}</h1>
-                    <hr>
+                    <h1>{{ post.title }}</h1>
+                    <hr />
                     <p [innerHTML]="post.content"></p>
                     <!-- <p>{{post.content}}</p> -->
 
-                    <hr>
+                    <hr />
                     <div class="info-box">
                         <div class="author-info">
-                            <mat-icon> person_pin</mat-icon>posted by <strong>{{post.author}}</strong>
+                            <mat-icon> person_pin</mat-icon>posted by
+                            <strong>{{ post.author }}</strong>
                         </div>
                         <div>
-                            <mat-icon>date_range</mat-icon>{{post.published.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}
+                            <mat-icon>date_range</mat-icon>{{ post.published.toDate() | date: "yyyy/MM/dd h:mm:ss a" }}
                         </div>
                     </div>
-                    <hr>
+                    <hr />
                     <mat-card-actions>
                         <div class="icons-wrapper">
                             <div class="icons-left">
                                 <button class="icon-box" mat-icon-button [hidden]="!userCanLike" (click)="likePost()">
                                     <mat-icon class="heart">favorite_border</mat-icon>
-                                    <span class="likes">{{post.likes}}</span>
+                                    <span class="likes">{{ post.likes }}</span>
                                 </button>
 
                                 <button class="icon-box" mat-icon-button [hidden]="userCanLike" (click)="likePost()">
                                     <mat-icon class="like-icon heart">favorite</mat-icon>
-                                    <span class="likes">{{post.likes}}</span>
+                                    <span class="likes">{{ post.likes }}</span>
                                 </button>
 
                                 <button class="icon-box" mat-icon-button>
                                     <mat-icon class="comment-icon">insert_comment</mat-icon>
-                                    <span class="likes">{{post.comments}}</span>
+                                    <span class="likes">{{ post.comments }}</span>
                                 </button>
                             </div>
                             <div>
                                 <button mat-icon-button *ngIf="auth.currentUserId === post.authorId"
-                                    (click)="editing=true">
+                                    (click)="editing = true">
                                     <mat-icon>edit</mat-icon>
                                 </button>
                                 <button mat-icon-button *ngIf="auth.currentUserId === post.authorId"
@@ -98,11 +104,9 @@
                             </div>
                         </div>
                     </mat-card-actions>
-
                 </div>
 
                 <div class="comments-box">
-
                     <h1>Comments</h1>
                     <div class="comments-wrapper" *ngIf="commentsWithId.length > 0">
                         <mat-card *ngFor="let cmmnt of commentsWithId" class="comments-card">
@@ -110,12 +114,11 @@
                                 <div>
                                     <div class="author-info">
                                         <mat-icon class="person">person_pin</mat-icon>By
-                                        <strong>{{cmmnt.author}}</strong>
+                                        <strong>{{ cmmnt.author }}</strong>
                                     </div>
                                     <div>
-                                        <mat-icon>date_range</mat-icon>{{cmmnt.published.toDate() | date:'yyyy/MM/dd
-                                        h:mm:ss
-                                        a'}}
+                                        <mat-icon>date_range</mat-icon>
+                                        {{ cmmnt.published.toDate() | date: "yyyy/MM/dd h:mm:ss a"}}
                                     </div>
                                 </div>
                                 <div>
@@ -129,7 +132,7 @@
                                     </button>
                                 </div>
                             </mat-card-content>
-                            <hr>
+                            <hr />
 
                             <!-- <div [hidden]="!commentEdit">
                             <mat-form-field>
@@ -144,7 +147,6 @@
 
                             <!-- <p>{{cmmnt.text}}</p> -->
                             <p [innerHTML]="cmmnt.text"></p>
-
                         </mat-card>
                     </div>
                     <div *ngIf="commentsWithId.length == 0">
@@ -154,7 +156,7 @@
 
                 <div class="comments-wrapper" *ngIf="getUserData()">
                     <h1>Write Comment</h1>
-                    <hr>
+                    <hr />
 
                     <!-- <mat-form-field>
                         <mat-label>Comment</mat-label>
@@ -162,24 +164,28 @@
                     </mat-form-field> -->
 
                     <editor class="custom-editor" apiKey="vi87d1gjroxj4d14mmefijxmo23v54ck3cuaxhqic1vgowx3" matInput
-                        [(ngModel)]="text" [init]="{ 
-                    plugins: 'lists link image table code help wordcount visualaid emoticons',
-                    skin: 'borderless',
-                    toolbar_mode: 'scrolling',
-                    toolbar: ['undo redo | bold italic underline | cut copy paste selectall checklist bulletlist | alignleft alignright aligncenter alignjustify lineheight blockquote | outdent indent | image media table | forecolor | backcolor | fontsize fontname | code formatselect link print emoticons fullscreen preview'] 
-                }">
+                        [(ngModel)]="text" [init]="{
+              plugins:
+                'lists link image table code help wordcount visualaid emoticons',
+              skin: 'borderless',
+              toolbar_mode: 'scrolling',
+              toolbar: [
+                'undo redo | bold italic underline | cut copy paste selectall checklist bulletlist | alignleft alignright aligncenter alignjustify lineheight blockquote | outdent indent | image media table | forecolor | backcolor | fontsize fontname | code formatselect link print emoticons fullscreen preview'
+              ]
+            }">
                         <textarea id="myEditor" matInput [placeholder]="text" [(ngModel)]="text"></textarea>
                     </editor>
 
-                    <button class="create-post-btn" mat-raised-button (click)="addComment()">Add</button>
+                    <button class="create-post-btn" mat-raised-button (click)="addComment()">
+                        Add
+                    </button>
                 </div>
-                <div *ngIf="!user" class="must-login">You Must Be <span (click)="auth.login()" class="login">Logged
-                        In</span> To Post Comment.</div>
-
+                <div *ngIf="!user" class="must-login">
+                    You Must Be
+                    <span (click)="auth.login()" class="login">Logged In</span> To Post
+                    Comment.
+                </div>
             </div>
         </div>
-
-
-
     </div>
 </ng-container>

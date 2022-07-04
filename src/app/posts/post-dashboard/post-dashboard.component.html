@@ -31,7 +31,13 @@
             plugins: 'lists link image table code help wordcount visualaid pagebreak emoticons',
             skin: 'borderless',
             toolbar_mode: 'scrolling',
-            toolbar: ['undo redo | bold italic underline | cut copy paste selectall checklist bulletlist | alignleft alignright aligncenter alignjustify lineheight | outdent indent | image media table | forecolor | backcolor | fontsize fontname | code formatselect link print emoticons fullscreen preview'] 
+            toolbar: ['undo redo | bold italic underline | cut copy paste selectall checklist bulletlist | alignleft alignright aligncenter alignjustify lineheight | outdent indent | image media table | forecolor | backcolor | fontsize fontname | code formatselect link print emoticons fullscreen preview'] ,
+            mobile: {
+                menubar: true,
+                plugins: 'lists link image table code help wordcount visualaid pagebreak emoticons',
+                toolbar: ['undo redo | bold italic | cut copy paste selectall checklist bulletlist | alignleft alignright aligncenter alignjustify lineheight | outdent indent | image media table | forecolor | backcolor | fontsize fontname | code formatselect link print emoticons fullscreen preview'],
+                toolbar_mode: 'scrolling'
+            }
         }">
             <textarea id="myEditor" matInput [placeholder]="content" [(ngModel)]="content"></textarea>
         </editor>

@@ -26,7 +26,7 @@
 
         <section *ngIf="posts | async as posts; else indicator" class="post-box">
 
-            <mat-card *ngFor="let post of posts | filter:term | paginate: { itemsPerPage: 3, currentPage: page}">
+            <mat-card *ngFor="let post of posts | filter:term | paginate: { itemsPerPage: 6, currentPage: page}">
 
                 <mat-card-content routerLink="{{post.id}}">
                     <div class="image-box">

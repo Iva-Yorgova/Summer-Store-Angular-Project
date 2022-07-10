@@ -72,10 +72,11 @@
 
             </mat-card>
 
-
+            <div class="paging">
+                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+            </div>
 
         </section>
-
 
         <ng-template #indicator class="loader-box" alt="Loading...">
             <!-- <h3 class="loading">Loading...</h3> -->
